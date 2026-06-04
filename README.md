@@ -1,53 +1,90 @@
-# Sepehr's Portfolio Website
+# Sep Web Portfolio
 
-My personal portfolio and contact management system. Built to be fast, modern, and easy to manage.
+A modern portfolio and agency website with a complete admin panel for managing projects, services, and client inquiries.
 
-## What's Inside
+## Features
 
-- **Portfolio site** – Showcases my work, skills, and services
-- **Contact form** – Lets potential clients reach out directly
-- **Admin panel** – Private dashboard to manage inquiries
-- **AI chatbot** – Answers questions about my work (powered by OpenAI)
+- Professional portfolio showcase with project gallery
+- Admin panel for content management
+- Contact form with inquiry management
+- Chatbot integration for client support
+- Responsive design for all devices
+- Multi-language support
+- Real-time project updates
+- Secure authentication system
 
 ## Tech Stack
 
-- **Framework**: TanStack Start (React-based)
-- **Database**: Cloudflare D1 (SQLite)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Deployment**: Cloudflare Workers
+- Frontend: React with TypeScript
+- Framework: TanStack Start
+- Database: Cloudflare D1 with SQLite
+- Styling: Tailwind CSS
+- Deployment: Cloudflare Workers
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18 or higher
 - npm or pnpm
 
 ### Installation
 
 ```bash
-# Clone the repo
 git clone https://github.com/sepehrchn/sep_web.git
 cd sep_web
-
-# Install dependencies
 npm install
+npm run dev
+```
 
-# Set up the local database
-npx wrangler d1 create sep-web-db
+### Database Setup
 
-# Copy the database ID from the output and update wrangler.toml
+Run migrations to set up the database:
 
-# Run migrations
+```bash
 npx wrangler d1 execute sep-web-db --local --file=migrations/0001_create_contacts.sql
 npx wrangler d1 execute sep-web-db --local --file=migrations/0002_create_admin.sql
 npx wrangler d1 execute sep-web-db --local --file=migrations/0003_create_projects.sql
 npx wrangler d1 execute sep-web-db --local --file=migrations/0004_seed_projects.sql
-
-# Start the dev server
-NODE_OPTIONS="--max-old-space-size=4096" npm run dev
 ```
+
+## Development
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Access the application at http://localhost:5173
+
+The admin panel is available at http://localhost:5173/admin
+
+## Building and Deployment
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Deploy to Cloudflare Workers:
+
+```bash
+npm run deploy
+```
+
+## Project Structure
+
+- `src/components` - UI components for the site and reusable elements
+- `src/routes` - Application routes and pages
+- `src/lib` - Utilities, database queries, and helpers
+- `migrations` - Database migration scripts
+- `src/styles` - Global styling
+
+## License
+
+Proprietary - All rights reserved
 
 Visit `http://localhost:8080` to see the site.
 

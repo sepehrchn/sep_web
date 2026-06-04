@@ -7,6 +7,32 @@ export const Route = createFileRoute("/api/projects/")({
   server: {
     handlers: {
       GET: async () => {
+        // TEMPORARY: Return hardcoded data to test frontend
+        const hardcoded = [
+          {
+            url: "arianasepehr.vercel.app",
+            bgClass: "bg-gradient-to-br from-blue-600 to-purple-700",
+            centerText: "Ariana",
+            category: "B2B Platform",
+            title: "Ariana Global Trade — B2B Export Portal",
+            description: "Multi-language B2B export platform",
+            highlights: ["Multi-language", "AI chatbot", "Quote system"],
+            tags: ["Next.js", "TypeScript", "Tailwind"],
+            github: "https://github.com/sepehrjo/ariana-b2b-export",
+            demo: "https://arianasepehr.vercel.app",
+            screenshots: [
+              { src: "/assets/preview-en.png", alt: "Homepage" },
+              { src: "/assets/languages-support.png", alt: "Multi-language" }
+            ]
+          }
+        ];
+        
+        return new Response(JSON.stringify(hardcoded), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+        
+        /* Original DB code - TODO: Fix
         try {
           const env = await getDevEnv();
           const db = getDb(env);
@@ -33,11 +59,13 @@ export const Route = createFileRoute("/api/projects/")({
           });
         } catch (error) {
           console.error("Projects API error:", error);
-          return new Response(JSON.stringify({ error: "Failed to load projects" }), {
-            status: 500,
+          // Return empty array instead of error object to prevent .map() errors
+          return new Response(JSON.stringify([]), {
+            status: 200,
             headers: { "Content-Type": "application/json" },
           });
         }
+        */
       },
     },
   },

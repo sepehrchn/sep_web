@@ -2,16 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getDevEnv } from "@/lib/platform";
 import { getDb } from "@/lib/db/client";
 import { deleteSession } from "@/lib/auth";
+import { getSessionFromRequest } from "@/lib/auth-middleware";
 
 export const Route = createFileRoute("/api/admin/logout")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const cookies = request.headers.get("cookie");
-        const sessionId = cookies
-          ?.split(";")
-          .find((c) => c.trim().startsWith("admin_session="))
-          ?.split("=")[1];
+        const sessionId = getSessionFromRequest(request);
 
         if (sessionId) {
           const env = await getDevEnv();

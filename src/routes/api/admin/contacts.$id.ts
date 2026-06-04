@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { getDevEnv } from "@/lib/platform";
 import { getDb } from "@/lib/db/client";
-import { validateSession } from "@/lib/auth";
+import { validateAdminSession, createUnauthorizedResponse } from "@/lib/auth-middleware";
 import { updateContactStatus } from "@/lib/db/queries";
 
 const updateSchema = z.object({
@@ -12,30 +12,14 @@ const updateSchema = z.object({
 export const Route = createFileRoute("/api/admin/contacts/$id")({
   server: {
     handlers: {
-      PATCH: async ({ request, context, params }) => {
-        // Auth check
-        const cookies = request.headers.get("cookie");
-        const sessionId = cookies
-          ?.split(";")
-          .find((c) => c.trim().startsWith("admin_session="))
-          ?.split("=")[1];
-
-        if (!sessionId) {
-          return new Response(JSON.stringify({ error: "Unauthorized" }), {
-            status: 401,
-            headers: { "Content-Type": "application/json" },
-          });
-        }
-
+      PATCH: async ({ request, params }) => {
+        // Authenticate request
         const env = await getDevEnv();
         const db = getDb(env);
-        const userId = await validateSession(db, sessionId);
+        const authResult = await validateAdminSession(db, request);
 
-        if (!userId) {
-          return new Response(JSON.stringify({ error: "Unauthorized" }), {
-            status: 401,
-            headers: { "Content-Type": "application/json" },
-          });
+        if (!authResult.authenticated) {
+          return createUnauthorizedResponse(authResult.error);
         }
 
         // Update contact

@@ -1,5 +1,6 @@
 name = "sep-web"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "DB"
@@ -8,4 +9,4 @@ database_id = "0fab311a-138f-48e3-a581-d451d4da2258"
 
 [[kv_namespaces]]
 binding = "RATE_LIMIT"
-id = "placeholder-run-wrangler-kv-create"
+id = "8108824b11f2401d89c666988360dce5"

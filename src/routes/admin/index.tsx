@@ -1,34 +1,48 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { getDb } from "@/lib/db/client";
-import { validateSession } from "@/lib/auth";
-import { getContacts, type Contact } from "@/lib/db/queries";
-import { useState } from "react";
-import { getDevEnv } from "@/lib/platform";
+import { createFileRoute } from "@tanstack/react-router";
+import { type Contact } from "@/lib/db/queries";
+import { useState, useEffect } from "react";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { CustomCursor } from "@/components/site/CustomCursor";
 
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
-  beforeLoad: () => {
-    // Simple client-side check
-    if (typeof window !== 'undefined' && !document.cookie.includes('admin_session=')) {
-      throw redirect({ to: "/admin/login" });
-    }
-  },
-  loader: async () => {
-    const env = await getDevEnv();
-    const db = getDb(env);
-    const contacts = await getContacts(db, 100, 0);
-    console.log("Admin dashboard loaded contacts:", contacts.length, contacts);
-    return { contacts };
-  },
 });
 
 function AdminDashboard() {
-  const { contacts: initialContacts } = Route.useLoaderData();
-  const [contacts, setContacts] = useState<Contact[]>(initialContacts);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [filter, setFilter] = useState<Contact["status"] | "all">("all");
+
+  // Fetch contacts from authenticated API endpoint
+  useEffect(() => {
+    async function fetchContacts() {
+      try {
+        const res = await fetch("/api/admin/contacts");
+        
+        if (res.status === 401) {
+          // Session expired, redirect to login
+          window.location.href = "/admin/login";
+          return;
+        }
+        
+        if (!res.ok) {
+          throw new Error("Failed to fetch contacts");
+        }
+        
+        const data = await res.json();
+        setContacts(data.contacts);
+      } catch (err) {
+        console.error("Failed to load contacts:", err);
+        setError("Failed to load contacts. Please refresh the page.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchContacts();
+  }, []);
 
   const updateStatus = async (id: number, status: Contact["status"]) => {
     const res = await fetch(`/api/admin/contacts/${id}`, {
@@ -36,6 +50,11 @@ function AdminDashboard() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
     });
+
+    if (res.status === 401) {
+      window.location.href = "/admin/login";
+      return;
+    }
 
     if (res.ok) {
       setContacts((prev) =>
@@ -67,6 +86,41 @@ function AdminDashboard() {
     in_progress: contacts.filter(c => c.status === "in_progress").length,
     completed: contacts.filter(c => c.status === "completed").length,
   };
+
+  if (loading) {
+    return (
+      <>
+        <ScrollProgress />
+        <CustomCursor />
+        <div className="flex min-h-screen items-center justify-center bg-bg">
+          <div className="text-center">
+            <div className="mb-4 inline-block h-12 w-12 animate-spin rounded-full border-4 border-accent border-t-transparent"></div>
+            <p className="text-text-secondary">Loading dashboard...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <ScrollProgress />
+        <CustomCursor />
+        <div className="flex min-h-screen items-center justify-center bg-bg p-4">
+          <div className="text-center">
+            <p className="text-red-400">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-4 rounded-md border border-[var(--border)] bg-bg-card px-4 py-2 text-sm transition-colors hover:border-[var(--border-hover)]"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

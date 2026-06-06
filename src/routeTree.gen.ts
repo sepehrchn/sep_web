@@ -18,6 +18,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as ApiProjectsIndexRouteImport } from './routes/api/projects/index'
 import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
 import { Route as ApiAdminContactsRouteImport } from './routes/api/admin/contacts'
+import { Route as ApiAdminCheckAuthRouteImport } from './routes/api/admin/check-auth'
 import { Route as ApiAdminContactsIdRouteImport } from './routes/api/admin/contacts.$id'
 
 const AdminRoute = AdminRouteImport.update({
@@ -65,6 +66,11 @@ const ApiAdminContactsRoute = ApiAdminContactsRouteImport.update({
   path: '/api/admin/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminCheckAuthRoute = ApiAdminCheckAuthRouteImport.update({
+  id: '/api/admin/check-auth',
+  path: '/api/admin/check-auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminContactsIdRoute = ApiAdminContactsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/api/contact': typeof ApiContactRoute
   '/admin/': typeof AdminIndexRoute
+  '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects/': typeof ApiProjectsIndexRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/api/contact': typeof ApiContactRoute
   '/admin': typeof AdminIndexRoute
+  '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects': typeof ApiProjectsIndexRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/api/contact': typeof ApiContactRoute
   '/admin/': typeof AdminIndexRoute
+  '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects/': typeof ApiProjectsIndexRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/contact'
     | '/admin/'
+    | '/api/admin/check-auth'
     | '/api/admin/contacts'
     | '/api/admin/logout'
     | '/api/projects/'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/contact'
     | '/admin'
+    | '/api/admin/check-auth'
     | '/api/admin/contacts'
     | '/api/admin/logout'
     | '/api/projects'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/contact'
     | '/admin/'
+    | '/api/admin/check-auth'
     | '/api/admin/contacts'
     | '/api/admin/logout'
     | '/api/projects/'
@@ -150,6 +162,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   ApiChatRoute: typeof ApiChatRoute
   ApiContactRoute: typeof ApiContactRoute
+  ApiAdminCheckAuthRoute: typeof ApiAdminCheckAuthRoute
   ApiAdminContactsRoute: typeof ApiAdminContactsRouteWithChildren
   ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
   ApiProjectsIndexRoute: typeof ApiProjectsIndexRoute
@@ -220,6 +233,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/check-auth': {
+      id: '/api/admin/check-auth'
+      path: '/api/admin/check-auth'
+      fullPath: '/api/admin/check-auth'
+      preLoaderRoute: typeof ApiAdminCheckAuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/contacts/$id': {
       id: '/api/admin/contacts/$id'
       path: '/$id'
@@ -258,6 +278,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   ApiChatRoute: ApiChatRoute,
   ApiContactRoute: ApiContactRoute,
+  ApiAdminCheckAuthRoute: ApiAdminCheckAuthRoute,
   ApiAdminContactsRoute: ApiAdminContactsRouteWithChildren,
   ApiAdminLogoutRoute: ApiAdminLogoutRoute,
   ApiProjectsIndexRoute: ApiProjectsIndexRoute,

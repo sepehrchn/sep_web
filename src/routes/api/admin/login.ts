@@ -96,11 +96,13 @@ export const Route = createFileRoute("/api/admin/login")({
             });
           }
 
+          // Set session cookie without Max-Age so it's a session cookie (cleared on browser close)
+          // Server-side session expiry is enforced in `createSession` (30 minutes).
           return new Response(JSON.stringify({ success: true }), {
             status: 200,
             headers: {
               "Content-Type": "application/json",
-              "Set-Cookie": `admin_session=${sessionId}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${7 * 24 * 60 * 60}`,
+              "Set-Cookie": `admin_session=${sessionId}; Path=/; HttpOnly; Secure; SameSite=Strict`,
             },
           });
         } catch (error) {

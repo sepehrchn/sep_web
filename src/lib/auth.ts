@@ -32,7 +32,8 @@ export async function createSession(
   userId: number
 ): Promise<string> {
   const sessionId = generateSessionId();
-  const expiresAt = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60; // 7 days
+  // Short session lifetime (30 minutes) to enforce re-auth on browser close/inactivity
+  const expiresAt = Math.floor(Date.now() / 1000) + 30 * 60; // 30 minutes
 
   await db
     .prepare(

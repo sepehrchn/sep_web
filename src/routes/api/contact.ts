@@ -51,7 +51,6 @@ export const Route = createFileRoute("/api/contact")({
               .first<{ id: number }>();
             
             if (recentContact) {
-              console.log(`Duplicate submission detected for ${email}`);
               return new Response(
                 JSON.stringify({ error: "You already submitted a request recently. We'll respond shortly." }),
                 { status: 429, headers: { "Content-Type": "application/json" } }
@@ -65,7 +64,6 @@ export const Route = createFileRoute("/api/contact")({
               project,
               budget,
             });
-            console.log(`Contact saved to database with ID: ${contactId}`);
           } catch (dbError) {
             // Log but don't fail the request - email is more important
             console.error("Database error (non-fatal):", dbError);
@@ -74,7 +72,6 @@ export const Route = createFileRoute("/api/contact")({
           // Fallback: if Resend not configured, still accept and return success
           const apiKey = process.env.RESEND_API_KEY;
           if (!apiKey || apiKey.includes("placeholder")) {
-            console.log("Contact form submitted (no Resend configured)");
             return new Response(JSON.stringify({ success: true, fallback: true, contactId }), {
               status: 200,
               headers: { "Content-Type": "application/json" },

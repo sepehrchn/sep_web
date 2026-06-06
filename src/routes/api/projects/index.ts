@@ -40,7 +40,7 @@ export const Route = createFileRoute("/api/projects/")({
               });
             }
           } catch (bindingError) {
-            console.log("Binding access failed, will try fallback");
+            // Binding not available; fall back to hardcoded projects below
           }
 
           // Fallback: Return hardcoded data based on what's in the DB

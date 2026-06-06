@@ -5,7 +5,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "sep-web-db"
-database_id = "0fab311a-138f-48e3-a581-d451d4da2258"
+database_id = "bf6751de-b907-48cc-88bf-2138e22104ec"
 
 [[kv_namespaces]]
 binding = "RATE_LIMIT"

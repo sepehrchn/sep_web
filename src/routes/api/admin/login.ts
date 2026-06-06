@@ -39,8 +39,6 @@ export const Route = createFileRoute("/api/admin/login")({
           }
 
           const { username, password } = result.data;
-          
-          console.log(`[Login] Attempt for user: ${username}`);
 
           let user;
           try {
@@ -48,7 +46,6 @@ export const Route = createFileRoute("/api/admin/login")({
               .prepare(`SELECT id, password_hash FROM admin_users WHERE username = ?`)
               .bind(username)
               .first<{ id: number; password_hash: string }>();
-            console.log(`[Login] User query result:`, user ? `Found (id=${user.id})` : "Not found");
           } catch (dbErr) {
             console.error(`[Login] Database query error:`, dbErr);
             return new Response(JSON.stringify({ error: "Database error", details: String(dbErr) }), {
@@ -67,7 +64,6 @@ export const Route = createFileRoute("/api/admin/login")({
           let passwordMatch;
           try {
             passwordMatch = await verifyPassword(password, user.password_hash);
-            console.log(`[Login] Password verification result: ${passwordMatch}`);
           } catch (hashErr) {
             console.error(`[Login] Password verification error:`, hashErr);
             return new Response(JSON.stringify({ error: "Authentication error", details: String(hashErr) }), {

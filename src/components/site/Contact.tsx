@@ -37,7 +37,7 @@ export function Contact() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    console.log("Form submitted - current data:", formData);
+    
     
     // Basic validation
     if (!formData.name || formData.name.length < 2) {
@@ -65,26 +65,19 @@ export function Contact() {
       budget: formData.budget || undefined,
     };
 
-    console.log("Sending payload:", payload);
-
     try {
-      console.log("Submitting contact form:", payload);
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      
-      console.log("Response status:", res.status);
       const data = await res.json();
-      console.log("API response:", { status: res.status, data });
       
       if (!res.ok) {
         if (data.errors) setFieldErrors(data.errors);
         else setApiError(data.error || "Failed to send. Please try again.");
         setStatus("error");
       } else {
-        console.log("Contact form submitted successfully!");
         setStatus("success");
         setFormData({ name: "", email: "", company: "", message: "", budget: "" });
       }

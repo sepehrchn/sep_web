@@ -14,6 +14,10 @@ export async function checkRateLimit(
   maxRequests = 20,
   windowSeconds = 3600
 ): Promise<{ allowed: boolean; remaining: number }> {
+  // If KV is not provided (common in local dev), fail open quietly.
+  if (!kv) {
+    return { allowed: true, remaining: maxRequests };
+  }
   const key = `ratelimit:${ip}`;
   const now = Date.now();
 

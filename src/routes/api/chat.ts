@@ -173,14 +173,6 @@ export const Route = createFileRoute("/api/chat")({
             headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
           });
         } catch (err) {
-          // Temporary debug: log a short, non-secret error marker for diagnostics
-          try {
-            const msg = err && (err as any).message ? (err as any).message : String(err);
-            console.error("[CHAT-DEBUG-ERR]", msg);
-          } catch (e) {
-            console.error("[CHAT-DEBUG-ERR] (failed to stringify error)");
-          }
-
           console.error("Chat API Error:", err);
           return new Response(
             JSON.stringify({ error: "Service unavailable. Please use the contact form." }),

@@ -29,7 +29,8 @@ export function generateSessionId(): string {
 
 export async function createSession(
   db: D1Database,
-  userId: number
+  userId: number,
+  tabToken?: string,
 ): Promise<string> {
   const sessionId = generateSessionId();
   // Short session lifetime (30 minutes) to enforce re-auth on browser close/inactivity
@@ -37,9 +38,9 @@ export async function createSession(
 
   await db
     .prepare(
-      `INSERT INTO admin_sessions (id, user_id, expires_at) VALUES (?, ?, ?)`
+      `INSERT INTO admin_sessions (id, user_id, expires_at, tab_token) VALUES (?, ?, ?, ?)`
     )
-    .bind(sessionId, userId, expiresAt)
+    .bind(sessionId, userId, expiresAt, tabToken ?? null)
     .run();
 
   return sessionId;
@@ -47,13 +48,16 @@ export async function createSession(
 
 export async function validateSession(
   db: D1Database,
-  sessionId: string
+  sessionId: string,
+  tabToken?: string,
 ): Promise<number | null> {
+  if (!tabToken) return null; // require per-tab token for strong guarantees
+
   const session = await db
     .prepare(
-      `SELECT user_id, expires_at FROM admin_sessions WHERE id = ? AND expires_at > unixepoch()`
+      `SELECT user_id, expires_at FROM admin_sessions WHERE id = ? AND tab_token = ? AND expires_at > unixepoch()`
     )
-    .bind(sessionId)
+    .bind(sessionId, tabToken)
     .first<{ user_id: number; expires_at: number }>();
 
   return session?.user_id ?? null;

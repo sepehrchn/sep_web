@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { getDb } from "@/lib/db/client";
-import { verifyPassword, createSession } from "@/lib/auth";
+import { verifyPassword, createSession, generateSessionId } from "@/lib/auth";
 import { getDevEnv } from "@/lib/platform";
 
 const loginSchema = z.object({
@@ -83,11 +83,11 @@ export const Route = createFileRoute("/api/admin/login")({
             });
           }
 
-          // Create and store session in database
+          // Create and store session in database with a per-tab token
           let sessionId;
+          const tabToken = generateSessionId();
           try {
-            sessionId = await createSession(db, user.id);
-            console.log(`[Login] Session created successfully`);
+            sessionId = await createSession(db, user.id, tabToken);
           } catch (sessionErr) {
             console.error(`[Login] Session creation error:`, sessionErr);
             return new Response(JSON.stringify({ error: "Session error", details: String(sessionErr) }), {
@@ -96,9 +96,8 @@ export const Route = createFileRoute("/api/admin/login")({
             });
           }
 
-          // Set session cookie without Max-Age so it's a session cookie (cleared on browser close)
-          // Server-side session expiry is enforced in `createSession` (30 minutes).
-          return new Response(JSON.stringify({ success: true }), {
+          // Return tab token to client (client will store in sessionStorage) and set session cookie
+          return new Response(JSON.stringify({ success: true, tabToken }), {
             status: 200,
             headers: {
               "Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { adminFetch } from "@/lib/adminFetch";
 import { type Contact } from "@/lib/db/queries";
 import { useState, useEffect } from "react";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
@@ -19,7 +20,7 @@ function AdminDashboard() {
     async function checkAuthAndFetch() {
       // First check if authenticated
       try {
-        const authRes = await fetch("/api/admin/check-auth");
+        const authRes = await adminFetch("/api/admin/check-auth");
         if (authRes.status === 401) {
           // Not authenticated
           window.location.href = "/admin/login";
@@ -41,7 +42,7 @@ function AdminDashboard() {
 
       // If authenticated, fetch contacts
       try {
-        const res = await fetch("/api/admin/contacts");
+        const res = await adminFetch("/api/admin/contacts");
 
         if (res.status === 401) {
           window.location.href = "/admin/login";
@@ -70,7 +71,7 @@ function AdminDashboard() {
   }, []);
 
   const updateStatus = async (id: number, status: Contact["status"]) => {
-    const res = await fetch(`/api/admin/contacts/${id}`, {
+    const res = await adminFetch(`/api/admin/contacts/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -89,7 +90,8 @@ function AdminDashboard() {
   };
 
   const logout = async () => {
-    await fetch("/api/admin/logout", { method: "POST" });
+    await adminFetch("/api/admin/logout", { method: "POST" });
+    try { sessionStorage.removeItem("admin_tab"); } catch (_) {}
     window.location.href = "/admin/login";
   };
 

@@ -33,14 +33,19 @@ export async function validateAdminSession(
   request: Request
 ): Promise<AuthResult> {
   const sessionId = getSessionFromRequest(request);
-  
+
   if (!sessionId) {
     return { authenticated: false, error: "No session cookie" };
   }
-  
-  // Query database to verify session is valid and not expired
+
+  // Require per-tab token header to ensure the session is used from the same tab
+  const tabToken = request.headers.get("X-Admin-Tab") || undefined;
+  if (!tabToken) {
+    return { authenticated: false, error: "No tab token" };
+  }
+
   try {
-    const userId = await validateSession(db, sessionId);
+    const userId = await validateSession(db, sessionId, tabToken);
     if (userId) {
       return { authenticated: true, userId };
     }

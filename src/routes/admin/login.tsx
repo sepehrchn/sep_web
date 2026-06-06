@@ -41,6 +41,11 @@ function AdminLogin() {
         return;
       }
 
+      // Store the per-tab token in sessionStorage so closing the tab requires re-login
+      if (data?.tabToken && typeof window !== "undefined" && window.sessionStorage) {
+        try { sessionStorage.setItem("admin_tab", data.tabToken); } catch (_) {}
+      }
+
       // Success — redirect to admin dashboard
       window.location.replace("/admin");
     } catch (err) {

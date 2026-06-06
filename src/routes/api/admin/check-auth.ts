@@ -21,8 +21,12 @@ export const Route = createFileRoute("/api/admin/check-auth")({
             headers: { "Content-Type": "application/json" },
           });
         } catch (error) {
+          // Treat errors as unauthenticated
           console.error("Auth check error:", error);
-          return createUnauthorizedResponse("Auth check failed");
+          return new Response(JSON.stringify({ authenticated: false }), {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
+          });
         }
       },
     },

@@ -75,11 +75,23 @@ export const Route = createFileRoute("/api/chat")({
             );
           }
 
-          // 3. Sanitize
+          // 3. Sanitize + redact PII
           const slicedMessages = messages.slice(-20);
           const sanitized: Array<{ role: "user" | "assistant" | "system"; content: string }> = [
             { role: "system", content: SYSTEM_PROMPT },
           ];
+
+          // Basic PII redaction to avoid sending emails/phones/CC-like numbers to OpenAI
+          const redactPII = (text: string) => {
+            if (!text) return text;
+            // redact emails
+            text = text.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[REDACTED_EMAIL]");
+            // redact phone numbers (simple patterns)
+            text = text.replace(/\+?\d[\d\-\s()]{6,}\d/g, "[REDACTED_PHONE]");
+            // redact long digit sequences (possible CC / tokens)
+            text = text.replace(/\b\d{12,19}\b/g, "[REDACTED_NUMBER]");
+            return text;
+          };
           for (const msg of slicedMessages) {
             if (msg.role !== "user" && msg.role !== "assistant") continue;
             if (msg.role === "user" && msg.content.length > 500) {
@@ -88,7 +100,8 @@ export const Route = createFileRoute("/api/chat")({
                 { status: 400, headers: { "Content-Type": "application/json" } }
               );
             }
-            sanitized.push({ role: msg.role, content: msg.content });
+            const content = msg.role === "user" ? redactPII(String(msg.content)) : String(msg.content);
+            sanitized.push({ role: msg.role, content });
           }
 
           // 4. OpenAI or placeholder

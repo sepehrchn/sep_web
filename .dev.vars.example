@@ -1,0 +1,11 @@
+# Development Environment Variables
+# Copy this file to .dev.vars and fill in your actual values
+# DO NOT commit .dev.vars to git (it's in .gitignore)
+
+# OpenAI API Key for chatbot
+# Get your key from: https://platform.openai.com/api-keys
+OPENAI_API_KEY=sk-proj-your-openai-api-key-here
+
+# Resend API Key for email notifications (optional)
+# Get your key from: https://resend.com/api-keys
+RESEND_API_KEY=re_your-resend-api-key-here

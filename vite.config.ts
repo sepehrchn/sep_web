@@ -32,7 +32,6 @@ export default defineConfig({
     plugins: [cloudflare({ viteEnvironment: { name: "ssr" } })],
     ssr: {
       external: ['wrangler', 'workerd'],
-      noExternal: true,
     },
   },
   tanstackStart: {

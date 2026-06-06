@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { checkRequestSize, checkOrigin } from "@/lib/request-validation";
 import { getDevEnv } from "@/lib/platform";
 import { checkRateLimit } from "@/lib/rate-limit";
@@ -81,7 +81,7 @@ export const Route = createFileRoute("/api/chat")({
             { role: "system", content: SYSTEM_PROMPT },
           ];
 
-          // Basic PII redaction to avoid sending emails/phones/CC-like numbers to OpenAI
+          // Basic PII redaction to avoid sending emails/phones/CC-like numbers to Gemini
           const redactPII = (text: string) => {
             if (!text) return text;
             // redact emails
@@ -104,8 +104,8 @@ export const Route = createFileRoute("/api/chat")({
             sanitized.push({ role: msg.role, content });
           }
 
-          // 4. OpenAI or placeholder
-          const apiKey = process.env.OPENAI_API_KEY || "";
+          // 4. Gemini or placeholder
+          const apiKey = process.env.GEMINI_API_KEY || "";
           const isPlaceholder = !apiKey || apiKey === "" || apiKey.includes("placeholder");
 
           const streamPlaceholder = (replyText: string, fallbackReason = "placeholder") => {
@@ -154,21 +154,32 @@ export const Route = createFileRoute("/api/chat")({
           }
 
           try {
-            const openai = new OpenAI({ apiKey });
-            const streamResponse = await openai.chat.completions.create({
-              model: "gpt-4o-mini",
-              messages: sanitized,
-              stream: true,
-              max_tokens: 300,
-              temperature: 0.4,
+            const genAI = new GoogleGenerativeAI(apiKey);
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            
+            // Convert sanitized messages to Gemini format (Gemini handles system message separately)
+            const userMessages = sanitized
+              .filter((m) => m.role !== "system")
+              .map((m) => ({
+                role: m.role === "assistant" ? "model" : m.role,
+                parts: [{ text: m.content }],
+              }));
+
+            const streamResponse = await model.generateContentStream({
+              contents: userMessages,
+              systemInstruction: SYSTEM_PROMPT,
+              generationConfig: {
+                maxOutputTokens: 300,
+                temperature: 0.4,
+              },
             });
 
             const encoder = new TextEncoder();
             const stream = new ReadableStream({
               async start(controller) {
                 try {
-                  for await (const chunk of streamResponse) {
-                    const text = chunk.choices[0]?.delta?.content || "";
+                  for await (const chunk of streamResponse.stream) {
+                    const text = chunk.text();
                     if (text) controller.enqueue(encoder.encode(text));
                   }
                   controller.close();
@@ -179,14 +190,32 @@ export const Route = createFileRoute("/api/chat")({
             });
 
             return new Response(stream, {
-              headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
+              headers: {
+                "Content-Type": "text/plain; charset=utf-8",
+                "Cache-Control": "no-cache",
+                "X-Chat-Fallback": "none",
+              },
             });
-          } catch (openaiErr) {
-            // Log and gracefully fallback to placeholder streaming so the chat remains usable
-            console.error("OpenAI call failed, falling back to placeholder:", openaiErr);
+          } catch (geminiErr) {
+            // Extract any known error/type information so we can surface quota/network reasons
+            const errType =
+              (geminiErr &&
+                (geminiErr.type ||
+                  // Gemini client may include message or status
+                  (geminiErr.message && geminiErr.message.includes("quota"))
+                    ? "quota_exceeded"
+                    : geminiErr.status ||
+                  geminiErr.code)) ||
+              "unknown";
+
+            // Log structured info (won't leak secrets) to help debugging in logs
+            console.error("Gemini call failed, falling back to placeholder:", { errType, message: geminiErr?.message || String(geminiErr) });
+
             const fallbackText = "Sorry — the AI assistant is temporarily unavailable. I can still help qualify requests. " +
               "Could you tell me briefly what you need?";
-            return streamPlaceholder(fallbackText, "openai_error");
+
+            // Include the error type in the fallback header so clients and monitoring can detect quota issues
+            return streamPlaceholder(fallbackText, `gemini_error:${String(errType)}`);
           }
         } catch (err) {
           console.error("Chat API Error:", err);

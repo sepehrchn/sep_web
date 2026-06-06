@@ -16,7 +16,20 @@ function AdminDashboard() {
   const [filter, setFilter] = useState<Contact["status"] | "all">("all");
 
   useEffect(() => {
-    async function fetchContacts() {
+    async function checkAuthAndFetch() {
+      // First check if authenticated
+      try {
+        const authRes = await fetch("/api/admin/check-auth");
+        if (authRes.status === 401) {
+          window.location.href = "/admin/login";
+          return;
+        }
+      } catch {
+        window.location.href = "/admin/login";
+        return;
+      }
+
+      // If authenticated, fetch contacts
       try {
         const res = await fetch("/api/admin/contacts");
         
@@ -39,7 +52,7 @@ function AdminDashboard() {
       }
     }
     
-    fetchContacts();
+    checkAuthAndFetch();
   }, []);
 
   const updateStatus = async (id: number, status: Contact["status"]) => {

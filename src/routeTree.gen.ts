@@ -17,6 +17,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as ApiProjectsIndexRouteImport } from './routes/api/projects/index'
 import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
+import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
 import { Route as ApiAdminContactsRouteImport } from './routes/api/admin/contacts'
 import { Route as ApiAdminCheckAuthRouteImport } from './routes/api/admin/check-auth'
 import { Route as ApiAdminContactsIdRouteImport } from './routes/api/admin/contacts.$id'
@@ -61,6 +62,11 @@ const ApiAdminLogoutRoute = ApiAdminLogoutRouteImport.update({
   path: '/api/admin/logout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
+  id: '/api/admin/login',
+  path: '/api/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminContactsRoute = ApiAdminContactsRouteImport.update({
   id: '/api/admin/contacts',
   path: '/api/admin/contacts',
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
+  '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects/': typeof ApiProjectsIndexRoute
   '/api/admin/contacts/$id': typeof ApiAdminContactsIdRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
+  '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects': typeof ApiProjectsIndexRoute
   '/api/admin/contacts/$id': typeof ApiAdminContactsIdRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
+  '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects/': typeof ApiProjectsIndexRoute
   '/api/admin/contacts/$id': typeof ApiAdminContactsIdRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/api/admin/check-auth'
     | '/api/admin/contacts'
+    | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/projects/'
     | '/api/admin/contacts/$id'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/api/admin/check-auth'
     | '/api/admin/contacts'
+    | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/projects'
     | '/api/admin/contacts/$id'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/api/admin/check-auth'
     | '/api/admin/contacts'
+    | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/projects/'
     | '/api/admin/contacts/$id'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   ApiContactRoute: typeof ApiContactRoute
   ApiAdminCheckAuthRoute: typeof ApiAdminCheckAuthRoute
   ApiAdminContactsRoute: typeof ApiAdminContactsRouteWithChildren
+  ApiAdminLoginRoute: typeof ApiAdminLoginRoute
   ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
   ApiProjectsIndexRoute: typeof ApiProjectsIndexRoute
 }
@@ -226,6 +239,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminLogoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/login': {
+      id: '/api/admin/login'
+      path: '/api/admin/login'
+      fullPath: '/api/admin/login'
+      preLoaderRoute: typeof ApiAdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/contacts': {
       id: '/api/admin/contacts'
       path: '/api/admin/contacts'
@@ -280,6 +300,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiContactRoute: ApiContactRoute,
   ApiAdminCheckAuthRoute: ApiAdminCheckAuthRoute,
   ApiAdminContactsRoute: ApiAdminContactsRouteWithChildren,
+  ApiAdminLoginRoute: ApiAdminLoginRoute,
   ApiAdminLogoutRoute: ApiAdminLogoutRoute,
   ApiProjectsIndexRoute: ApiProjectsIndexRoute,
 }

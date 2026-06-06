@@ -7,6 +7,11 @@ type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
 
+// Store the Cloudflare environment globally
+declare global {
+  var __CF_PAGES_ENV__: unknown;
+}
+
 function addSecurityHeaders(response: Response): Response {
   const headers = new Headers(response.headers);
   headers.set("X-Content-Type-Options", "nosniff");

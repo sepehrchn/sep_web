@@ -1,31 +1,28 @@
 import type { D1Database } from "./db/client";
 
-let cachedEnv: { DB: D1Database } | null = null;
-
 export async function getDevEnv(): Promise<{ DB: D1Database }> {
-  if (cachedEnv) {
-    return cachedEnv;
+  // Try Nitro/h3 event context first (available during request handling)
+  try {
+    const { useEvent } = await import("h3");
+    const event = useEvent();
+    const db = event.context?.cloudflare?.env?.DB || (event.context as any)?.env?.DB || (event.context as any)?.DB;
+    if (db) return { DB: db };
+  } catch (_) {
+    // not available
   }
 
-  // For Cloudflare Pages/Workers, DB should be available on globalThis
-  // when running in Nitro + Cloudflare Pages preset
-  const db = (globalThis as any).DB || (globalThis as any).__CONTEXT__?.env?.DB;
-  if (db) {
-    cachedEnv = { DB: db };
-    return cachedEnv;
-  }
+  // Fallbacks: globalThis bindings that Workers/Pages may expose
+  const globalDb = (globalThis as any).DB || (globalThis as any).__CF_PAGES_ENV__?.DB || (globalThis as any).__CF_ENV__?.DB || (globalThis as any).__CONTEXT__?.env?.DB;
+  if (globalDb) return { DB: globalDb };
 
-  // Try wrangler (local dev)
+  // Local dev via wrangler proxy
   try {
     const { getPlatformProxy } = await import("wrangler");
     const { env } = await getPlatformProxy();
-    if (env.DB) {
-      cachedEnv = { DB: env.DB };
-      return cachedEnv;
-    }
-  } catch (error) {
-    // Not in local dev
+    if (env?.DB) return { DB: env.DB };
+  } catch (_) {
+    // ignore
   }
 
-  throw new Error("DB binding not found on globalThis or wrangler. Ensure D1 is bound in wrangler.toml and properly deployed.");
+  throw new Error("DB binding not found. Ensure D1 is bound in wrangler.toml and deployed to Cloudflare Pages.");
 }

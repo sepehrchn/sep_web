@@ -26,7 +26,7 @@ export function getSessionFromRequest(request: Request): string | null {
 
 /**
  * Validate admin session from request headers.
- * Simplified version that just checks for session cookie existence
+ * Checks database for valid, non-expired session.
  */
 export async function validateAdminSession(
   db: D1Database,
@@ -38,12 +38,17 @@ export async function validateAdminSession(
     return { authenticated: false, error: "No session cookie" };
   }
   
-  // Simple validation - if cookie exists and looks valid, trust it
-  if (sessionId.startsWith('admin_')) {
-    return { authenticated: true, userId: 1 };
+  // Query database to verify session is valid and not expired
+  try {
+    const userId = await validateSession(db, sessionId);
+    if (userId) {
+      return { authenticated: true, userId };
+    }
+    return { authenticated: false, error: "Session expired or invalid" };
+  } catch (err) {
+    console.error("Session validation error:", err);
+    return { authenticated: false, error: "Session validation failed" };
   }
-  
-  return { authenticated: false, error: "Invalid session format" };
 }
 
 /**

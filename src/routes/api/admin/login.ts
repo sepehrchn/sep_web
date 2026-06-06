@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { getDb } from "@/lib/db/client";
-import { verifyPassword } from "@/lib/auth";
+import { verifyPassword, createSession } from "@/lib/auth";
 import { getDevEnv } from "@/lib/platform";
 
 const loginSchema = z.object({
@@ -42,7 +42,8 @@ export const Route = createFileRoute("/api/admin/login")({
             });
           }
 
-          const sessionId = `admin_${user.id}_${Date.now()}`;
+          // Create and store session in database
+          const sessionId = await createSession(db, user.id);
 
           return new Response(JSON.stringify({ success: true }), {
             status: 200,

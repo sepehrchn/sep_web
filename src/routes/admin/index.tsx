@@ -21,32 +21,46 @@ function AdminDashboard() {
       try {
         const authRes = await fetch("/api/admin/check-auth");
         if (authRes.status === 401) {
+          // Not authenticated
           window.location.href = "/admin/login";
           return;
         }
-      } catch {
-        window.location.href = "/admin/login";
+
+        if (!authRes.ok) {
+          // Server returned an unexpected error
+          setError("Authentication check failed. Server returned an error.");
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        console.error("Network error when checking auth:", err);
+        setError("Unable to reach the server. Ensure the backend is deployed (Cloudflare Worker / API) and try again.");
+        setLoading(false);
         return;
       }
 
       // If authenticated, fetch contacts
       try {
         const res = await fetch("/api/admin/contacts");
-        
+
         if (res.status === 401) {
           window.location.href = "/admin/login";
           return;
         }
-        
+
         if (!res.ok) {
-          throw new Error("Failed to fetch contacts");
+          const txt = await res.text().catch(() => "");
+          console.error("Server error fetching contacts:", res.status, txt);
+          setError("Failed to fetch contacts from server. See console for details.");
+          setLoading(false);
+          return;
         }
-        
+
         const data = await res.json();
-        setContacts(data.contacts);
+        setContacts(data.contacts || []);
       } catch (err) {
         console.error("Failed to load contacts:", err);
-        setError("Failed to load contacts. Please refresh the page.");
+        setError("Unable to reach the server. Ensure the backend API is deployed and reachable.");
       } finally {
         setLoading(false);
       }

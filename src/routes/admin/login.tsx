@@ -17,15 +17,36 @@ function AdminLogin() {
     setLoading(true);
     setError("");
 
-    const formData = new FormData(e.currentTarget);
-    const res = await fetch("/api/admin/login", { method: "POST", body: formData });
-    const data = await res.json();
+    try {
+      const formData = new FormData(e.currentTarget);
+      const res = await fetch("/api/admin/login", { method: "POST", body: formData });
 
-    if (!res.ok) {
-      setError(data.error || "Invalid credentials");
-      setLoading(false);
-    } else {
+      // If response cannot be parsed as JSON, fall back to text
+      let data: any = {};
+      const contentType = res.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const txt = await res.text();
+        try {
+          data = JSON.parse(txt || "{}");
+        } catch {
+          data = { message: txt };
+        }
+      }
+
+      if (!res.ok) {
+        setError(data.error || data.message || "Invalid credentials");
+        setLoading(false);
+        return;
+      }
+
+      // Success — redirect to admin dashboard
       window.location.replace("/admin");
+    } catch (err) {
+      console.error("Network or server error during login:", err);
+      setError("Unable to contact server. Please check deployment or try again later.");
+      setLoading(false);
     }
   };
 

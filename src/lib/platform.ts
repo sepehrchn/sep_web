@@ -7,33 +7,25 @@ export async function getDevEnv(): Promise<{ DB: D1Database }> {
     return cachedEnv;
   }
 
-  // Try multiple methods to access DB binding
-  
-  // Method 1: Direct process.env (Cloudflare Workers/Pages with Nitro)
-  // @ts-expect-error - DB binding injected by Cloudflare
-  if (typeof process !== 'undefined' && process.env?.DB) {
-    // @ts-expect-error - DB binding injected by Cloudflare
-    cachedEnv = { DB: process.env.DB };
+  // For Cloudflare Pages/Workers, DB should be available on globalThis
+  // when running in Nitro + Cloudflare Pages preset
+  const db = (globalThis as any).DB || (globalThis as any).__CONTEXT__?.env?.DB;
+  if (db) {
+    cachedEnv = { DB: db };
     return cachedEnv;
   }
 
-  // Method 2: globalThis (alternative Cloudflare binding location)
-  // @ts-expect-error - DB binding might be on globalThis
-  if (typeof globalThis !== 'undefined' && globalThis.DB) {
-    // @ts-expect-error - DB binding might be on globalThis
-    cachedEnv = { DB: globalThis.DB };
-    return cachedEnv;
-  }
-
-  // Method 3: Try wrangler (local dev mode)
+  // Try wrangler (local dev)
   try {
     const { getPlatformProxy } = await import("wrangler");
     const { env } = await getPlatformProxy();
-    cachedEnv = { DB: env.DB };
-    return cachedEnv;
+    if (env.DB) {
+      cachedEnv = { DB: env.DB };
+      return cachedEnv;
+    }
   } catch (error) {
-    // Wrangler not available, continue
+    // Not in local dev
   }
 
-  throw new Error("Database connection not available. DB binding not found in process.env, globalThis, or wrangler.");
+  throw new Error("DB binding not found on globalThis or wrangler. Ensure D1 is bound in wrangler.toml and properly deployed.");
 }

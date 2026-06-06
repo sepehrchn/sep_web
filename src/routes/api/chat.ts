@@ -108,7 +108,29 @@ export const Route = createFileRoute("/api/chat")({
           const apiKey = process.env.OPENAI_API_KEY || "";
           const isPlaceholder = !apiKey || apiKey === "" || apiKey.includes("placeholder");
 
-          if (isPlaceholder) {
+          const streamPlaceholder = (replyText: string, fallbackReason = "placeholder") => {
+            const encoder = new TextEncoder();
+            const stream = new ReadableStream({
+              async start(controller) {
+                const words = replyText.split(" ");
+                for (let i = 0; i < words.length; i++) {
+                  const chunk = words[i] + (i === words.length - 1 ? "" : " ");
+                  controller.enqueue(encoder.encode(chunk));
+                  await new Promise((r) => setTimeout(r, 40));
+                }
+                controller.close();
+              },
+            });
+            return new Response(stream, {
+              headers: {
+                "Content-Type": "text/plain; charset=utf-8",
+                "Cache-Control": "no-cache",
+                "X-Chat-Fallback": fallbackReason,
+              },
+            });
+          };
+
+          if (isPlaceholder || process.env.USE_PLACEHOLDER === "1") {
             const userMsgs = sanitized.filter((m) => m.role === "user");
             const stepIndex = userMsgs.length;
             let replyText = "";
@@ -128,50 +150,44 @@ export const Route = createFileRoute("/api/chat")({
               replyText = `Thanks ${name}! I've noted down all the details of your request. Based on what you've shared, this sounds like a great fit for my services. Please use the contact form below to submit your inquiry, and I'll follow up within 24 hours.`;
             }
 
+            return streamPlaceholder(replyText, isPlaceholder ? "no_api_key" : "forced_placeholder");
+          }
+
+          try {
+            const openai = new OpenAI({ apiKey });
+            const streamResponse = await openai.chat.completions.create({
+              model: "gpt-4o-mini",
+              messages: sanitized,
+              stream: true,
+              max_tokens: 300,
+              temperature: 0.4,
+            });
+
             const encoder = new TextEncoder();
             const stream = new ReadableStream({
               async start(controller) {
-                const words = replyText.split(" ");
-                for (let i = 0; i < words.length; i++) {
-                  const chunk = words[i] + (i === words.length - 1 ? "" : " ");
-                  controller.enqueue(encoder.encode(chunk));
-                  await new Promise((r) => setTimeout(r, 40));
+                try {
+                  for await (const chunk of streamResponse) {
+                    const text = chunk.choices[0]?.delta?.content || "";
+                    if (text) controller.enqueue(encoder.encode(text));
+                  }
+                  controller.close();
+                } catch (err) {
+                  controller.error(err);
                 }
-                controller.close();
               },
             });
+
             return new Response(stream, {
               headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
             });
+          } catch (openaiErr) {
+            // Log and gracefully fallback to placeholder streaming so the chat remains usable
+            console.error("OpenAI call failed, falling back to placeholder:", openaiErr);
+            const fallbackText = "Sorry — the AI assistant is temporarily unavailable. I can still help qualify requests. " +
+              "Could you tell me briefly what you need?";
+            return streamPlaceholder(fallbackText, "openai_error");
           }
-
-          const openai = new OpenAI({ apiKey });
-          const streamResponse = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: sanitized,
-            stream: true,
-            max_tokens: 300,
-            temperature: 0.4,
-          });
-
-          const encoder = new TextEncoder();
-          const stream = new ReadableStream({
-            async start(controller) {
-              try {
-                for await (const chunk of streamResponse) {
-                  const text = chunk.choices[0]?.delta?.content || "";
-                  if (text) controller.enqueue(encoder.encode(text));
-                }
-                controller.close();
-              } catch (err) {
-                controller.error(err);
-              }
-            },
-          });
-
-          return new Response(stream, {
-            headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
-          });
         } catch (err) {
           console.error("Chat API Error:", err);
           return new Response(

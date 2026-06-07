@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 const steps = [
   {
     n: "01",
-    title: "Discovery (Free, 30 min)",
-    body: "Quick call. I understand your needs, timeline, and constraints. You understand how I work. We assess if it's a good fit.",
+    title: "Discovery (Email)",
+    body: "Initial email exchange. I understand your needs, timeline, and constraints. You understand how I work. We assess if it's a good fit.",
   },
   {
     n: "02",

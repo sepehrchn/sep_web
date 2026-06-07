@@ -51,7 +51,7 @@ export function Chatbot() {
         className="fixed bottom-6 right-6 z-50 flex h-12 items-center gap-2 rounded-full bg-accent px-5 text-sm font-medium text-white shadow-[0_0_24px_var(--accent-glow)] transition-colors hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent"
       >
         {isOpen ? <X size={16} /> : <MessageSquare size={16} />}
-        <span className="hidden sm:inline">{isOpen ? "Close" : "Let's talk"}</span>
+        <span className="hidden sm:inline">{isOpen ? "Close" : "Make a Request"}</span>
       </motion.button>
 
       <AnimatePresence>

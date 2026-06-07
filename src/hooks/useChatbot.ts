@@ -12,7 +12,6 @@ export interface CollectedData {
   project?: string;
   budget?: string;
 }
-
 export function useChatbot(openingMessage: string) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -35,11 +34,24 @@ export function useChatbot(openingMessage: string) {
   const runHeuristics = useCallback((text: string, isUser: boolean) => {
     if (!isUser) return;
     const updates: CollectedData = {};
-    if (text.includes("$") || /\b(budget|under|over|k)\b/i.test(text)) {
-      if (/\b(under 8|8k|8 k)\b/i.test(text)) updates.budget = "under_8k";
-      else if (/\b(8.?20|10k|15k|12k|8-20)\b/i.test(text)) updates.budget = "8_20k";
-      else if (/\b(20.?50|25k|30k|40k|20-50)\b/i.test(text)) updates.budget = "20_50k";
-      else if (/\b(over 50|50k\+|50k or more|50-|100k|150k|200k)\b/i.test(text)) updates.budget = "over_50k";
+    if (text.includes("$") || /\b(budget|under|over|dollars|usd|\$)\b/i.test(text)) {
+      // Try phrase-first detection
+      if (/\bunder\s*\$?\s*100\b/i.test(text) || /<\s*\$?\s*100\b/.test(text)) updates.budget = "under_100";
+      else if (/\bover\s*\$?\s*1000\b/i.test(text) || />\s*\$?\s*1000\b/.test(text)) updates.budget = "over_1000";
+      else {
+        // Try numeric extraction (supports 'k' suffix)
+        const numMatch = text.match(/(\d{1,3}(?:,\d{3})?(?:\.\d+)?)(k?)/i);
+        if (numMatch) {
+          let n = parseFloat(numMatch[1].replace(/,/g, ""));
+          const suffix = (numMatch[2] || "").toLowerCase();
+          if (suffix === "k") n = n * 1000;
+          if (n < 100) updates.budget = "under_100";
+          else if (n < 300) updates.budget = "100_300";
+          else if (n < 500) updates.budget = "300_500";
+          else if (n < 1000) updates.budget = "500_1000";
+          else updates.budget = "over_1000";
+        }
+      }
     }
     const nameMatch = text.match(/\b(?:my name is|i am|i'm)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/i);
     if (nameMatch?.[1]) updates.name = nameMatch[1];
@@ -124,10 +136,11 @@ export function useChatbot(openingMessage: string) {
         const el = document.querySelector('select[name="budget"]') as HTMLSelectElement | null;
         if (el) {
           const map: Record<string, string> = {
-            "under_8k": "under_8k",
-            "8_20k": "8_20k",
-            "20_50k": "20_50k",
-            "over_50k": "over_50k",
+            "under_100": "under_100",
+            "100_300": "100_300",
+            "300_500": "300_500",
+            "500_1000": "500_1000",
+            "over_1000": "over_1000",
           };
           if (map[collectedData.budget]) { el.value = map[collectedData.budget]; el.dispatchEvent(new Event("change", { bubbles: true })); }
         }

@@ -119,7 +119,7 @@ export function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="font-mono-ui text-sm text-accent">// let's talk</div>
+          <div className="font-mono-ui text-sm text-accent">// make a request</div>
           <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">Ready to Build Something?</h2>
           <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-lg">
             Whether you're an agency looking for a reliable subcontractor or a company that needs a better product —
@@ -158,13 +158,11 @@ export function Contact() {
               ))}
 
               <a
-                href="https://calendly.com/sepehrjo/30min"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:hello@sepehr.am"
                 className="inline-flex items-center gap-2 rounded-md border border-accent/40 bg-accent/5 px-4 py-3 text-sm text-text-primary transition-colors hover:bg-accent/10"
               >
-                <Calendar size={16} className="text-accent" />
-                Book a free 30-min call
+                <Mail size={16} className="text-accent" />
+                Email me
               </a>
             </div>
 
@@ -211,10 +209,11 @@ export function Contact() {
                   className="mt-2 w-full rounded-md border border-[var(--border)] bg-bg px-3 py-2 text-sm text-text-primary outline-none focus:border-accent"
                 >
                   <option value="">Not sure yet</option>
-                  <option value="under_8k">Under $8K</option>
-                  <option value="8_20k">$8K–$20K</option>
-                  <option value="20_50k">$20K–$50K</option>
-                  <option value="over_50k">Over $50K</option>
+                  <option value="under_100">Under $100</option>
+                  <option value="100_300">$100–$300</option>
+                  <option value="300_500">$300–$500</option>
+                  <option value="500_1000">$500–$1,000</option>
+                  <option value="over_1000">Over $1,000</option>
                 </select>
                 {fieldErrors.budget && <p className="mt-1 text-xs text-red-400">{fieldErrors.budget}</p>}
               </div>
@@ -244,7 +243,7 @@ export function Contact() {
 
             <div className="mt-8 space-y-2 border-t border-[var(--border)] pt-6 text-sm text-text-secondary">
               <div><span className="text-accent">1.</span> I review your brief and reply within 24 hours.</div>
-              <div><span className="text-accent">2.</span> If it's a good fit, we schedule a free 30-min scoping call.</div>
+              <div><span className="text-accent">2.</span> If it's a good fit, I'll follow up via email.</div>
               <div><span className="text-accent">3.</span> You receive a written, fixed-price proposal within 3 days.</div>
             </div>
           </motion.form>

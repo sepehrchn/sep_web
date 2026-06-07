@@ -1,22 +1,30 @@
 import { Linkedin, Github, Mail } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
-const links = [
-  { label: "Work", href: "#work" },
-  { label: "Skills", href: "#skills" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
+const baseLinks = [
+  { labelKey: "nav.links.0.label", href: "#work" },
+  { labelKey: "nav.links.1.label", href: "#skills" },
+  { labelKey: "nav.links.2.label", href: "#process" },
+  { labelKey: "nav.links.4.label", href: "#contact" },
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
+  
+  const links = baseLinks.map(l => ({
+    ...l,
+    label: t(l.labelKey)
+  }));
+
   return (
     <footer className="border-t border-[var(--border)] bg-bg-card/50">
       <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid gap-8 md:grid-cols-3 md:items-center">
           <div>
             <a href="#" className="font-mono-ui text-base text-accent">
-              sepehr_
+              {t('nav.logoLabel')}_
             </a>
-            <p className="mt-2 text-sm text-text-tertiary">Built in Yerevan. Deployed everywhere.</p>
+            <p className="mt-2 text-sm text-text-tertiary">{t('footer.description')}</p>
           </div>
 
           <div className="flex flex-wrap items-center justify-start gap-6 md:justify-center">
@@ -48,7 +56,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-[var(--border)] pt-6 text-center text-xs text-text-tertiary">
-          © 2026 Sepehr Jokanian · sepehrjokanian99@gmail.com
+          {t('footer.copyright')}
         </div>
       </div>
     </footer>

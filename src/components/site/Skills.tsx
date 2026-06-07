@@ -1,15 +1,10 @@
 import { motion } from "framer-motion";
-
-const groups = [
-  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "HTML/CSS", "Vite"] },
-  { label: "3D & Visual", items: ["Three.js", "@react-three/fiber", "@react-three/drei", "CSS Modules"] },
-  { label: "Backend & API", items: ["Node.js", "REST APIs", "Next.js Server Actions", "Zod", "PostgreSQL"] },
-  { label: "AI & Automation", items: ["OpenAI API", "LLM Integration", "Zapier", "Make", "Webhooks"] },
-  { label: "Internationalisation", items: ["i18next", "react-i18next", "RTL/LTR Layouts", "Persian", "Armenian", "Russian"] },
-  { label: "Deploy & Tools", items: ["Vercel", "GitHub", "Git", "Figma", "Docker"] },
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 export function Skills() {
+  const { t } = useTranslation();
+  const groups = t('skills.groups') || [];
+
   return (
     <section id="skills" className="py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -19,12 +14,12 @@ export function Skills() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="font-mono-ui text-sm text-accent">// technical capabilities</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">The Stack I Ship With</h2>
+          <div className="font-mono-ui text-sm text-accent">{t('skills.label')}</div>
+          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">{t('skills.title')}</h2>
         </motion.div>
 
         <div className="mt-14 grid gap-10 md:grid-cols-2">
-          {groups.map((g, gi) => (
+          {groups.map((g: any, gi: number) => (
             <motion.div
               key={g.label}
               initial={{ opacity: 0, y: 30 }}
@@ -34,7 +29,7 @@ export function Skills() {
             >
               <div className="font-mono-ui text-sm text-accent">{g.label}</div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {g.items.map((s, i) => (
+                {g.items.map((s: string, i: number) => (
                   <motion.span
                     key={s}
                     initial={{ opacity: 0, scale: 0.9 }}

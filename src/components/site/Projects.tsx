@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 import { TiltCard } from "./TiltCard";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface Project {
   url: string;
@@ -74,6 +75,7 @@ function ScreenshotCarousel({ shots }: { shots: { src: string; alt: string }[] }
 }
 
 export function Projects() {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -94,7 +96,7 @@ export function Projects() {
     return (
       <section id="work" className="py-28">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <div className="text-text-secondary">Loading projects...</div>
+          <div className="text-text-secondary">{t('projects.loading')}</div>
         </div>
       </section>
     );
@@ -109,10 +111,10 @@ export function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="font-mono-ui text-sm text-accent">// selected work</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">Real Code. Real Demos.</h2>
+          <div className="font-mono-ui text-sm text-accent">{t('projects.label')}</div>
+          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">{t('projects.title')}</h2>
           <p className="mt-4 text-base text-text-secondary md:text-lg">
-            These aren't mockups. Click the links — they actually load.
+            {t('projects.subtitle')}
           </p>
         </motion.div>
 
@@ -176,7 +178,7 @@ export function Projects() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-bg-card px-4 py-2 text-sm transition-colors hover:border-[var(--border-hover)] hover:text-accent"
                       >
-                        <Github size={16} /> GitHub
+                        <Github size={16} /> {t('projects.github')}
                       </a>
                       <a
                         href={p.demo}
@@ -184,7 +186,7 @@ export function Projects() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm text-white shadow-[0_0_16px_var(--accent-glow)] transition-colors hover:bg-accent-hover"
                       >
-                        <ExternalLink size={16} /> Live Demo
+                        <ExternalLink size={16} /> {t('projects.liveDemo')}
                       </a>
                     </div>
                   </div>

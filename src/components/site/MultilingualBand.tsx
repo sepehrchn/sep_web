@@ -1,15 +1,10 @@
 import { motion } from "framer-motion";
-
-const languages = [
-  { code: "EN", name: "English" },
-  { code: "HY", name: "Armenian" },
-  { code: "RU", name: "Russian" },
-  { code: "FA", name: "Persian" },
-  { code: "DE", name: "German" },
-  { code: "FR", name: "French" },
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 export function MultilingualBand() {
+  const { t } = useTranslation();
+  const languages = t('multilingual.languages') || [];
+
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-6">
@@ -21,18 +16,17 @@ export function MultilingualBand() {
           className="rounded-2xl border border-[var(--border)] bg-bg-card p-8 md:p-12"
         >
           <div className="font-mono-ui text-xs uppercase tracking-wider text-accent">
-            // multilingual delivery
+            {t('multilingual.label')}
           </div>
           <h3 className="font-display mt-3 text-2xl font-bold md:text-3xl">
-            Production sites shipped in 5+ languages.
+            {t('multilingual.title')}
           </h3>
           <p className="mt-3 max-w-3xl text-base text-text-secondary">
-            SEO-optimised per market. Full localisation — copy, currency, legal.
-            Including complex right-to-left (RTL) layout engines with sub-180ms page-load transitions.
+            {t('multilingual.description')}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {languages.map((lang, i) => (
+            {languages.map((lang: any, i: number) => (
               <motion.div
                 key={lang.code}
                 initial={{ opacity: 0, scale: 0.9 }}

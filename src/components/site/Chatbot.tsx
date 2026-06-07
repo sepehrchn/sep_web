@@ -1,15 +1,15 @@
 import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChatbot } from "@/hooks/useChatbot";
+import { useTranslation } from "@/hooks/useTranslation";
 import { MessageSquare, X } from "lucide-react";
 
 export function Chatbot() {
+  const { t } = useTranslation();
   const {
     isOpen, messages, inputValue, isLoading, showFormCTA,
     openChat, closeChat, setInputValue, sendMessage, prefillContactForm,
-  } = useChatbot(
-    "Hey — what are you building? Tell me the current state and what you need, and I'll tell you if we're a fit."
-  );
+  } = useChatbot(t('chatbot.openingMessage'));
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -47,11 +47,11 @@ export function Chatbot() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.5, duration: 0.3 }}
         aria-expanded={isOpen}
-        aria-label={isOpen ? "Close chat" : "Open project intake chat"}
+        aria-label={isOpen ? `${t('chatbot.label')} (close)` : `${t('chatbot.label')} (open)`}
         className="fixed bottom-6 right-6 z-50 flex h-12 items-center gap-2 rounded-full bg-accent px-5 text-sm font-medium text-white shadow-[0_0_24px_var(--accent-glow)] transition-colors hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent"
       >
         {isOpen ? <X size={16} /> : <MessageSquare size={16} />}
-        <span className="hidden sm:inline">{isOpen ? "Close" : "Let's Talk"}</span>
+        <span className="hidden sm:inline">{isOpen ? t('chatbot.close') : t('chatbot.label')}</span>
       </motion.button>
 
       <AnimatePresence>
@@ -69,10 +69,10 @@ export function Chatbot() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
               <div>
-                <p className="font-mono-ui text-sm font-medium text-text-primary">Sepehr</p>
-                <p className="font-mono-ui text-[10px] text-text-tertiary">Responds within 24h</p>
+                <p className="font-mono-ui text-sm font-medium text-text-primary">{t('nav.logoLabel')}</p>
+                <p className="font-mono-ui text-[10px] text-text-tertiary">{t('chatbot.responseTime')}</p>
               </div>
-              <button onClick={closeChat} aria-label="Close chat" className="text-text-tertiary transition-colors hover:text-text-primary">
+                  <button onClick={closeChat} aria-label={t('chatbot.close')} className="text-text-tertiary transition-colors hover:text-text-primary">
                 <X size={16} />
               </button>
             </div>
@@ -104,7 +104,7 @@ export function Chatbot() {
                     onClick={prefillContactForm}
                     className="w-full rounded-md border border-accent text-accent px-3 py-2.5 text-xs font-mono-ui transition-colors hover:bg-accent hover:text-white"
                   >
-                    Fill the contact form with this context →
+                    {t('chatbot.fillFormCTA')}
                   </button>
                 </div>
               )}
@@ -121,7 +121,7 @@ export function Chatbot() {
                 onKeyDown={handleKeyDown}
                 maxLength={500}
                 rows={2}
-                placeholder="Describe your project or ask a question..."
+                placeholder={t('chatbot.openingMessage')}
                 className="flex-1 resize-none rounded-md border border-[var(--border)] bg-transparent px-3 py-2 text-sm text-text-primary outline-none placeholder:text-text-tertiary focus:border-accent"
               />
               <button
@@ -129,12 +129,11 @@ export function Chatbot() {
                 disabled={isLoading || !inputValue.trim()}
                 className="h-[38px] rounded-md bg-accent px-3.5 py-2 text-xs font-mono-ui text-white transition-colors hover:bg-accent-hover disabled:opacity-40"
               >
-                Send
+                {t('chatbot.send')}
               </button>
             </form>
-
             <div className="px-4 pb-2 text-center font-mono-ui text-[9px] text-text-tertiary">
-              This chat is handled by AI. All inquiries are reviewed personally.
+              {t('chatbot.aiNotice')}
             </div>
           </motion.div>
         )}

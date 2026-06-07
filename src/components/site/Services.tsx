@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Layout, Workflow, Cpu, type LucideIcon } from "lucide-react";
 import { TiltCard } from "./TiltCard";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface Service {
   Icon: LucideIcon;
@@ -9,28 +10,30 @@ interface Service {
   tags: string[];
 }
 
-const services: Service[] = [
-  {
-    Icon: Layout,
-    title: "Figma → Production",
-    body: "I build your designs into fast, responsive websites with pixel-accurate implementation. Clean code your team can maintain. White-label available for agencies — your client never needs to know.",
-    tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Vercel"],
-  },
-  {
-    Icon: Workflow,
-    title: "Workflow Automation",
-    body: "Connect your CRM, forms, email, and internal systems. Eliminate the repetitive manual tasks draining your team's time. No-code where it fits, custom code where it doesn't.",
-    tags: ["Zapier", "Make", "REST APIs", "Webhooks", "Node.js"],
-  },
-  {
-    Icon: Cpu,
-    title: "AI Features That Actually Ship",
-    body: "I have an AI degree backing every integration I build — chatbots, content generation, lead qualification, document processing. Real implementations, not copy-pasted tutorials.",
-    tags: ["OpenAI API", "TypeScript", "Next.js", "Server Actions"],
-  },
-];
-
 export function Services() {
+  const { t } = useTranslation();
+
+  const services: Service[] = [
+    {
+      Icon: Layout,
+      title: t('services.items.0.title'),
+      body: t('services.items.0.body'),
+      tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    },
+    {
+      Icon: Workflow,
+      title: t('services.items.1.title'),
+      body: t('services.items.1.body'),
+      tags: ["Zapier", "Make", "REST APIs", "Webhooks", "Node.js"],
+    },
+    {
+      Icon: Cpu,
+      title: t('services.items.2.title'),
+      body: t('services.items.2.body'),
+      tags: ["OpenAI API", "TypeScript", "Next.js", "Server Actions"],
+    },
+  ];
+
   return (
     <section id="services" className="py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -40,10 +43,10 @@ export function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="font-mono-ui text-sm text-accent">// what i build</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">Three Ways I Can Help</h2>
+          <div className="font-mono-ui text-sm text-accent">{t('services.label')}</div>
+          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">{t('services.title')}</h2>
           <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-lg">
-            Most projects combine two or more of these. I work with agencies and businesses.
+            {t('services.description')}
           </p>
         </motion.div>
 

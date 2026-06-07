@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { I18nProvider } from "../components/I18nProvider";
 
 function NotFoundComponent() {
   return (
@@ -115,9 +116,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html>
       <head>
         <HeadContent />
+        {/* Pre-hydration script: read preferred-language cookie and set html lang/dir
+            This runs before the page paints to reduce flash of un-localized content. */}
+        <script
+          // inline on purpose
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+  try {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + 'preferred-language' + '=([^;]*)'));
+    var lang = m ? decodeURIComponent(m[1]) : null;
+    if (lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'fa') ? 'rtl' : 'ltr';
+    }
+  } catch (e) { /* ignore */ }
+})();`,
+          }}
+        />
       </head>
       <body>
         <a
@@ -154,9 +172,11 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-    </QueryClientProvider>
+    <I18nProvider defaultLanguage="en">
+      <QueryClientProvider client={queryClient}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </QueryClientProvider>
+    </I18nProvider>
   );
 }

@@ -2,16 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Calendar, Loader2, CheckCircle2 } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-const contacts = [
-  { Icon: Mail, label: "Email", value: "sepehrjokanian99@gmail.com", href: "mailto:sepehrjokanian99@gmail.com" },
-  { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/sepehr-jo", href: "https://www.linkedin.com/in/sepehr-jo/" },
-  { Icon: Github, label: "GitHub", value: "github.com/sepehrjo", href: "https://github.com/sepehrjo" },
-];
-
 export function Contact() {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,15 +38,15 @@ export function Contact() {
     
     // Basic validation
     if (!formData.name || formData.name.length < 2) {
-      setApiError("Name must be at least 2 characters");
+      setApiError(t('contact.validation.name'));
       return;
     }
     if (!formData.email || !formData.email.includes("@")) {
-      setApiError("Please enter a valid email");
+      setApiError(t('contact.validation.email'));
       return;
     }
     if (!formData.message || formData.message.length < 20) {
-      setApiError("Please describe your project (at least 20 characters)");
+      setApiError(t('contact.validation.message'));
       return;
     }
     
@@ -75,7 +72,7 @@ export function Contact() {
       
       if (!res.ok) {
         if (data.errors) setFieldErrors(data.errors);
-        else setApiError(data.error || "Failed to send. Please try again.");
+        else setApiError(data.error || t('contact.errorMessage'));
         setStatus("error");
       } else {
         setStatus("success");
@@ -83,7 +80,7 @@ export function Contact() {
       }
     } catch (err) {
       console.error("Contact form error:", err);
-      setApiError("Network error. Please check your connection and try again.");
+      setApiError(t('contact.errorMessage'));
       setStatus("error");
     }
   };
@@ -94,15 +91,13 @@ export function Contact() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-xl rounded-xl border border-accent/30 bg-bg-card p-10 text-center">
             <CheckCircle2 size={40} className="mx-auto text-accent" />
-            <h2 className="font-display mt-6 text-3xl font-bold">Got it.</h2>
-            <p className="mt-3 text-text-secondary">
-              I'll review your brief and respond within 24 hours. If it sounds like a good fit, I'll suggest a time for a quick call.
-            </p>
+            <h2 className="font-display mt-6 text-3xl font-bold">{t('contact.title')}</h2>
+            <p className="mt-3 text-text-secondary">{t('contact.successMessage')}</p>
             <button
               onClick={() => setStatus("idle")}
               className="mt-8 rounded-md border border-[var(--border)] bg-bg px-4 py-2 text-sm text-text-secondary transition-colors hover:text-text-primary"
             >
-              Send another inquiry
+              {t('contact.formLabels.submit')}
             </button>
           </div>
         </div>
@@ -119,12 +114,9 @@ export function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="font-mono-ui text-sm text-accent">// make a request</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">Ready to Build Something?</h2>
-          <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-lg">
-            Whether you're an agency looking for a reliable subcontractor or a company that needs a better product —
-            I respond to every message within 24 hours.
-          </p>
+          <div className="font-mono-ui text-sm text-accent">{t('contact.label')}</div>
+          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">{t('contact.title')}</h2>
+          <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-lg">{t('contact.description')}</p>
         </motion.div>
 
         <div className="mt-14 grid gap-10 md:grid-cols-2">
@@ -136,10 +128,16 @@ export function Contact() {
             transition={{ duration: 0.6 }}
           >
             <div className="font-mono-ui text-xs uppercase tracking-wider text-text-tertiary">
-              Contact me directly:
+              {t('footer.contact')}
             </div>
             <div className="mt-6 space-y-5">
-              {contacts.map((c) => (
+              {(function(){
+                const contacts = [
+                  { Icon: Mail, label: "Email", value: t('footer.email') || "sepehrjokanian99@gmail.com", href: `mailto:${t('footer.email') || 'sepehrjokanian99@gmail.com'}` },
+                  { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/sepehr-jo", href: "https://www.linkedin.com/in/sepehr-jo/" },
+                  { Icon: Github, label: "GitHub", value: "github.com/sepehrjo", href: "https://github.com/sepehrjo" },
+                ];
+                return contacts.map((c) => (
                 <a
                   key={c.label}
                   href={c.href}
@@ -155,20 +153,19 @@ export function Contact() {
                     <div className="text-sm text-text-primary group-hover:text-accent">{c.value}</div>
                   </div>
                 </a>
-              ))}
+                ));
+              })()}
 
               <a
-                href="mailto:sepehrjokanian99@gmail.com"
+                href={`mailto:${t('footer.email') || 'sepehrjokanian99@gmail.com'}`}
                 className="inline-flex items-center gap-2 rounded-md border border-accent/40 bg-accent/5 px-4 py-3 text-sm text-text-primary transition-colors hover:bg-accent/10"
               >
                 <Mail size={16} className="text-accent" />
-                Email me
+                {t('footer.email') || 'Email'}
               </a>
             </div>
 
-            <p className="mt-6 text-xs text-text-tertiary">
-              "I check messages personally — not a bot, not a VA."
-            </p>
+            <p className="mt-6 text-xs text-text-tertiary">{t('contact.personalNote')}</p>
           </motion.div>
 
           {/* Right form */}
@@ -181,12 +178,12 @@ export function Contact() {
             className="rounded-xl border border-[var(--border)] bg-bg-card p-6 md:p-8"
           >
             <div className="space-y-4">
-              <Field label="Your name" name="name" value={formData.name} onChange={onChange} required error={fieldErrors.name} />
-              <Field label="Email" name="email" type="email" value={formData.email} onChange={onChange} required error={fieldErrors.email} />
-              <Field label="Company / Agency name" name="company" value={formData.company} onChange={onChange} error={fieldErrors.company} />
+              <Field label={t('contact.formLabels.name')} name="name" value={formData.name} onChange={onChange} required error={fieldErrors.name} />
+              <Field label={t('contact.formLabels.email')} name="email" type="email" value={formData.email} onChange={onChange} required error={fieldErrors.email} />
+              <Field label={t('contact.formLabels.company')} name="company" value={formData.company} onChange={onChange} error={fieldErrors.company} />
               <div>
                 <label className="font-mono-ui text-xs text-text-tertiary">
-                  About your project *
+                  {t('contact.formLabels.message')}{" *"}
                 </label>
                 <textarea
                   name="message"
@@ -195,25 +192,23 @@ export function Contact() {
                   maxLength={2000}
                   value={formData.message}
                   onChange={(e) => onChange("message", e.target.value)}
-                  placeholder="What are you building? What's the challenge? What's the deadline?"
+                  placeholder={t('contact.formLabels.message')}
                   className="mt-2 w-full rounded-md border border-[var(--border)] bg-bg px-3 py-2 text-sm text-text-primary outline-none transition-colors placeholder:text-text-tertiary focus:border-accent"
                 />
                 {fieldErrors.message && <p className="mt-1 text-xs text-red-400">{fieldErrors.message}</p>}
               </div>
               <div>
-                <label className="font-mono-ui text-xs text-text-tertiary">Budget range</label>
+                <label className="font-mono-ui text-xs text-text-tertiary">{t('contact.formLabels.budget')}</label>
                 <select
                   name="budget"
                   value={formData.budget}
                   onChange={(e) => onChange("budget", e.target.value)}
                   className="mt-2 w-full rounded-md border border-[var(--border)] bg-bg px-3 py-2 text-sm text-text-primary outline-none focus:border-accent"
                 >
-                  <option value="">Not sure yet</option>
-                  <option value="under_100">Under $100</option>
-                  <option value="100_300">$100–$300</option>
-                  <option value="300_500">$300–$500</option>
-                  <option value="500_1000">$500–$1,000</option>
-                  <option value="over_1000">Over $1,000</option>
+                  <option value="">{t('contact.budgetPlaceholder')}</option>
+                  {(t('contact.budgetOptions') || []).map((opt: any) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
                 </select>
                 {fieldErrors.budget && <p className="mt-1 text-xs text-red-400">{fieldErrors.budget}</p>}
               </div>
@@ -233,18 +228,18 @@ export function Contact() {
               >
                 {status === "submitting" ? (
                   <span className="flex items-center justify-center gap-2">
-                    <Loader2 size={16} className="animate-spin" /> Sending…
+                    <Loader2 size={16} className="animate-spin" /> {t('contact.formLabels.sending')}
                   </span>
                 ) : (
-                  "Send Message →"
+                  t('contact.formLabels.submit')
                 )}
               </MagneticButton>
             </div>
 
             <div className="mt-8 space-y-2 border-t border-[var(--border)] pt-6 text-sm text-text-secondary">
-              <div><span className="text-accent">1.</span> I review your brief and reply within 24 hours.</div>
-              <div><span className="text-accent">2.</span> If it's a good fit, I'll follow up via email.</div>
-              <div><span className="text-accent">3.</span> You receive a written, fixed-price proposal within 3 days.</div>
+              {(t('contact.postNotes') || []).map((note: string, i: number) => (
+                <div key={i}><span className="text-accent">{i+1}.</span> {note}</div>
+              ))}
             </div>
           </motion.form>
         </div>

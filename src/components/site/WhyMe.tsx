@@ -1,36 +1,40 @@
 import { motion } from "framer-motion";
 import { Zap, Bot, DollarSign, Rocket, type LucideIcon } from "lucide-react";
 import { TiltCard } from "./TiltCard";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface Item {
   Icon: LucideIcon;
   title: string;
   body: string;
 }
-const items: Item[] = [
-  {
-    Icon: Zap,
-    title: "Full-Stack, Solo",
-    body: "Frontend, backend, and deployment — one person. No handoffs, no miscommunication, no \"that's the other team's problem.\" You talk directly to the developer writing your code.",
-  },
-  {
-    Icon: Bot,
-    title: "AI-Augmented Workflow",
-    body: "I hold a degree in Artificial Intelligence — I understand what these models actually do, not just how to call an API. That means faster builds and smarter integrations.",
-  },
-  {
-    Icon: DollarSign,
-    title: "Yerevan Rates, European Quality",
-    body: "Competitive pricing is a natural result of low overhead — not a sign of lower quality. You get senior-level architecture at a fraction of typical agency cost.",
-  },
-  {
-    Icon: Rocket,
-    title: "Demo in Days, Not Weeks",
-    body: "Most clients see a working prototype within 3–5 days of kickoff. Faster feedback loops mean faster launches. Speed is a feature.",
-  },
-];
 
 export function WhyMe() {
+  const { t } = useTranslation();
+
+  const items: Item[] = [
+    {
+      Icon: Zap,
+      title: t('whyMe.items.0.title'),
+      body: t('whyMe.items.0.body'),
+    },
+    {
+      Icon: Bot,
+      title: t('whyMe.items.1.title'),
+      body: t('whyMe.items.1.body'),
+    },
+    {
+      Icon: DollarSign,
+      title: t('whyMe.items.2.title'),
+      body: t('whyMe.items.2.body'),
+    },
+    {
+      Icon: Rocket,
+      title: t('whyMe.items.3.title'),
+      body: t('whyMe.items.3.body'),
+    },
+  ];
+
   return (
     <section className="py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -40,15 +44,14 @@ export function WhyMe() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="font-mono-ui text-sm text-accent">// value proposition</div>
+          <div className="font-mono-ui text-sm text-accent">{t('whyMe.label')}</div>
           <h2 className="font-display mt-4 text-4xl font-bold leading-tight md:text-5xl">
-            What others charge more for —
+            {t('whyMe.heading1')}
             <br />
-            <span className="text-accent">I ship faster.</span>
+            <span className="text-accent">{t('whyMe.heading2')}</span>
           </h2>
           <p className="mt-5 max-w-2xl text-base text-text-secondary md:text-lg">
-            Most agencies add layers of account managers, designers, and developers between you and your product.
-            I remove all of that overhead — and pass the savings directly to you.
+            {t('whyMe.subheading')}
           </p>
         </motion.div>
 

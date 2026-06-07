@@ -81,7 +81,7 @@
 │      Bot: "Timeline?"                                                        │
 │                                                                              │
 │  Visitor: "2-3 months"                                                       │
-│      Bot: "Budget range? Under $8K / $8K–$20K / $20K–$50K / Over $50K"      │
+│      Bot: "Budget range? Under $100 / $100–$300 / $300–$500 / $500–$1,000 / Over $1,000"      │
 │                                                                              │
 │  Visitor: "$20K range"                                                       │
 │      Bot: "Name and company?"                                                │

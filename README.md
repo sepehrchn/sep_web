@@ -197,7 +197,7 @@ Personal project – feel free to reference, but please don't clone the entire t
 
 ## Contact
 
-For inquiries: hello@sepehr.am
+For inquiries: sepehrjokanian99@gmail.com
 
 ---
 

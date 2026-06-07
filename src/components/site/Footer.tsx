@@ -31,7 +31,7 @@ export function Footer() {
             {[
               { Icon: Linkedin, href: "https://www.linkedin.com/in/sepehr-jo/", label: "LinkedIn" },
               { Icon: Github, href: "https://github.com/sepehrjo", label: "GitHub" },
-              { Icon: Mail, href: "mailto:hello@sepehr.am", label: "Email" },
+              { Icon: Mail, href: "mailto:sepehrjokanian99@gmail.com", label: "Email" },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -48,7 +48,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-[var(--border)] pt-6 text-center text-xs text-text-tertiary">
-          © 2026 Sepehr Jokanian · hello@sepehr.am
+          © 2026 Sepehr Jokanian · sepehrjokanian99@gmail.com
         </div>
       </div>
     </footer>

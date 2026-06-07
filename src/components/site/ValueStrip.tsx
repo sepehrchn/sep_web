@@ -4,7 +4,7 @@ import { CountUp } from "./CountUp";
 const stats = [
   { value: 5, suffix: "", label: "Days to Prototype", sub: "Working build, not a mockup" },
   { value: 24, suffix: "h", label: "Response Time", sub: "You are never left waiting" },
-  { value: 8, suffix: "K+", label: "Minimum Engagement", sub: "Fixed scope, no surprises" },
+  { value: 100, suffix: "", prefix: "$", label: "Minimum Engagement", sub: "Fixed scope, no surprises" },
 ];
 
 export function ValueStrip() {
@@ -21,6 +21,7 @@ export function ValueStrip() {
             className="px-6 py-6 text-center md:py-0"
           >
             <div className="font-mono-ui text-5xl font-semibold text-accent md:text-[56px]">
+              {s.prefix ? <span className="mr-1 align-middle">{s.prefix}</span> : null}
               <CountUp to={s.value} suffix={s.suffix} />
             </div>
             <div className="mt-3 text-base font-medium text-text-primary">{s.label}</div>

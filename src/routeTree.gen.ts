@@ -15,9 +15,11 @@ import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminChatLogsRouteImport } from './routes/admin/chat-logs'
 import { Route as ApiProjectsIndexRouteImport } from './routes/api/projects/index'
 import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
 import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
+import { Route as ApiAdminConversationsRouteImport } from './routes/api/admin/conversations'
 import { Route as ApiAdminContactsRouteImport } from './routes/api/admin/contacts'
 import { Route as ApiAdminCheckAuthRouteImport } from './routes/api/admin/check-auth'
 import { Route as ApiAdminContactsIdRouteImport } from './routes/api/admin/contacts.$id'
@@ -52,6 +54,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminChatLogsRoute = AdminChatLogsRouteImport.update({
+  id: '/chat-logs',
+  path: '/chat-logs',
+  getParentRoute: () => AdminRoute,
+} as any)
 const ApiProjectsIndexRoute = ApiProjectsIndexRouteImport.update({
   id: '/api/projects/',
   path: '/api/projects/',
@@ -65,6 +72,11 @@ const ApiAdminLogoutRoute = ApiAdminLogoutRouteImport.update({
 const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
   id: '/api/admin/login',
   path: '/api/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminConversationsRoute = ApiAdminConversationsRouteImport.update({
+  id: '/api/admin/conversations',
+  path: '/api/admin/conversations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdminContactsRoute = ApiAdminContactsRouteImport.update({
@@ -86,12 +98,14 @@ const ApiAdminContactsIdRoute = ApiAdminContactsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admin/chat-logs': typeof AdminChatLogsRoute
   '/admin/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
   '/api/contact': typeof ApiContactRoute
   '/admin/': typeof AdminIndexRoute
   '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
+  '/api/admin/conversations': typeof ApiAdminConversationsRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects/': typeof ApiProjectsIndexRoute
@@ -99,12 +113,14 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/chat-logs': typeof AdminChatLogsRoute
   '/admin/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
   '/api/contact': typeof ApiContactRoute
   '/admin': typeof AdminIndexRoute
   '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
+  '/api/admin/conversations': typeof ApiAdminConversationsRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects': typeof ApiProjectsIndexRoute
@@ -114,12 +130,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admin/chat-logs': typeof AdminChatLogsRoute
   '/admin/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
   '/api/contact': typeof ApiContactRoute
   '/admin/': typeof AdminIndexRoute
   '/api/admin/check-auth': typeof ApiAdminCheckAuthRoute
   '/api/admin/contacts': typeof ApiAdminContactsRouteWithChildren
+  '/api/admin/conversations': typeof ApiAdminConversationsRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
   '/api/projects/': typeof ApiProjectsIndexRoute
@@ -130,12 +148,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/admin/chat-logs'
     | '/admin/login'
     | '/api/chat'
     | '/api/contact'
     | '/admin/'
     | '/api/admin/check-auth'
     | '/api/admin/contacts'
+    | '/api/admin/conversations'
     | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/projects/'
@@ -143,12 +163,14 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin/chat-logs'
     | '/admin/login'
     | '/api/chat'
     | '/api/contact'
     | '/admin'
     | '/api/admin/check-auth'
     | '/api/admin/contacts'
+    | '/api/admin/conversations'
     | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/projects'
@@ -157,12 +179,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/admin/chat-logs'
     | '/admin/login'
     | '/api/chat'
     | '/api/contact'
     | '/admin/'
     | '/api/admin/check-auth'
     | '/api/admin/contacts'
+    | '/api/admin/conversations'
     | '/api/admin/login'
     | '/api/admin/logout'
     | '/api/projects/'
@@ -176,6 +200,7 @@ export interface RootRouteChildren {
   ApiContactRoute: typeof ApiContactRoute
   ApiAdminCheckAuthRoute: typeof ApiAdminCheckAuthRoute
   ApiAdminContactsRoute: typeof ApiAdminContactsRouteWithChildren
+  ApiAdminConversationsRoute: typeof ApiAdminConversationsRoute
   ApiAdminLoginRoute: typeof ApiAdminLoginRoute
   ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
   ApiProjectsIndexRoute: typeof ApiProjectsIndexRoute
@@ -225,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/chat-logs': {
+      id: '/admin/chat-logs'
+      path: '/chat-logs'
+      fullPath: '/admin/chat-logs'
+      preLoaderRoute: typeof AdminChatLogsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/api/projects/': {
       id: '/api/projects/'
       path: '/api/projects'
@@ -244,6 +276,13 @@ declare module '@tanstack/react-router' {
       path: '/api/admin/login'
       fullPath: '/api/admin/login'
       preLoaderRoute: typeof ApiAdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/conversations': {
+      id: '/api/admin/conversations'
+      path: '/api/admin/conversations'
+      fullPath: '/api/admin/conversations'
+      preLoaderRoute: typeof ApiAdminConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/admin/contacts': {
@@ -271,11 +310,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminChatLogsRoute: typeof AdminChatLogsRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminChatLogsRoute: AdminChatLogsRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
@@ -300,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiContactRoute: ApiContactRoute,
   ApiAdminCheckAuthRoute: ApiAdminCheckAuthRoute,
   ApiAdminContactsRoute: ApiAdminContactsRouteWithChildren,
+  ApiAdminConversationsRoute: ApiAdminConversationsRoute,
   ApiAdminLoginRoute: ApiAdminLoginRoute,
   ApiAdminLogoutRoute: ApiAdminLogoutRoute,
   ApiProjectsIndexRoute: ApiProjectsIndexRoute,

@@ -36,10 +36,10 @@ export function useChatbot(openingMessage: string) {
     if (!isUser) return;
     const updates: CollectedData = {};
     if (text.includes("$") || /\b(budget|under|over|k)\b/i.test(text)) {
-    if (/\b(under 8|8k|8 k)\b/i.test(text)) updates.budget = "under_8k";
-    else if (/\b(8.?20|10k|15k|12k|8-20)\b/i.test(text)) updates.budget = "8_20k";
-    else if (/\b(20.?50|25k|30k|40k|20-50)\b/i.test(text)) updates.budget = "20_50k";
-    else if (/\b(over 50|50k\+|50k or more|50-|100k|150k|200k)\b/i.test(text)) updates.budget = "over_50k";
+      if (/\b(under 8|8k|8 k)\b/i.test(text)) updates.budget = "under_8k";
+      else if (/\b(8.?20|10k|15k|12k|8-20)\b/i.test(text)) updates.budget = "8_20k";
+      else if (/\b(20.?50|25k|30k|40k|20-50)\b/i.test(text)) updates.budget = "20_50k";
+      else if (/\b(over 50|50k\+|50k or more|50-|100k|150k|200k)\b/i.test(text)) updates.budget = "over_50k";
     }
     const nameMatch = text.match(/\b(?:my name is|i am|i'm)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/i);
     if (nameMatch?.[1]) updates.name = nameMatch[1];
@@ -71,7 +71,13 @@ export function useChatbot(openingMessage: string) {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: payloadMessages }),
+          body: JSON.stringify({
+            message: payloadMessages[payloadMessages.length - 1].content,
+            history: payloadMessages.slice(0, -1).map((m) => ({
+              role: m.role === "assistant" ? "model" : "user",
+              parts: [{ text: m.content }],
+            })),
+          }),
         });
         if (!res.ok) {
           let errMsg = "Service unavailable. Please use the contact form.";
@@ -81,16 +87,9 @@ export function useChatbot(openingMessage: string) {
           } catch (_) {}
           throw new Error(errMsg);
         }
-        const reader = res.body?.getReader();
-        if (!reader) throw new Error("Response stream reader not available.");
-        const decoder = new TextDecoder();
-        let content = "";
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          content += decoder.decode(value, { stream: true });
-          setMessages((prev) => prev.map((m) => (m.id === assistantId ? { ...m, content } : m)));
-        }
+        const data = await res.json();
+        const content = data.reply ?? "Sorry, I could not generate a response.";
+        setMessages((prev) => prev.map((m) => (m.id === assistantId ? { ...m, content } : m)));
         const normalized = content.toLowerCase();
         if (normalized.includes("#contact") || normalized.includes("contact form")) {
           setShowFormCTA(true);

@@ -1,227 +1,157 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { checkRequestSize, checkOrigin } from "@/lib/request-validation";
 import { getDevEnv } from "@/lib/platform";
-import { checkRateLimit } from "@/lib/rate-limit";
-
-const SYSTEM_PROMPT = `You are the intake assistant for Sepehr, a senior software engineer and web developer based in Yerevan, Armenia. You pre-qualify project inquiries on his behalf.
-
-Your job: identify if the visitor is a fit, gather the information needed to start a scoping call, and route them to the contact form if they qualify. You are not customer support. You do not troubleshoot existing products.
-
-Personality: Direct, technically confident. No filler phrases. No enthusiasm for its own sake. You ask one question at a time. You never ask for information you already have.
-
-Sepehr's services (reference only — use natural language, not this list verbatim):
-- Web design implementation for agencies (white-label, clean handoff)
-- Frontend systems and performance work
-- Automation and integrations (APIs, Zapier, Make, custom webhooks)
-- Practical AI features (content generation, data processing, support automation)
-- MVP builds: fixed scope, fixed price, 4-8 weeks
-
-Typical project range: $8K–$50K. Engagements below $8K are not in scope.
-
-Qualified visitor signals: agency looking for a subcontractor, business needing a lead-gen site or automation, technical founder needing frontend or integration work.
-
-Disqualified visitor signals: pre-seed startup with no budget, looking for co-founder equity arrangement, wants general IT support or maintenance only, budget under $8K.
-
-If disqualified: be honest and brief. Say it's not the right fit and wish them well. Do not apologize excessively.
-
-Conversation flow (adapt to what the visitor volunteers — skip steps if already answered):
-1. What they're building or need
-2. Current state (existing site/system or greenfield)
-3. Rough timeline
-4. Budget range (offer options: Under $8K / $8K–$20K / $20K–$50K / Over $50K)
-5. Name and company if not given
-
-Once you have all five, respond with a summary of what you understood and tell the visitor to use the contact form to start a formal inquiry. The form link is #contact. You may say: 'Based on what you've told me, this sounds like a fit. Head to the contact form below — I'll get back to you within 24 hours.'
-
-Voice rules:
-- Never say: seamless, innovative, cutting-edge, passionate, world-class, synergy
-- Never say: 'Great question!', 'Absolutely!', 'Of course!', 'How can I help you today?'
-- CTAs use action verbs with objects: 'Start a project' not 'Get started'
-- Responses are 1-4 sentences maximum. Never write paragraphs.
-- Do not repeat the visitor's words back to them as a preamble.`;
+import { getDb } from "@/lib/db/client";
 
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        // Security checks
-        const sizeCheck = checkRequestSize(request);
-        if (sizeCheck) return sizeCheck;
-        
-        const originCheck = checkOrigin(request);
-        if (originCheck) return originCheck;
-
         try {
-          // 1. Rate limiting
-          const ip = request.headers.get("cf-connecting-ip") || "127.0.0.1";
-          const env = await getDevEnv();
-          const rateLimit = await checkRateLimit(env.RATE_LIMIT, ip);
-          
-          if (!rateLimit.allowed) {
-            return new Response(
-              JSON.stringify({ error: "Too many messages. Please use the contact form." }),
-              { status: 429, headers: { "Content-Type": "application/json" } }
-            );
-          }
+          const reqBody = await request.json();
+          const { message, history = [] } = reqBody as { message?: string; history?: any[] };
 
-          // 2. Parse
-          const body = (await request.json()) as { messages?: Array<{ role: string; content: string }> };
-          const messages = body.messages;
-          if (!messages || !Array.isArray(messages)) {
+          if (!message) {
             return new Response(
-              JSON.stringify({ error: "Invalid payload: messages array is required." }),
+              JSON.stringify({ error: "message is required" }),
               { status: 400, headers: { "Content-Type": "application/json" } }
             );
           }
 
-          // 3. Sanitize + redact PII
-          const slicedMessages = messages.slice(-20);
-          const sanitized: Array<{ role: "user" | "assistant" | "system"; content: string }> = [
-            { role: "system", content: SYSTEM_PROMPT },
+          // Resolve runtime env (DB, secrets) using helper that works in Pages/Workers
+          let apiKey: string | undefined;
+          try {
+            const env = await getDevEnv();
+            // Prefer binding on env (Cloudflare Pages runtime)
+            apiKey = env?.GEMINI_API_KEY ?? env?.GEMINI_API_KEY?.toString?.();
+            // store env for later DB logging
+            (request as any).__runtime_env = env;
+          } catch (e) {
+            // fallback to process.env (some runtimes may expose this)
+            apiKey = process.env.GEMINI_API_KEY as any;
+          }
+
+          if (!apiKey) {
+            console.error("GEMINI_API_KEY not set via getDevEnv or process.env");
+            return new Response(
+              JSON.stringify({ reply: "Configuration error: no API key." }),
+              { status: 500, headers: { "Content-Type": "application/json" } }
+            );
+          }
+
+          // Load knowledge.txt from same origin as request
+          let knowledge = "";
+          try {
+            const kUrl = new URL('/knowledge.txt', request.url).toString();
+            const kRes = await fetch(kUrl);
+            if (kRes.ok) knowledge = await kRes.text();
+          } catch (e) {
+            console.error("knowledge.txt load failed:", e);
+          }
+
+          // Build Gemini request payload
+          const contents = [
+            ...history,
+            { role: 'user', parts: [{ text: message }] },
           ];
 
-          // Basic PII redaction to avoid sending emails/phones/CC-like numbers to Gemini
-          const redactPII = (text: string) => {
-            if (!text) return text;
-            // redact emails
-            text = text.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[REDACTED_EMAIL]");
-            // redact phone numbers (simple patterns)
-            text = text.replace(/\+?\d[\d\-\s()]{6,}\d/g, "[REDACTED_PHONE]");
-            // redact long digit sequences (possible CC / tokens)
-            text = text.replace(/\b\d{12,19}\b/g, "[REDACTED_NUMBER]");
-            return text;
-          };
-          for (const msg of slicedMessages) {
-            if (msg.role !== "user" && msg.role !== "assistant") continue;
-            if (msg.role === "user" && msg.content.length > 500) {
-              return new Response(
-                JSON.stringify({ error: "Message exceeds character limit of 500." }),
-                { status: 400, headers: { "Content-Type": "application/json" } }
-              );
+          // Try a set of preferred models and fall back if one fails (quota, not available, etc.)
+          const preferredModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+          let reply: string | null = null;
+          let lastRawBody: string | null = null;
+
+          function extractTextFromCandidates(body: any): string | null {
+            if (!body || !Array.isArray(body.candidates) || body.candidates.length === 0) return null;
+            const candidate = body.candidates[0];
+            const content = candidate.content;
+            if (!content) return null;
+            // common case: content is an object with `parts: [{ text }]`
+            if (content && typeof content === 'object' && Array.isArray(content.parts)) {
+              return content.parts.map((p: any) => p?.text || '').join('');
             }
-            const content = msg.role === "user" ? redactPII(String(msg.content)) : String(msg.content);
-            sanitized.push({ role: msg.role, content });
-          }
-
-          // 4. Gemini or placeholder
-          const apiKey = process.env.GEMINI_API_KEY || "";
-          const isPlaceholder = !apiKey || apiKey === "" || apiKey.includes("placeholder");
-
-          const streamPlaceholder = (replyText: string, fallbackReason = "placeholder") => {
-            const encoder = new TextEncoder();
-            const stream = new ReadableStream({
-              async start(controller) {
-                const words = replyText.split(" ");
-                for (let i = 0; i < words.length; i++) {
-                  const chunk = words[i] + (i === words.length - 1 ? "" : " ");
-                  controller.enqueue(encoder.encode(chunk));
-                  await new Promise((r) => setTimeout(r, 40));
-                }
-                controller.close();
-              },
-            });
-            return new Response(stream, {
-              headers: {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Cache-Control": "no-cache",
-                "X-Chat-Fallback": fallbackReason,
-              },
-            });
-          };
-
-          if (isPlaceholder || process.env.USE_PLACEHOLDER === "1") {
-            const userMsgs = sanitized.filter((m) => m.role === "user");
-            const stepIndex = userMsgs.length;
-            let replyText = "";
-            if (stepIndex === 1) {
-              replyText = "That sounds interesting. Is this a brand new greenfield project, or are we adding to/overhauling an existing system?";
-            } else if (stepIndex === 2) {
-              replyText = "Understood. What is your target timeline for starting and launching this project?";
-            } else if (stepIndex === 3) {
-              replyText = "Got it. What is your estimated budget range for this work? The typical options are: Under $8K, $8K–$20K, $20K–$50K, or Over $50K.";
-            } else if (stepIndex === 4) {
-              replyText = "Perfect. Could you also share your name and company name if you have one?";
-            } else {
-              const name =
-                userMsgs
-                  .map((m) => m.content.match(/\b(?:my name is|i am|i'm)\s+([A-Z][a-z]+)/i))
-                  .filter(Boolean)[0]?.[1] || "there";
-              replyText = `Thanks ${name}! I've noted down all the details of your request. Based on what you've shared, this sounds like a great fit for my services. Please use the contact form below to submit your inquiry, and I'll follow up within 24 hours.`;
+            if (typeof content === 'string') return content;
+            if (Array.isArray(content)) {
+              return content
+                .map((part: any) => {
+                  if (!part) return '';
+                  if (typeof part === 'string') return part;
+                  if (typeof part.text === 'string') return part.text;
+                  if (Array.isArray(part.parts)) return part.parts.map((p: any) => p.text || '').join('');
+                  if (Array.isArray(part.content)) return extractTextFromCandidates({ candidates: [{ content: part.content }] });
+                  return '';
+                })
+                .join('');
             }
-
-            return streamPlaceholder(replyText, isPlaceholder ? "no_api_key" : "forced_placeholder");
+            try { return String(content); } catch (e) { return null; }
           }
 
-          try {
-            const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            
-            // Convert sanitized messages to Gemini format (Gemini handles system message separately)
-            const userMessages = sanitized
-              .filter((m) => m.role !== "system")
-              .map((m) => ({
-                role: m.role === "assistant" ? "model" : m.role,
-                parts: [{ text: m.content }],
-              }));
+          for (const modelName of preferredModels) {
+            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modelName)}:generateContent`;
+            try {
+              const res = await fetch(`${geminiUrl}?key=${encodeURIComponent(apiKey)}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ system_instruction: { parts: [{ text: knowledge }] }, contents }),
+              });
 
-            const streamResponse = await model.generateContentStream({
-              contents: userMessages,
-              systemInstruction: SYSTEM_PROMPT,
-              generationConfig: {
-                maxOutputTokens: 300,
-                temperature: 0.4,
-              },
-            });
+              const raw = await res.text().catch(() => null);
+              lastRawBody = raw;
+              console.log('GEMINI_MODEL:', modelName, 'GEMINI_STATUS:', res.status);
+              console.log('GEMINI_BODY:', raw);
 
-            const encoder = new TextEncoder();
-            const stream = new ReadableStream({
-              async start(controller) {
-                try {
-                  for await (const chunk of streamResponse.stream) {
-                    const text = chunk.text();
-                    if (text) controller.enqueue(encoder.encode(text));
-                  }
-                  controller.close();
-                } catch (err) {
-                  controller.error(err);
-                }
-              },
-            });
+              let parsed: any = null;
+              try { parsed = raw ? JSON.parse(raw) : null; } catch (e) { parsed = null; }
 
-            return new Response(stream, {
-              headers: {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Cache-Control": "no-cache",
-                "X-Chat-Fallback": "none",
-              },
-            });
-          } catch (geminiErr) {
-            // Extract any known error/type information so we can surface quota/network reasons
-            const errType =
-              (geminiErr &&
-                (geminiErr.type ||
-                  // Gemini client may include message or status
-                  (geminiErr.message && geminiErr.message.includes("quota"))
-                    ? "quota_exceeded"
-                    : geminiErr.status ||
-                  geminiErr.code)) ||
-              "unknown";
+              if (!res.ok) {
+                // continue to next model if non-OK (quota, etc.)
+                continue;
+              }
 
-            // Log structured info (won't leak secrets) to help debugging in logs
-            console.error("Gemini call failed, falling back to placeholder:", { errType, message: geminiErr?.message || String(geminiErr) });
-
-            const fallbackText = "Sorry — the AI assistant is temporarily unavailable. I can still help qualify requests. " +
-              "Could you tell me briefly what you need?";
-
-            // Include the error type in the fallback header so clients and monitoring can detect quota issues
-            return streamPlaceholder(fallbackText, `gemini_error:${String(errType)}`);
+              const candidateText = extractTextFromCandidates(parsed);
+              if (candidateText) {
+                reply = candidateText;
+                break;
+              }
+              // otherwise try next model
+            } catch (e) {
+              console.error('Gemini request error for model', modelName, e);
+              // try next model
+            }
           }
-        } catch (err) {
-          console.error("Chat API Error:", err);
+
+          if (!reply) {
+            // no reply produced by any model
+            return new Response(JSON.stringify({ reply: 'Sorry, I could not generate a response.' }), {
+              headers: { 'Content-Type': 'application/json' },
+            });
+          }
+
+          // Non-blocking D1 logging using env resolved earlier
+          (async () => {
+            try {
+              const env = (request as any).__runtime_env ?? (await getDevEnv());
+              const db = getDb(env);
+              const sessionId = (typeof crypto !== 'undefined' && (crypto as any).randomUUID) ? (crypto as any).randomUUID() : String(Date.now());
+              const now = Date.now();
+              await db.batch([
+                db.prepare('INSERT INTO conversations (id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)')
+                  .bind((crypto as any).randomUUID(), sessionId, 'user', message, now),
+                db.prepare('INSERT INTO conversations (id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)')
+                  .bind((crypto as any).randomUUID(), sessionId, 'assistant', reply, now),
+              ]);
+            } catch (dbErr) {
+              console.error('D1 logging failed:', dbErr);
+            }
+          })();
+
+          return new Response(JSON.stringify({ reply }), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+
+        } catch (err: any) {
+          console.error('CHAT_ERROR:', err?.message ?? err);
           return new Response(
-            JSON.stringify({ error: "Service unavailable. Please use the contact form." }),
-            { status: 503, headers: { "Content-Type": "application/json" } }
+            JSON.stringify({ reply: 'Error: ' + (err?.message ?? String(err)) }),
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
           );
         }
       },

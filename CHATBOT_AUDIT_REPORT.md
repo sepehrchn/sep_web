@@ -93,6 +93,7 @@ if (isPlaceholder) {
 - Based in Yerevan, Armenia
 - Services: Web development, AI integrations, MVP builds, agency white-label
 - Target: Agencies and businesses with $8K–$50K budgets
+ - Target: Agencies and businesses with $100–$1,000 budgets
 - Goal: Pre-qualify leads before they fill contact form
 
 **Target Clients:**
@@ -105,6 +106,7 @@ if (isPlaceholder) {
 - Looking for equity/co-founder arrangements
 - IT support/maintenance only
 - Budget under $8K
+ - Budget under $100
 
 ---
 
@@ -154,6 +156,7 @@ if (isPlaceholder) {
 - ✅ Direct, no-nonsense personality
 - ✅ Service scope clearly defined
 - ✅ Budget ranges explicit ($8K–$50K)
+ - ✅ Budget ranges explicit ($100–$1,000)
 - ✅ Qualification/disqualification criteria
 - ✅ Voice rules prevent corporate jargon
 - ✅ Conversation flow structured but adaptive
@@ -172,7 +175,7 @@ if (isPlaceholder) {
    - Better: Provide alternative resources (freelance platforms, lower-cost options)
 
 3. **Budget Conversation**:
-   - Current: Asks directly about $8K–$50K ranges
+   - Current: Asks directly about $100–$1,000 ranges
    - Better: Start with project scope, infer budget naturally
 
 4. **Follow-up Trigger**:
@@ -257,7 +260,7 @@ Bot: "Budget range?"
 
 Visitor: "Maybe $2-3K?"
 
-Bot: "That's below my project minimum ($8K+). For a simpler site, check out Webflow or Framer — both are great for landing pages and don't require custom dev. You can also find good freelancers on Contra or Upwork in that range."
+Bot: "That's below my project minimum ($100). For a simpler site, check out Webflow or Framer — both are great for landing pages and don't require custom dev. You can also find good freelancers on Contra or Upwork in that range."
 
 [END CONVERSATION]
 ```
@@ -341,7 +344,7 @@ wrangler deploy
 // Enhanced system prompt with better qualification logic
 const SYSTEM_PROMPT = `You are Sepehr's intake assistant. You pre-qualify project inquiries.
 
-Your goal: Determine if the visitor is a fit within 2-3 exchanges. Qualified = agency partner, business with real budget, or technical founder. Disqualified = hobbyist, equity-seeker, or sub-$8K budget.
+Your goal: Determine if the visitor is a fit within 2-3 exchanges. Qualified = agency partner, business with real budget, or technical founder. Disqualified = hobbyist, equity-seeker, or budget under $100.
 
 Conversation style:
 - Direct, confident, no filler
@@ -354,7 +357,7 @@ Services in scope:
 - Lead-gen sites + automation
 - AI integrations (OpenAI, content generation)
 - MVP builds (4-8 weeks, fixed scope)
-- Typical range: $8K–$50K
+ - Typical range: $100–$1,000
 
 **Qualification shortcuts:**
 - If visitor says "we're an agency" or "I run a [business]" → assume qualified, skip to budget
@@ -362,7 +365,7 @@ Services in scope:
 - If visitor says "$15K" or "around $20K" → qualified, move to form CTA immediately
 
 **Disqualification with value:**
-- Budget under $8K → suggest Webflow, Framer, Upwork/Contra
+ - Budget under $100 → suggest Webflow, Framer, Upwork/Contra
 - Pre-revenue startup → "not the right time, revisit when you have traction"
 - Vague/exploratory → redirect to contact form (low effort)
 

@@ -6,7 +6,7 @@ import { MagneticButton } from "./MagneticButton";
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 const contacts = [
-  { Icon: Mail, label: "Email", value: "hello@sepehr.am", href: "mailto:hello@sepehr.am" },
+  { Icon: Mail, label: "Email", value: "sepehrjokanian99@gmail.com", href: "mailto:sepehrjokanian99@gmail.com" },
   { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/sepehr-jo", href: "https://www.linkedin.com/in/sepehr-jo/" },
   { Icon: Github, label: "GitHub", value: "github.com/sepehrjo", href: "https://github.com/sepehrjo" },
 ];
@@ -158,7 +158,7 @@ export function Contact() {
               ))}
 
               <a
-                href="mailto:hello@sepehr.am"
+                href="mailto:sepehrjokanian99@gmail.com"
                 className="inline-flex items-center gap-2 rounded-md border border-accent/40 bg-accent/5 px-4 py-3 text-sm text-text-primary transition-colors hover:bg-accent/10"
               >
                 <Mail size={16} className="text-accent" />

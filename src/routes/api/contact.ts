@@ -84,7 +84,7 @@ export const Route = createFileRoute("/api/contact")({
           const resend = new Resend(apiKey);
           const sendResult = await resend.emails.send({
             from: "noreply@sepehr.am",
-            to: "hello@sepehr.am",
+            to: "sepehrjokanian99@gmail.com",
             subject: `New project inquiry from ${escapeHtml(name)}`,
             html: `
               <h2>New Inquiry</h2>

@@ -209,10 +209,11 @@ export function Contact() {
                   className="mt-2 w-full rounded-md border border-[var(--border)] bg-bg px-3 py-2 text-sm text-text-primary outline-none focus:border-accent"
                 >
                   <option value="">Not sure yet</option>
-                  <option value="under_8k">Under $8K</option>
-                  <option value="8_20k">$8K–$20K</option>
-                  <option value="20_50k">$20K–$50K</option>
-                  <option value="over_50k">Over $50K</option>
+                  <option value="under_100">Under $100</option>
+                  <option value="100_300">$100–$300</option>
+                  <option value="300_500">$300–$500</option>
+                  <option value="500_1000">$500–$1,000</option>
+                  <option value="over_1000">Over $1,000</option>
                 </select>
                 {fieldErrors.budget && <p className="mt-1 text-xs text-red-400">{fieldErrors.budget}</p>}
               </div>

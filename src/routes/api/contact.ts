@@ -12,7 +12,10 @@ const contactSchema = z.object({
   email: z.string().email(),
   company: z.string().max(100).optional(),
   project: z.string().min(20).max(2000),
-  budget: z.enum(["", "under_8k", "8_20k", "20_50k", "over_50k"]).optional(),
+  // Updated budget tiers to reflect current public knowledge/pricing
+  budget: z
+    .enum(["", "under_100", "100_300", "300_500", "500_1000", "over_1000"])
+    .optional(),
 });
 
 export const Route = createFileRoute("/api/contact")({

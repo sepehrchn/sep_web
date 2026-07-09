@@ -32,12 +32,7 @@ export function Hero() {
                 className="blob-mask relative h-[320px] w-[320px] overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-xl md:h-[420px] md:w-[420px]"
                 style={{ animation: "float 8s ease-in-out infinite" }}
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="font-script text-5xl md:text-7xl mb-2">سپهر</div>
-                    <div className="font-mono-ui text-xs tracking-widest opacity-80">FULL-STACK DEVELOPER</div>
-                  </div>
-                </div>
+                <img src="/assets/profile-placeholder.jpg" alt="سپهر - Full-Stack Developer" className="h-full w-full object-cover" />
               </div>
             </div>
           </motion.div>

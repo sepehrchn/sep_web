@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 
 interface JigsawCardProps {
     color?: string;
+    filled?: boolean;
     className?: string;
     children: ReactNode;
 }
@@ -18,7 +19,7 @@ const PALETTE = [
 
 const NOTCH = 28;
 
-export function JigsawCard({ color, className = "", children }: JigsawCardProps) {
+export function JigsawCard({ color, filled = false, className = "", children }: JigsawCardProps) {
     const resolved = color || PALETTE[Math.floor(Math.random() * PALETTE.length)];
 
     const clip = `polygon(
@@ -33,7 +34,10 @@ export function JigsawCard({ color, className = "", children }: JigsawCardProps)
             className={["relative bg-white border border-[var(--border)] shadow-md transition-all duration-300", className].join(" ")}
             style={{ clipPath: clip }}
         >
-            <div className="h-full w-full bg-[var(--bg-card)]">
+            <div
+                className={filled ? "h-full w-full" : "h-full w-full bg-[var(--bg-card)]"}
+                style={filled ? { backgroundColor: resolved } : undefined}
+            >
                 {children}
             </div>
         </div>

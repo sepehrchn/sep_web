@@ -192,65 +192,77 @@
       "list": {
         "shahmaghz": {
           "title": "ShahMaghz E-Commerce Platform",
-          "description": "A high-performance, RTL-native agricultural e-commerce platform built with a 13-model Postgres schema, Zustand state, and Cloudinary media pipelines.",
+          "description": "A full-scale e-commerce platform for a Persian nuts & dried-fruits brand — 13-model schema, RTL-native UI, admin dashboard, and a live storefront.",
+          "color": "#1B1B4A",
+          "images": ["/assets/projects/shahmaghz-1.jpg", "/assets/projects/shahmaghz-2.jpg", "/assets/projects/shahmaghz-3.jpg"],
           "highlights": [
             "13-model relational schema with Prisma & PostgreSQL",
             "Fully native RTL/LTR design system and theme selector",
             "Optimized media processing and upload via Cloudinary",
             "Predictable client-side state management using Zustand"
           ],
-          "category": "Full-Stack"
+          "category": "web"
         },
         "cyberbullying": {
           "title": "Cyberbullying Classification System",
-          "description": "An NLP text classification system combining BERT and BiLSTM models with human-in-the-loop retraining, wrapped in a Chrome extension and FastAPI dashboard. Graded A+.",
+          "description": "An NLP system that detects cyberbullying in real time — BERT + BiLSTM model, Chrome extension, moderator dashboard, and human-in-the-loop retraining. Final year project, graded A+.",
+          "color": "#C17A54",
+          "images": ["/assets/projects/cyberbullying-1.jpg", "/assets/projects/cyberbullying-2.jpg", "/assets/projects/cyberbullying-3.jpg"],
           "highlights": [
             "Hybrid BERT + BiLSTM neural network built with PyTorch",
             "Active learning loop utilizing moderator verification feedback",
             "Chrome extension for real-time social platform monitoring",
             "FastAPI backend and analytics dashboard with PostgreSQL"
           ],
-          "category": "AI/ML"
+          "category": "ai"
         },
         "ariana": {
           "title": "Ariana Global Trade",
-          "description": "A bilingual B2B platform prototype highlighting an advanced RTL layout engine and a local Knowledge Base chatbot running LLM fallbacks.",
+          "description": "A bilingual B2B export platform with a full RTL/LTR layout engine and a hybrid chatbot — local knowledge base first, LLM fallback when needed.",
+          "color": "#1B1B4A",
+          "images": ["/assets/projects/ariana-1.jpg", "/assets/projects/ariana-2.jpg", "/assets/projects/ariana-3.jpg"],
           "highlights": [
             "Bilingual (EN/FA) interface with micro-interaction state transitions",
             "OpenAI-powered concierge bot with local KB context integration",
             "Robust responsive grids matching 5 viewport breakpoints"
           ],
-          "category": "Full-Stack"
+          "category": "web"
         },
         "forma": {
           "title": "FORMA Studio Website",
-          "description": "A fictional design studio showcase highlighting a performance-conscious Three.js WebGL hero and 4-language i18n routing in CSS Modules.",
+          "description": "An interactive agency site with a WebGL Three.js hero, 4-language i18n, and a custom AI chat widget — built as a design/dev showcase.",
+          "color": "#C17A54",
+          "images": ["/assets/projects/forma-1.jpg", "/assets/projects/forma-2.jpg", "/assets/projects/forma-3.jpg"],
           "highlights": [
             "Three.js WebGL rendering with off-screen GPU sleep mode",
             "Custom CSS Modules design system with zero utilities dependency",
             "Smooth framerate animation transitions using Framer Motion"
           ],
-          "category": "Full-Stack"
+          "category": "web"
         },
         "telegram": {
           "title": "Telegram AI Assistant",
-          "description": "A Gemini-powered personal bot deployed on the edge, featuring ElevenLabs voice processing and live knowledge base syncing without redeploys.",
+          "description": "A Gemini-powered assistant on Cloudflare's edge — voice in, voice out (ElevenLabs), auto language detection, and a live-updatable knowledge base.",
+          "color": "#1B1B4A",
+          "images": ["/assets/projects/telegram-1.jpg", "/assets/projects/telegram-2.jpg", "/assets/projects/telegram-3.jpg"],
           "highlights": [
             "Serverless execution using Cloudflare Workers, KV, and D1",
             "Multimodal audio translation powered by ElevenLabs voice API",
             "Dynamic context updating through real-time DB synchronization"
           ],
-          "category": "AI/ML"
+          "category": "ai"
         },
         "n8n": {
           "title": "Multi-Agent Outreach Automation",
-          "description": "A secure n8n automation pipeline conducting recursive site scraping, AI research, and automated draft synthesis with strict rate-limiting guardrails.",
+          "description": "An automation pipeline where one AI agent researches a lead and another drafts the outreach email — with human review and rate-limited sending.",
+          "color": "#C17A54",
+          "images": ["/assets/projects/n8n-1.jpg", "/assets/projects/n8n-2.jpg", "/assets/projects/n8n-3.jpg"],
           "highlights": [
             "Orchestration of independent research and writing agents",
             "Dynamic rate-limiting guardrails and manual approval gates",
             "Real-time logging to spreadsheet databases and email triggers"
           ],
-          "category": "Automation"
+          "category": "mobile"
         }
       }
     },
@@ -473,65 +485,77 @@
       "list": {
         "shahmaghz": {
           "title": "پلتفرم فروشگاهی شاه‌مغز",
-          "description": "یک پلتفرم فروشگاهی با کارایی بالا و منطبق بر چیدمان راست‌به‌چپ برای محصولات کشاورزی که با یک طرح پایگاه‌داده ۱۳ مدله Postgres، مدیریت حالت Zustand و پردازش رسانه Cloudinary طراحی شده است.",
+          "description": "یک پلتفرم فروشگاهی کامل برای برند خشکبار — با طراحی پایگاه‌داده ۱۳ مدله، رابط کاربری بومی راست‌به‌چپ، داشبورد مدیریتی و فروشگاه آنلاین فعال.",
+          "color": "#1B1B4A",
+          "images": ["/assets/projects/shahmaghz-1.jpg", "/assets/projects/shahmaghz-2.jpg", "/assets/projects/shahmaghz-3.jpg"],
           "highlights": [
             "طراحی پایگاه‌داده ۱۳ مدله با Prisma و PostgreSQL",
             "طراحی بومی سیستم راست‌به‌چپ/چپ‌به‌راست و تغییر تم",
             "آپلود و پردازش تصویر بهینه‌شده از طریق Cloudinary",
             "مدیریت وضعیت سمت کلاینت با کارایی بالا با Zustand"
           ],
-          "category": "فول‌استک"
+          "category": "web"
         },
         "cyberbullying": {
           "title": "سیستم طبقه‌بندی سایبربولینگ",
-          "description": "یک سیستم طبقه‌بندی متنی NLP ترکیبی از مدل‌های BERT و BiLSTM همراه با حلقه یادگیری فعال با بازخورد ناظران، در قالب افزونه کروم و داشبورد FastAPI. نمره پایان‌نامه: A+.",
+          "description": "سیستمی برای شناسایی آنی سایبربولینگ — مدل ترکیبی BERT و BiLSTM، افزونه کروم، داشبورد ناظر و بازآموزی مبتنی بر بازخورد انسانی. پروژه پایانی، نمره A+.",
+          "color": "#C17A54",
+          "images": ["/assets/projects/cyberbullying-1.jpg", "/assets/projects/cyberbullying-2.jpg", "/assets/projects/cyberbullying-3.jpg"],
           "highlights": [
             "شبکه عصبی ترکیبی BERT + BiLSTM با PyTorch",
             "حلقه یادگیری فعال با تأیید و بازخورد ناظران انسانی",
             "افزونه کروم برای پایش زنده در شبکه‌های اجتماعی",
             "بک‌اند FastAPI و داشبورد تحلیل داده با PostgreSQL"
           ],
-          "category": "هوش مصنوعی و یادگیری ماشین"
+          "category": "ai"
         },
         "ariana": {
           "title": "پورتال تجاری آریانا",
-          "description": "یک نمونه اولیه پلتفرم تجارت B2B دوزبانه با سیستم تغییر چیدمان پیشرفته RTL/LTR و چت‌بات پشتیبان با پایگاه دانش محلی و مدل‌های زبانی.",
+          "description": "پلتفرم صادرات B2B دوزبانه با موتور چیدمان کامل راست‌به‌چپ/چپ‌به‌راست و چت‌بات ترکیبی — ابتدا پایگاه دانش محلی، در صورت نیاز مدل زبانی.",
+          "color": "#1B1B4A",
+          "images": ["/assets/projects/ariana-1.jpg", "/assets/projects/ariana-2.jpg", "/assets/projects/ariana-3.jpg"],
           "highlights": [
             "واسط کاربری دوزبانه (فارسی/انگلیسی) با انیمیشن‌های روان",
             "دستیار گفتگو با هوش مصنوعی OpenAI و پایگاه دانش محلی",
             "سازگاری کامل با ۵ سایز استاندارد نمایشگر"
           ],
-          "category": "فول‌استک"
+          "category": "web"
         },
         "forma": {
           "title": "وب‌سایت استودیو FORMA",
-          "description": "یک ویترین نمایشی استودیوی طراحی با رندر سه‌بعدی Three.js WebGL و مدیریت هوشمند منابع سیستم و ۴ زبان مختلف در CSS Modules.",
+          "description": "وب‌سایت تعاملی یک استودیوی طراحی با هیرو سه‌بعدی WebGL، پشتیبانی از ۴ زبان و ویجت گفتگوی هوش مصنوعی اختصاصی — به‌عنوان نمونه‌کار طراحی و توسعه.",
+          "color": "#C17A54",
+          "images": ["/assets/projects/forma-1.jpg", "/assets/projects/forma-2.jpg", "/assets/projects/forma-3.jpg"],
           "highlights": [
             "رندر سه‌بعدی Three.js WebGL با حالت استراحت در خارج از صفحه جهت کاهش بار پردازشی",
             "سیستم طراحی کاملاً اختصاصی CSS Modules بدون نیاز به کلاس‌های Tailwind",
             "انیمیشن‌های نرم کلاینت با استفاده از Framer Motion"
           ],
-          "category": "فول‌استک"
+          "category": "web"
         },
         "telegram": {
           "title": "ربات دستیار تلگرام AI",
-          "description": "یک ربات شخصی مبتنی بر مدل Gemini مستقر در لبه (Edge) با پردازش صوتی ElevenLabs و همگام‌سازی زنده پایگاه دانش بدون نیاز به استقرار مجدد.",
+          "description": "دستیار هوشمند مبتنی بر Gemini روی زیرساخت Edge کلادفلر — ورودی و خروجی صوتی با ElevenLabs، تشخیص خودکار زبان و پایگاه دانش قابل به‌روزرسانی زنده.",
+          "color": "#1B1B4A",
+          "images": ["/assets/projects/telegram-1.jpg", "/assets/projects/telegram-2.jpg", "/assets/projects/telegram-3.jpg"],
           "highlights": [
             "اجرای ابری بدون سرور با Cloudflare Workers، KV و D1",
             "تبدیل صوت و ترجمه صوتی با APIهای صوتی ElevenLabs",
             "به‌روزرسانی پویای بستر دانش از طریق همگام‌سازی زنده دیتابیس"
           ],
-          "category": "هوش مصنوعی و یادگیری ماشین"
+          "category": "ai"
         },
         "n8n": {
           "title": "خودکارسازی فرآیند ارتباط با مشتری",
-          "description": "یک خط لوله خودکارسازی امن با n8n شامل استخراج recursively وب‌سایت‌ها، تحلیل هوش مصنوعی و تولید خودکار ایمیل با سدهای محدودکننده نرخ ارسال.",
+          "description": "خط لوله خودکارسازی‌ای که یک عامل هوش مصنوعی درباره مخاطب تحقیق می‌کند و دیگری ایمیل را می‌نویسد — با بازبینی انسانی و محدودیت نرخ ارسال.",
+          "color": "#C17A54",
+          "images": ["/assets/projects/n8n-1.jpg", "/assets/projects/n8n-2.jpg", "/assets/projects/n8n-3.jpg"],
           "highlights": [
             "هماهنگ‌سازی و ارتباط هوشمند عامل‌های تحقیقاتی و نویسندگی",
             "رعایت محدودیت‌های خودکار ارسال و درگاه‌های تأیید انسانی",
             "ثبت زنده داده‌ها در صفحات اکسل و محرک‌های خودکار ایمیلی"
           ],
-          "category": "خودکارسازی"
+          "category": "mobile"
         }
       }
     },

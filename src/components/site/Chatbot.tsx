@@ -38,24 +38,36 @@ export function Chatbot() {
     if (inputValue.trim() && !isLoading) sendMessage(inputValue.trim());
   };
 
-  /* Floating bottom bar trigger */
+  /* Floating action button trigger */
   const TriggerButton = (
-    <motion.button
-      ref={triggerRef}
-      onClick={isOpen ? closeChat : openChat}
+    <motion.div
+      className="fixed bottom-6 left-6 z-50 group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.5, duration: 0.4 }}
-      aria-expanded={isOpen}
-      aria-label={isOpen ? `${t('chatbot.label')} (close)` : `${t('chatbot.label')} (open)`}
-      className="fixed bottom-6 left-6 z-50 flex items-center gap-2 rounded-full border border-[var(--border)] bg-white px-4 py-2.5 shadow-md transition-all hover:border-[var(--accent)] hover:shadow-[var(--shadow-glow)]"
     >
-      <span className="relative flex h-2.5 w-2.5">
-        <span className="absolute inset-0 animate-ping rounded-full bg-[var(--c-success)] opacity-70" />
-        <span className="relative h-2.5 w-2.5 rounded-full bg-[var(--c-success)]" />
-      </span>
-      <span className="text-sm font-medium text-text-primary">Need help?</span>
-    </motion.button>
+      <button
+        ref={triggerRef}
+        onClick={isOpen ? closeChat : openChat}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? `${t('chatbot.label')} (close)` : `${t('chatbot.label')} (open)`}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-lg transition-all hover:scale-110 hover:shadow-[var(--shadow-glow)]"
+      >
+        {/* Copper ring accent on hover */}
+        <div className="absolute -inset-1 rounded-full border-2 border-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-40" />
+        
+        {/* Pulsing glow */}
+        <span className="absolute inset-0 rounded-full bg-[var(--accent)] opacity-20 animate-ping" />
+        
+        {/* Icon */}
+        <MessageSquare size={24} className="relative z-10 text-white" />
+      </button>
+      
+      {/* Tooltip on hover */}
+      <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none">
+        Chat Bot
+      </div>
+    </motion.div>
   );
 
   /* Chat dialog */
@@ -71,17 +83,17 @@ export function Chatbot() {
       className="fixed bottom-20 left-6 z-40 flex h-[520px] max-h-[70vh] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-bg shadow-2xl md:left-6 md:w-[360px]"
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-[var(--border)] bg-white px-4 py-3">
+      <div className="flex items-center justify-between border-b border-[var(--border)] bg-[var(--primary)] px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="relative h-10 w-10">
             <div className="absolute inset-0 rounded-full border-2 border-[var(--accent)]" />
-            <div className="absolute inset-[3px] rounded-full bg-[var(--primary)] flex items-center justify-center">
-              <MessageSquare size={14} className="text-white" />
+            <div className="absolute inset-[3px] rounded-full bg-white flex items-center justify-center">
+              <MessageSquare size={14} className="text-[var(--primary)]" />
             </div>
           </div>
           <div>
-            <div className="text-sm font-semibold text-text-primary">{t('nav.logoLabel')}</div>
-            <div className="flex items-center gap-1.5 text-xs text-text-secondary">
+            <div className="text-sm font-semibold text-white">{t('nav.logoLabel')}</div>
+            <div className="flex items-center gap-1.5 text-xs text-white/70">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inset-0 animate-ping rounded-full bg-[var(--c-success)] opacity-70" />
                 <span className="relative h-1.5 w-1.5 rounded-full bg-[var(--c-success)]" />
@@ -90,7 +102,7 @@ export function Chatbot() {
             </div>
           </div>
         </div>
-        <button onClick={closeChat} aria-label={t('chatbot.close')} className="text-text-tertiary transition-colors hover:text-text-primary rounded-full p-1 hover:bg-[var(--bg-card)]">
+        <button onClick={closeChat} aria-label={t('chatbot.close')} className="text-white/70 transition-colors hover:text-white rounded-full p-1 hover:bg-white/10">
           <X size={16} />
         </button>
       </div>
@@ -100,9 +112,9 @@ export function Chatbot() {
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`px-3 py-2.5 text-sm leading-relaxed rounded-lg max-w-[88%] ${msg.role === "user"
+            className={`px-3 py-2.5 text-sm leading-relaxed rounded-xl max-w-[88%] ${msg.role === "user"
                 ? "self-end bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-text-primary"
-                : "self-start border border-[var(--border)] text-text-secondary bg-white"
+                : "self-start border-l-2 border-[var(--accent)] bg-white text-text-secondary shadow-sm"
               }`}
           >
             {msg.content}
@@ -110,7 +122,7 @@ export function Chatbot() {
         ))}
 
         {isLoading && messages[messages.length - 1]?.role === "user" && (
-          <div className="self-start border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-text-secondary bg-white">
+          <div className="self-start border-l-2 border-[var(--accent)] rounded-xl px-3 py-2 text-sm text-text-secondary bg-white shadow-sm">
             <span className="animate-pulse text-text-tertiary">...</span>
           </div>
         )}
@@ -144,14 +156,11 @@ export function Chatbot() {
         <button
           type="submit"
           disabled={isLoading || !inputValue.trim()}
-          className="h-[38px] rounded-md bg-[var(--accent)] px-3.5 py-2 text-xs font-mono-ui text-white transition-colors hover:bg-[var(--accent-hover)] disabled:opacity-40"
+          className="h-[38px] rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-medium text-white transition-all hover:bg-[var(--accent-hover)] hover:shadow-md disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {t('chatbot.send')}
         </button>
       </form>
-      <div className="px-4 pb-2 text-center font-mono-ui text-[9px] text-text-tertiary bg-white">
-        {t('chatbot.aiNotice')}
-      </div>
     </motion.div>
   );
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { JigsawCard } from "./JigsawCard";
+import { ProjectImageSlider } from "./ProjectImageSlider";
 import { WaveDivider } from "./WaveDivider";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -76,39 +77,47 @@ export function Projects() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="relative"
               >
-                <JigsawCard color={p.color} className="overflow-hidden p-8">
-                  <div className="flex h-full flex-col">
-                    {/* Top color accent bar */}
-                    <div
-                      className="absolute top-0 left-0 right-0 h-2"
-                      style={{ backgroundColor: p.color || "#1B1B4A" }}
-                    />
+                <JigsawCard color={p.color} filled className="overflow-hidden">
+                  {/* Image slider - full bleed at top */}
+                  {p.images && p.images.length > 0 && (
+                    <ProjectImageSlider images={p.images} alt={p.title} />
+                  )}
 
-                    {/* Badge */}
-                    {p.badge && (
-                      <div className="inline-flex items-center gap-1 self-start rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-3 py-1">
-                        <span className="text-xs font-medium text-[var(--accent)]">★ {p.badge}</span>
-                      </div>
-                    )}
+                  {/* Padded content area */}
+                  <div className="p-8">
+                    <div className="flex h-full flex-col">
+                      {/* Top color accent bar */}
+                      <div
+                        className="absolute top-0 left-0 right-0 h-2"
+                        style={{ backgroundColor: p.color || "#1B1B4A" }}
+                      />
 
-                    {/* Card content */}
-                    <div className="mt-auto flex flex-1 flex-col justify-end">
-                      <h3 className="font-display text-xl font-bold text-white mt-4">{p.title}</h3>
-                      <p className="mt-2 text-sm text-white/70 leading-relaxed">{p.description}</p>
-                      {p.tags && (
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {p.tags.map((tag: string, j: number) => (
-                            <span key={j} className="text-xs text-white/60 font-mono-ui">{tag}</span>
-                          ))}
+                      {/* Badge */}
+                      {p.badge && (
+                        <div className="inline-flex items-center gap-1 self-start rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-3 py-1">
+                          <span className="text-xs font-medium text-[var(--accent)]">★ {p.badge}</span>
                         </div>
                       )}
-                    </div>
 
-                    {/* Bottom accent dot */}
-                    <div className="mt-4 flex gap-1">
-                      {[1, 2, 3].map((d) => (
-                        <div key={d} className={`h-1.5 rounded-full ${d === 1 ? "w-6 bg-white/80" : "w-1.5 bg-white/40"}`} />
-                      ))}
+                      {/* Card content */}
+                      <div className="mt-auto flex flex-1 flex-col justify-end">
+                        <h3 className="font-display text-xl font-bold text-white mt-4">{p.title}</h3>
+                        <p className="mt-2 text-sm text-white/70 leading-relaxed">{p.description}</p>
+                        {p.tags && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {p.tags.map((tag: string, j: number) => (
+                              <span key={j} className="text-xs text-white/60 font-mono-ui">{tag}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Bottom accent dot */}
+                      <div className="mt-4 flex gap-1">
+                        {[1, 2, 3].map((d) => (
+                          <div key={d} className={`h-1.5 rounded-full ${d === 1 ? "w-6 bg-white/80" : "w-1.5 bg-white/40"}`} />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </JigsawCard>

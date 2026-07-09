@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const D1_DATABASE_ID = "0fab311a-138f-48e3-a581-d451d4da2258";
-const D1_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID || "";
-const D1_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
+const keyMapping: Record<string, string> = {
+  "ShahMaghz": "shahmaghz",
+  "Cyberbullying": "cyberbullying",
+  "Ariana": "ariana",
+  "FORMA": "forma",
+  "Telegram": "telegram",
+  "n8n": "n8n",
+  "Ariana Global Trade — B2B Export Portal": "ariana",
+  "FORMA Studio — Art Direction & Advertising": "forma"
+};
 
 export const Route = createFileRoute("/api/projects/")({
   server: {
@@ -20,19 +27,24 @@ export const Route = createFileRoute("/api/projects/")({
             const projects = await getVisibleProjects(db);
 
             if (projects && projects.length > 0) {
-              const transformed = projects.map((p) => ({
-                url: p.url,
-                bgClass: p.bg_class,
-                centerText: p.center_text,
-                category: p.category,
-                title: p.title,
-                description: p.description,
-                highlights: p.highlights,
-                tags: p.tags,
-                github: p.github,
-                demo: p.demo,
-                screenshots: p.screenshots,
-              }));
+              const transformed = projects.map((p) => {
+                const matchedKey = Object.keys(keyMapping).find(k => p.title.includes(k));
+                const key = matchedKey ? keyMapping[matchedKey] : p.title.toLowerCase().replace(/[^a-z0-9]/g, "");
+                return {
+                  key,
+                  url: p.url,
+                  bgClass: p.bg_class,
+                  centerText: p.center_text,
+                  category: p.category,
+                  title: p.title,
+                  description: p.description,
+                  highlights: p.highlights,
+                  tags: p.tags,
+                  github: p.github,
+                  demo: p.demo,
+                  screenshots: p.screenshots,
+                };
+              });
 
               return new Response(JSON.stringify(transformed), {
                 status: 200,
@@ -46,49 +58,114 @@ export const Route = createFileRoute("/api/projects/")({
           // Fallback: Return hardcoded data based on what's in the DB
           const hardcodedProjects = [
             {
-              url: "arianasepehr.vercel.app",
-              bgClass: "bg-gradient-to-br from-[#1a2030] via-[#0f1520] to-[#0a0e18]",
-              centerText: "B2B Export Platform",
-              category: "Full-Stack · Next.js · AI Integration",
-              title: "Ariana Global Trade — B2B Export Portal",
-              description: "A premium B2B showcase for an agricultural commodities exporter targeting international wholesale importers. Built with genuine engineering depth: multi-language support including full Persian RTL layout switching, a dynamic volume-based pricing calculator, and an OpenAI-powered pre-qualification chatbot that routes leads automatically.",
+              key: "shahmaghz",
+              url: "shahmaghz.demo",
+              bgClass: "bg-gradient-to-br from-[#2D2A26] to-[#1E1C1A]",
+              centerText: "ShahMaghz E-Commerce",
+              category: "Full-Stack",
+              title: "ShahMaghz E-Commerce Platform",
+              description: "A high-performance, RTL-native agricultural e-commerce platform built with a 13-model Postgres schema, Zustand state, and Cloudinary media pipelines.",
               highlights: [
-                "RTL/LTR layout switching under 180ms (EN · FA · HY)",
-                "AI chat concierge with OpenAI API + graceful fallback handling",
-                "Volume-tier pricing calculator running entirely client-side",
-                "Responsive across 5 viewport breakpoints with sub-180ms page load"
+                "13-model relational schema with Prisma & PostgreSQL",
+                "Fully native RTL/LTR design system and theme selector",
+                "Optimized media processing and upload via Cloudinary",
+                "Predictable client-side state management using Zustand"
+              ],
+              tags: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma", "Zustand", "Zod", "Tailwind v4", "Cloudinary"],
+              github: "https://github.com/sepehrjo/shahmaghz",
+              demo: "https://shahmaghz.demo",
+              screenshots: []
+            },
+            {
+              key: "cyberbullying",
+              url: "cyberbullying-detector.local",
+              bgClass: "bg-gradient-to-br from-[#1C1D24] to-[#111216]",
+              centerText: "NLP Classifier Dashboard",
+              category: "AI/ML",
+              title: "Cyberbullying Classification System",
+              description: "An NLP text classification system combining BERT and BiLSTM models with human-in-the-loop retraining, wrapped in a Chrome extension and FastAPI dashboard. Graded A+.",
+              highlights: [
+                "Hybrid BERT + BiLSTM neural network built with PyTorch",
+                "Active learning loop utilizing moderator verification feedback",
+                "Chrome extension for real-time social platform monitoring",
+                "FastAPI backend and analytics dashboard with PostgreSQL"
+              ],
+              tags: ["Python", "FastAPI", "PyTorch", "Transformers", "BERT", "Chrome Extension", "React", "PostgreSQL"],
+              github: "https://github.com/sepehrjo/cyberbullying-detector",
+              demo: "https://cyberbullying-detector.local",
+              screenshots: []
+            },
+            {
+              key: "ariana",
+              url: "arianasepehr.vercel.app",
+              bgClass: "bg-gradient-to-br from-[#24211D] to-[#161412]",
+              centerText: "B2B Export Platform",
+              category: "Full-Stack",
+              title: "Ariana Global Trade",
+              description: "A bilingual B2B platform prototype highlighting an advanced RTL layout engine and a local Knowledge Base chatbot running LLM fallbacks.",
+              highlights: [
+                "Bilingual (EN/FA) interface with micro-interaction state transitions",
+                "OpenAI-powered concierge bot with local KB context integration",
+                "Robust responsive grids matching 5 viewport breakpoints"
               ],
               tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "OpenAI API", "RTL Support", "React 19", "Vercel"],
               github: "https://github.com/sepehrjo/ariana-b2b-export",
               demo: "https://arianasepehr.vercel.app",
-              screenshots: [
-                { src: "/assets/preview-en.png", alt: "Ariana homepage" },
-                { src: "/assets/languages-support.png", alt: "Multi-language support" },
-                { src: "/assets/chatbot-sensitivity.png", alt: "AI chatbot" },
-                { src: "/assets/quote-inquiry.png", alt: "Quote form" }
-              ]
+              screenshots: []
             },
             {
+              key: "forma",
               url: "adart-alpha.vercel.app",
               bgClass: "bg-[#0B0B0B]",
               centerText: "Creative Agency Website",
-              category: "Frontend · React 19 · Three.js · WebGL",
-              title: "FORMA Studio — Art Direction & Advertising",
-              description: "A premium showcase website for FORMA, an avant-garde art direction and advertising studio — built to demonstrate advanced frontend engineering. The centrepiece is a real-time Three.js WebGL scene in the hero that pauses GPU rendering via IntersectionObserver when off-screen, maintaining 60fps across all device tiers. The site is fully multilingual across four scripts — including dynamic Persian RTL — built entirely in CSS Modules.",
+              category: "Full-Stack",
+              title: "FORMA Studio Website",
+              description: "A fictional design studio showcase highlighting a performance-conscious Three.js WebGL hero and 4-language i18n routing in CSS Modules.",
               highlights: [
-                "Three.js WebGL 3D hero with IntersectionObserver render-pausing — zero GPU/CPU usage when scrolled out of view",
-                "Full RTL/LTR layout engine for EN · RU · FA · HY via i18next with mirrored grid, alignment, and absolute positioning",
-                "Zero-Tailwind CSS Modules architecture — fully scoped styles with no global override risk across every component"
+                "Three.js WebGL rendering with off-screen GPU sleep mode",
+                "Custom CSS Modules design system with zero utilities dependency",
+                "Smooth framerate animation transitions using Framer Motion"
               ],
               tags: ["React 19", "TypeScript", "Three.js", "@react-three/fiber", "Framer Motion", "i18next", "RTL Support", "CSS Modules", "Vite"],
               github: "https://github.com/sepehrjo/Ad_Art_Web",
               demo: "https://adart-alpha.vercel.app",
-              screenshots: [
-                { src: "/assets/hero_en.png", alt: "FORMA hero" },
-                { src: "/assets/portfolio.png", alt: "FORMA portfolio" },
-                { src: "/assets/journal.png", alt: "FORMA journal" },
-                { src: "/assets/contact.png", alt: "FORMA contact" }
-              ]
+              screenshots: []
+            },
+            {
+              key: "telegram",
+              url: "telegram-bot.edge",
+              bgClass: "bg-gradient-to-br from-[#1E2530] to-[#12161E]",
+              centerText: "Telegram AI Assistant",
+              category: "AI/ML",
+              title: "Telegram AI Assistant",
+              description: "A Gemini-powered personal bot deployed on the edge, featuring ElevenLabs voice processing and live knowledge base syncing without redeploys.",
+              highlights: [
+                "Serverless execution using Cloudflare Workers, KV, and D1",
+                "Multimodal audio translation powered by ElevenLabs voice API",
+                "Dynamic context updating through real-time DB synchronization"
+              ],
+              tags: ["Cloudflare Workers", "D1 Database", "KV Store", "Gemini API", "ElevenLabs API", "TypeScript", "Wrangler"],
+              github: "https://github.com/sepehrjo/telegram-ai-assistant",
+              demo: "https://telegram-bot.edge",
+              screenshots: []
+            },
+            {
+              key: "n8n",
+              url: "n8n-automation.local",
+              bgClass: "bg-gradient-to-br from-[#201816] to-[#140F0E]",
+              centerText: "Multi-Agent Outreach Workflow",
+              category: "Automation",
+              title: "Multi-Agent Outreach Automation",
+              description: "A secure n8n automation pipeline conducting recursive site scraping, AI research, and automated draft synthesis with strict rate-limiting guardrails.",
+              highlights: [
+                "Orchestration of independent research and writing agents",
+                "Dynamic rate-limiting guardrails and manual approval gates",
+                "Real-time logging to spreadsheet databases and email triggers"
+              ],
+              tags: ["n8n", "AI Agents", "Web Scraping", "Google Sheets API", "Email API", "Workflow Automation"],
+              github: "https://github.com/sepehrjo/outreach-automation",
+              demo: "https://n8n-automation.local",
+              screenshots: []
             }
           ];
 

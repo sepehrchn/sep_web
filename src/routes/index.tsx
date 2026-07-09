@@ -7,8 +7,6 @@ import { Projects } from "@/components/site/Projects";
 import { Skills } from "@/components/site/Skills";
 import { MultilingualBand } from "@/components/site/MultilingualBand";
 import { Services } from "@/components/site/Services";
-import { AgencyPartnership } from "@/components/site/AgencyPartnership";
-import { Process } from "@/components/site/Process";
 import { About } from "@/components/site/About";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
@@ -19,17 +17,17 @@ import { CustomCursor } from "@/components/site/CustomCursor";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sepehr — Full-Stack Developer · Yerevan, Armenia" },
+      { title: "سپهر — توسعه‌دهنده فول‌استک و مهندس هوش مصنوعی" },
       {
         name: "description",
         content:
-          "Sepehr — full-stack developer in Yerevan. Ship faster, pay less, no middlemen. Senior-level Next.js, React, Three.js and AI integrations for agencies and businesses.",
+          "سپهر — توسعه‌دهنده فول‌استک و مهندس هوش مصنوعی. طراحی و پیاده‌سازی محصولات هوشمند، سیستم‌های یادگیری ماشین، برنامه‌های وب مدرن و خودکارسازی فرآیندها.",
       },
-      { property: "og:title", content: "Sepehr — Full-Stack Developer · Yerevan" },
+      { property: "og:title", content: "سپهر — توسعه‌دهنده فول‌استک و مهندس هوش مصنوعی" },
       {
         property: "og:description",
         content:
-          "One developer who handles design to deployment. Direct communication, fixed pricing, demos in days.",
+          "طراحی و توسعه محصولات هوشمند، وب‌اپلیکیشن‌های پیشرفته و خودکارسازی گردش کار.",
       },
     ],
     scripts: [
@@ -39,14 +37,9 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Person",
           name: "Sepehr Jokanian",
-          jobTitle: "Full-Stack Developer",
+          jobTitle: "Full-Stack Developer & AI Engineer",
           url: "https://sepehr.am",
           email: "sepehrjokanian99@gmail.com",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Yerevan",
-            addressCountry: "AM",
-          },
           sameAs: [
             "https://github.com/sepehrjo",
             "https://www.linkedin.com/in/sepehr-jo/",
@@ -56,9 +49,16 @@ export const Route = createFileRoute("/")({
             "React",
             "TypeScript",
             "Three.js",
-            "OpenAI API",
-            "Framer Motion",
+            "Python",
+            "PyTorch",
+            "FastAPI",
+            "n8n",
+            "Cloudflare Workers",
+            "PostgreSQL",
+            "Prisma",
             "Full-Stack Development",
+            "Artificial Intelligence",
+            "Machine Learning",
           ],
         }),
       },
@@ -82,8 +82,6 @@ function Index() {
         <Skills />
         <MultilingualBand />
         <Services />
-        <AgencyPartnership />
-        <Process />
         <Contact />
       </main>
       <Footer />

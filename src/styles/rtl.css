@@ -2,13 +2,47 @@
 html[dir="rtl"] {
   direction: rtl;
   text-align: right;
+  font-family: "YekanBakh", "Vazirmatn", sans-serif !important;
 }
 
-/* Flex direction for RTL */
-html[dir="rtl"] .flex {
-  flex-direction: row-reverse !important;
+html[dir="rtl"] body {
+  font-family: "YekanBakh", "Vazirmatn", sans-serif !important;
 }
 
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] .font-display {
+  font-family: "YekanBakh", "Vazirmatn", sans-serif !important;
+  font-weight: 700;
+}
+
+/* Ensure English text within RTL uses Poppins */
+html[dir="rtl"] .font-en {
+  font-family: "Poppins", sans-serif !important;
+  direction: ltr;
+  display: inline-block;
+}
+
+/* Keep Latin numerals LTR-embedded in RTL flow */
+html[dir="rtl"] .numeral {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Icon mirroring for directional icons */
+html[dir="rtl"] .icon-arrow-right,
+html[dir="rtl"] .icon-chevron-right {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .icon-arrow-left,
+html[dir="rtl"] .icon-chevron-left {
+  transform: scaleX(-1);
+}
+
+/* RTL-specific flex overrides — only for directional flex containers */
 html[dir="rtl"] .flex-row-reverse {
   flex-direction: row !important;
 }
@@ -17,7 +51,7 @@ html[dir="rtl"] .flex-col {
   flex-direction: column !important;
 }
 
-/* Padding and margin RTL mirroring */
+/* Padding and margin RTL mirroring — only for explicitly directional spacing */
 html[dir="rtl"] .pl-6 {
   padding-right: 1.5rem;
   padding-left: 0;
@@ -56,19 +90,10 @@ html[dir="rtl"] .text-right {
   text-align: left;
 }
 
-html[dir="rtl"] .gap-8 {
-  gap: 2rem;
-}
-
-/* Fixed positioning adjustments */
+/* Fixed positioning adjustments — only for specific UI elements */
 html[dir="rtl"] .right-0 {
   right: auto;
   left: 0;
-}
-
-html[dir="rtl"] .left-0 {
-  left: auto;
-  right: 0;
 }
 
 html[dir="rtl"] .inset-y-0 {
@@ -89,4 +114,10 @@ html[dir="rtl"] .border-r {
 /* Animation directions */
 html[dir="rtl"] [style*="x:"] {
   transform: translateX(calc(-1 * var(--tw-translate-x))) translateY(var(--tw-translate-y));
+}
+
+/* Hero particles RTL mirroring — mirror left/right positions */
+html[dir="rtl"] .hero-particle {
+  left: auto !important;
+  right: var(--particle-left, 0) !important;
 }

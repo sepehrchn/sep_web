@@ -8,7 +8,7 @@ interface I18nProviderProps {
   defaultLanguage?: Language;
 }
 
-export function I18nProvider({ children, defaultLanguage = 'en' }: I18nProviderProps) {
+export function I18nProvider({ children, defaultLanguage = 'fa' }: I18nProviderProps) {
   const [language, setLanguageState] = useState<Language>(defaultLanguage);
   const [mounted, setMounted] = useState(false);
 
@@ -25,11 +25,11 @@ export function I18nProvider({ children, defaultLanguage = 'en' }: I18nProviderP
     };
 
     const savedCookie = readCookie(STORAGE_KEY) as Language | null;
-    if (savedCookie && ['en', 'hy', 'fa'].includes(savedCookie)) {
+    if (savedCookie && ['en', 'fa'].includes(savedCookie)) {
       setLanguageState(savedCookie);
     } else {
       const saved = localStorage.getItem(STORAGE_KEY) as Language | null;
-      if (saved && ['en', 'hy', 'fa'].includes(saved)) {
+      if (saved && ['en', 'fa'].includes(saved)) {
         setLanguageState(saved);
       }
     }

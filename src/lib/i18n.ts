@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export type Language = 'en' | 'hy' | 'fa';
+export type Language = 'en' | 'fa';
 
 export interface I18nContextType {
   language: Language;
@@ -12,7 +12,6 @@ export const I18nContext = createContext<I18nContextType | undefined>(undefined)
 
 export const LANGUAGES = {
   en: { name: 'English', nativeName: 'English', dir: 'ltr' },
-  hy: { name: 'Armenian', nativeName: 'Հայերեն', dir: 'ltr' },
   fa: { name: 'Persian', nativeName: 'فارسی', dir: 'rtl' },
 } as const;
 

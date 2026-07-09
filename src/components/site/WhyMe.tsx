@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Zap, Bot, DollarSign, Rocket, type LucideIcon } from "lucide-react";
+import { Zap, Bot, Code2, Rocket, type LucideIcon } from "lucide-react";
 import { TiltCard } from "./TiltCard";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -24,7 +24,7 @@ export function WhyMe() {
       body: t('whyMe.items.1.body'),
     },
     {
-      Icon: DollarSign,
+      Icon: Code2,
       title: t('whyMe.items.2.title'),
       body: t('whyMe.items.2.body'),
     },

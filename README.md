@@ -201,4 +201,4 @@ For inquiries: sepehrjokanian99@gmail.com
 
 ---
 
-Built with ❤️ in Yerevan, Armenia
+Built with ❤️

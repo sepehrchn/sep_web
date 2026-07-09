@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
       },
       {
         rel: "stylesheet",
@@ -113,10 +113,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
+ 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html>
+    <html lang="fa" dir="rtl">
       <head>
         <HeadContent />
         {/* Pre-hydration script: read preferred-language cookie and set html lang/dir
@@ -127,11 +127,9 @@ function RootShell({ children }: { children: ReactNode }) {
             __html: `(() => {
   try {
     var m = document.cookie.match(new RegExp('(?:^|; )' + 'preferred-language' + '=([^;]*)'));
-    var lang = m ? decodeURIComponent(m[1]) : null;
-    if (lang) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = (lang === 'fa') ? 'rtl' : 'ltr';
-    }
+    var lang = m ? decodeURIComponent(m[1]) : 'fa';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'fa') ? 'rtl' : 'ltr';
   } catch (e) { /* ignore */ }
 })();`,
           }}
@@ -167,12 +165,12 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
+ 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
+ 
   return (
-    <I18nProvider defaultLanguage="en">
+    <I18nProvider defaultLanguage="fa">
       <QueryClientProvider client={queryClient}>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />

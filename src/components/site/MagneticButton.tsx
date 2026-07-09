@@ -8,9 +8,10 @@ interface Props {
   as?: "button" | "a";
   href?: string;
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
-export function MagneticButton({ children, className = "", onClick, as = "button", href, type = "button" }: Props) {
+export function MagneticButton({ children, className = "", onClick, as = "button", href, type = "button", disabled }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);

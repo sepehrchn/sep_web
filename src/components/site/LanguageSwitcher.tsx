@@ -19,11 +19,11 @@ export function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-1">
-      <Globe size={16} className="text-text-secondary" />
+      <Globe size={16} className="text-white" />
       <select
         value={language}
         onChange={handleLanguageChange}
-        className="bg-transparent text-sm text-text-secondary border border-[var(--border)] rounded px-2 py-1 cursor-pointer hover:text-text-primary transition-colors"
+        className="bg-transparent text-sm text-white border border-white/30 rounded px-2 py-1 cursor-pointer hover:text-white/90 transition-colors"
         aria-label={t ? t('nav.languageSelect') : 'Select language'}
       >
         {(Object.entries(LANGUAGES) as [Language, typeof LANGUAGES[Language]][]).map(([lang, info]) => (

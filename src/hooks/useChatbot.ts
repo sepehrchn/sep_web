@@ -10,7 +10,6 @@ export interface CollectedData {
   name?: string;
   company?: string;
   project?: string;
-  budget?: string;
 }
 export function useChatbot(openingMessage: string) {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,25 +33,7 @@ export function useChatbot(openingMessage: string) {
   const runHeuristics = useCallback((text: string, isUser: boolean) => {
     if (!isUser) return;
     const updates: CollectedData = {};
-    if (text.includes("$") || /\b(budget|under|over|dollars|usd|\$)\b/i.test(text)) {
-      // Try phrase-first detection
-      if (/\bunder\s*\$?\s*100\b/i.test(text) || /<\s*\$?\s*100\b/.test(text)) updates.budget = "under_100";
-      else if (/\bover\s*\$?\s*1000\b/i.test(text) || />\s*\$?\s*1000\b/.test(text)) updates.budget = "over_1000";
-      else {
-        // Try numeric extraction (supports 'k' suffix)
-        const numMatch = text.match(/(\d{1,3}(?:,\d{3})?(?:\.\d+)?)(k?)/i);
-        if (numMatch) {
-          let n = parseFloat(numMatch[1].replace(/,/g, ""));
-          const suffix = (numMatch[2] || "").toLowerCase();
-          if (suffix === "k") n = n * 1000;
-          if (n < 100) updates.budget = "under_100";
-          else if (n < 300) updates.budget = "100_300";
-          else if (n < 500) updates.budget = "300_500";
-          else if (n < 1000) updates.budget = "500_1000";
-          else updates.budget = "over_1000";
-        }
-      }
-    }
+
     const nameMatch = text.match(/\b(?:my name is|i am|i'm)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/i);
     if (nameMatch?.[1]) updates.name = nameMatch[1];
     const compMatch = text.match(/\b(?:at|for|from|company is|agency is)\s+([A-Z][a-zA-Z0-9_]+(?:\s+[A-Z][a-zA-Z0-9_]+)*)/i);
@@ -132,19 +113,7 @@ export function useChatbot(openingMessage: string) {
         const el = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
         if (el) { el.value = collectedData.project; el.dispatchEvent(new Event("input", { bubbles: true })); }
       }
-      if (collectedData.budget) {
-        const el = document.querySelector('select[name="budget"]') as HTMLSelectElement | null;
-        if (el) {
-          const map: Record<string, string> = {
-            "under_100": "under_100",
-            "100_300": "100_300",
-            "300_500": "300_500",
-            "500_1000": "500_1000",
-            "over_1000": "over_1000",
-          };
-          if (map[collectedData.budget]) { el.value = map[collectedData.budget]; el.dispatchEvent(new Event("change", { bubbles: true })); }
-        }
-      }
+
     }, 500);
     setIsOpen(false);
   }, [collectedData]);

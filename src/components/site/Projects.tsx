@@ -1,199 +1,119 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink } from "lucide-react";
-import { useEffect, useState } from "react";
-import { TiltCard } from "./TiltCard";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { JigsawCard } from "./JigsawCard";
+import { WaveDivider } from "./WaveDivider";
 import { useTranslation } from "@/hooks/useTranslation";
 
-interface Project {
-  url: string;
-  bgClass: string;
-  centerText: string;
-  category: string;
-  title: string;
-  description: string;
-  highlights: string[];
-  tags: string[];
-  github: string;
-  demo: string;
-  screenshots?: { src: string; alt: string }[];
-}
-
-function BrowserChrome({ url }: { url: string }) {
-  return (
-    <div className="flex items-center gap-2 border-b border-[var(--border)] bg-black/40 px-4 py-3">
-      <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-      <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-      <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-      <div className="ml-4 flex-1 rounded bg-black/40 px-3 py-1 font-mono-ui text-xs text-text-tertiary">{url}</div>
-    </div>
-  );
-}
-
-function LiveBadge() {
-  return (
-    <div className="absolute right-4 top-4 z-10 flex items-center gap-2 rounded-full border border-green-400/30 bg-black/60 px-3 py-1 backdrop-blur">
-      <span className="relative flex h-2 w-2">
-        <span className="absolute inset-0 animate-ping rounded-full bg-green-400 opacity-75" />
-        <span className="relative h-2 w-2 rounded-full bg-green-400" />
-      </span>
-      <span className="font-mono-ui text-xs font-semibold tracking-wider text-green-400">LIVE</span>
-    </div>
-  );
-}
-
-function ScreenshotCarousel({ shots }: { shots: { src: string; alt: string }[] }) {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % shots.length), 3500);
-    return () => clearInterval(t);
-  }, [shots.length]);
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <AnimatePresence mode="sync">
-        <motion.img
-          key={idx}
-          src={shots[idx].src}
-          alt={shots[idx].alt}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 h-full w-full object-cover object-top"
-        />
-      </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-      <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-        {shots.map((_, i) => (
-          <span
-            key={i}
-            className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-white" : "w-1.5 bg-white/40"}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+type Filter = "all" | "web" | "ai" | "mobile";
 
 export function Projects() {
   const { t } = useTranslation();
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/projects")
-      .then((res) => res.json())
-      .then((data) => {
-        setProjects(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to load projects:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return (
-      <section id="work" className="py-28">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <div className="text-text-secondary">{t('projects.loading')}</div>
-        </div>
-      </section>
-    );
-  }
+  const [filter, setFilter] = useState<Filter>("all");
+  const rawProjects = t('projects.list');
+  const projects: any[] = rawProjects ? Object.values(rawProjects) : [];
+  const rawCategories = t('projects.categories');
+  const categories: { value: Filter; label: string }[] = rawCategories
+    ? Object.entries(rawCategories).map(([value, label]) => ({ value: value as Filter, label: label as string }))
+    : [
+      { value: "all", label: "All" },
+      { value: "web", label: "Web" },
+      { value: "ai", label: "AI/ML" },
+      { value: "mobile", label: "Mobile" },
+    ] as { value: Filter; label: string }[];
 
   return (
-    <section id="work" className="py-28">
+    <section id="work" className="relative bg-[var(--bg-card)] py-28 overflow-hidden">
+      {/* Wavy top divider */}
+      <div className="absolute top-0 left-0 right-0">
+        <WaveDivider color="#FAFAFA" height={60} flip />
+      </div>
+
       <div className="mx-auto max-w-7xl px-6">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          <div className="font-mono-ui text-sm text-accent">{t('projects.label')}</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">{t('projects.title')}</h2>
-          <p className="mt-4 text-base text-text-secondary md:text-lg">
-            {t('projects.subtitle')}
-          </p>
+          <div className="label-mono">{t('projects.label')}</div>
+          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('projects.title')}</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-base text-text-secondary md:text-lg">{t('projects.description')}</p>
         </motion.div>
 
-        <div className="mt-14 space-y-10" style={{ perspective: 1400 }}>
-          {projects.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+        {/* Filter tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
+          {categories.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setFilter(cat.value)}
+              className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${filter === cat.value
+                ? "bg-[var(--primary)] text-white shadow-md"
+                : "border border-[var(--border)] bg-white text-text-secondary hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                }`}
             >
-              <TiltCard max={4} className="group">
-                <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-bg-card transition-all duration-300 group-hover:border-[var(--border-hover)] group-hover:shadow-[0_0_32px_var(--accent-glow)]">
-                  {/* Browser mockup */}
-                  <div className="relative">
-                    <BrowserChrome url={p.url} />
-                    <div className={`relative flex h-72 items-center justify-center overflow-hidden md:h-96 ${p.bgClass}`}>
-                      <div className="absolute inset-0 dot-grid opacity-[0.06]" />
-                      
-                      {p.screenshots && p.screenshots.length > 0 ? (
-                        <ScreenshotCarousel shots={p.screenshots} />
-                      ) : (
-                        <h3 className="font-display relative px-6 text-center text-3xl font-bold text-text-primary md:text-5xl">
-                          {p.centerText}
-                        </h3>
+              {cat.label}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Projects grid with jigsaw cards */}
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects
+            .filter((p) => filter === "all" || (p.category && p.category === filter))
+            .map((p, i) => (
+              <motion.div
+                key={p.title || i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="relative"
+              >
+                <JigsawCard color={p.color} className="overflow-hidden p-8">
+                  <div className="flex h-full flex-col">
+                    {/* Top color accent bar */}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-2"
+                      style={{ backgroundColor: p.color || "#1B1B4A" }}
+                    />
+
+                    {/* Badge */}
+                    {p.badge && (
+                      <div className="inline-flex items-center gap-1 self-start rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-3 py-1">
+                        <span className="text-xs font-medium text-[var(--accent)]">★ {p.badge}</span>
+                      </div>
+                    )}
+
+                    {/* Card content */}
+                    <div className="mt-auto flex flex-1 flex-col justify-end">
+                      <h3 className="font-display text-xl font-bold text-white mt-4">{p.title}</h3>
+                      <p className="mt-2 text-sm text-white/70 leading-relaxed">{p.description}</p>
+                      {p.tags && (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {p.tags.map((tag: string, j: number) => (
+                            <span key={j} className="text-xs text-white/60 font-mono-ui">{tag}</span>
+                          ))}
+                        </div>
                       )}
                     </div>
-                  </div>
 
-                  {/* Details */}
-                  <div className="p-8 md:p-10">
-                    <div className="font-mono-ui text-xs uppercase tracking-wider text-accent">{p.category}</div>
-                    <h4 className="font-display mt-3 text-2xl font-semibold md:text-3xl">{p.title}</h4>
-                    <p className="mt-4 max-w-3xl text-sm leading-relaxed text-text-secondary md:text-base">{p.description}</p>
-
-                    <ul className="mt-6 space-y-2">
-                      {p.highlights.map((h) => (
-                        <li key={h} className="flex gap-3 text-sm text-text-secondary">
-                          <span className="text-accent">→</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-7 flex flex-wrap gap-2">
-                      {p.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-full border border-[var(--border)] bg-black/30 px-3 py-1 font-mono-ui text-xs text-text-secondary"
-                        >
-                          {t}
-                        </span>
+                    {/* Bottom accent dot */}
+                    <div className="mt-4 flex gap-1">
+                      {[1, 2, 3].map((d) => (
+                        <div key={d} className={`h-1.5 rounded-full ${d === 1 ? "w-6 bg-white/80" : "w-1.5 bg-white/40"}`} />
                       ))}
                     </div>
-
-                    <div className="mt-8 flex flex-wrap gap-3">
-                      <a
-                        href={p.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-bg-card px-4 py-2 text-sm transition-colors hover:border-[var(--border-hover)] hover:text-accent"
-                      >
-                        <Github size={16} /> {t('projects.github')}
-                      </a>
-                      <a
-                        href={p.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm text-white shadow-[0_0_16px_var(--accent-glow)] transition-colors hover:bg-accent-hover"
-                      >
-                        <ExternalLink size={16} /> {t('projects.liveDemo')}
-                      </a>
-                    </div>
                   </div>
-                </div>
-              </TiltCard>
-            </motion.div>
-          ))}
+                </JigsawCard>
+              </motion.div>
+            ))}
         </div>
       </div>
     </section>

@@ -2,459 +2,294 @@
   "en": {
     "nav": {
       "links": [
-        { "label": "Work", "href": "#work" },
-        { "label": "Skills", "href": "#skills" },
-        { "label": "Process", "href": "#process" },
-        { "label": "About", "href": "#about" },
-        { "label": "Contact", "href": "#contact" }
+        {
+          "label": "Work",
+          "href": "#work"
+        },
+        {
+          "label": "Skills",
+          "href": "#skills"
+        },
+        {
+          "label": "About",
+          "href": "#about"
+        },
+        {
+          "label": "Services",
+          "href": "#skills"
+        },
+        {
+          "label": "Contact",
+          "href": "#contact"
+        }
       ],
-      "cta": "Make a Request →",
+      "cta": "Contact Me →",
       "logoLabel": "sepehr",
       "languageSelect": "Select language"
     },
     "hero": {
-      "typewriter": "// full-stack developer — Yerevan, Armenia",
-      "heading1": "Ship faster.",
-      "heading2": "Pay less.",
-      "heading3": "No middlemen.",
-      "description": "One full-stack developer who handles everything — from design to deployment. Direct communication, honest pricing, and results that speak louder than promises.",
-      "status": "Available for new projects",
-      "cta1": "See My Work →",
-      "cta2": "Get in Touch"
+      "typewriter": "// full-stack developer & ai engineer",
+      "heading1": "Full-Stack Developer",
+      "heading2": "& AI Engineer",
+      "heading3": "Building Products & Intelligent Systems",
+      "description": "From ML models to production web apps to workflow automation. Focusing on high-performance web systems and intelligent systems.",
+      "status": "Open to full-time roles · Open to contract work",
+      "cta1": "View Work",
+      "cta2": "Contact"
     },
     "services": {
-      "label": "// what i build",
-      "title": "Three Ways I Can Help",
-      "description": "Most projects combine two or more of these. I work with agencies and businesses.",
+      "label": "// areas of expertise",
+      "title": "Core Technical Capabilities",
+      "description": "How I help engineering teams build and scale modern products.",
       "items": [
         {
-          "title": "Figma → Production",
-          "body": "I build your designs into fast, responsive websites with pixel-accurate implementation. Clean code your team can maintain. White-label available for agencies — your client never needs to know."
+          "title": "Full-Stack Web Development",
+          "body": "Building modular, fast, and type-safe web systems using React, Next.js, and TypeScript. Designing clean relational schemas and scalable serverless backends."
         },
         {
-          "title": "Workflow Automation",
-          "body": "Connect your CRM, forms, email, and internal systems. Eliminate the repetitive manual tasks draining your team's time. No-code where it fits, custom code where it doesn't."
+          "title": "AI & Natural Language Processing",
+          "body": "Integrating machine learning models, deploying custom classifiers (BERT), and building intelligent LLM agents with hybrid RAG pipelines."
         },
         {
-          "title": "AI Features That Actually Ship",
-          "body": "I have an AI degree backing every integration I build — chatbots, content generation, lead qualification, document processing. Real implementations, not copy-pasted tutorials."
+          "title": "Workflow & Process Automation",
+          "body": "Designing robust pipelines using n8n and serverless edge technologies (Cloudflare Workers) to automate operations with clean error-handling."
         }
       ]
     },
     "skills": {
       "label": "// tech stack",
-      "title": "I Work With",
+      "title": "Core Technologies",
       "groups": [
-        { "label": "Frontend", "items": ["React","Next.js","TypeScript","Tailwind CSS","Framer Motion","HTML/CSS","Vite"] },
-        { "label": "3D & Visual", "items": ["Three.js","@react-three/fiber","@react-three/drei","CSS Modules"] },
-        { "label": "Backend & API", "items": ["Node.js","REST APIs","Next.js Server Actions","Zod","PostgreSQL"] },
-        { "label": "AI & Automation", "items": ["OpenAI API","LLM Integration","Zapier","Make","Webhooks"] },
-        { "label": "Internationalisation", "items": ["i18next","react-i18next","RTL/LTR Layouts","Persian","Armenian","Russian"] },
-        { "label": "Deploy & Tools", "items": ["Vercel","GitHub","Git","Figma","Docker"] }
-      ]
-    },
-    "process": {
-      "label": "// how we work",
-      "title": "Simple, Direct Process",
-      "steps": [
         {
-          "number": "01",
-          "title": "Discovery",
-          "description": "You tell me about your project. I ask the hard questions to make sure I'm the right fit."
+          "label": "AI & Machine Learning",
+          "items": [
+            "PyTorch",
+            "Transformers/BERT",
+            "Gemini API",
+            "RAG / Hybrid Retrieval"
+          ]
         },
         {
-          "number": "02",
-          "title": "Proposal",
-          "description": "You get a fixed scope, fixed timeline, and fixed price. No surprises."
+          "label": "Full-Stack Development",
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Node.js / FastAPI",
+            "PostgreSQL",
+            "Prisma"
+          ]
         },
         {
-          "number": "03",
-          "title": "Build",
-          "description": "Fortnightly updates. Weekly communication. You have complete transparency."
-        },
-        {
-          "number": "04",
-          "title": "Ship",
-          "description": "Deployment, training, and 30-day handoff support. Full documentation."
+          "label": "Automation & Infrastructure",
+          "items": [
+            "n8n",
+            "Cloudflare Workers",
+            "D1 / KV",
+            "CI/CD Basics"
+          ]
         }
       ]
     },
     "about": {
-      "label": "// who i am",
+      "label": "// profile",
       "title": "Digital Craftsman",
-      "description": "I started as a designer, became a developer, and now I do both. That background shapes everything I build — interfaces that don't just work, but feel right.",
-      "points": [
-        "Direct communication, no project manager markup",
-        "Design and development under one roof",
-        "Fixed scope = predictable delivery",
-        "Your budget is safe: you approve the scope before we start"
-      ],
-      "focus": [
-        "Full-stack implementation from Figma or spec",
-        "3D WebGL interfaces (Three.js + React Three Fiber)",
-        "Practical AI integration backed by genuine ML understanding",
-        "Multi-language deployment: EN, HY, RU, FA, DE, FR"
-      ],
+      "description": "I am a Full-Stack Developer and AI Engineer focused on building high-performance web applications and intelligent systems. Backed by a B.Sc. in Artificial Intelligence, I bridge the gap between complex machine learning workflows and elegant, user-centric interfaces. I specialize in designing type-safe architectures, microservice integrations, and scalable edge automations.",
       "sidebar": [
-        ["Based in","Yerevan, Armenia 🇦🇲"],
-        ["Availability","Open to new work"],
-        ["Response","Within 24 hours"],
-        ["Timezone","GMT+4 (Armenia Standard)"],
-        ["Degree","B.Sc. Artificial Intelligence"],
-        ["Languages","English · Armenian · Farsi"]
+        [
+          "Availability",
+          "Open to full-time roles & contracts"
+        ],
+        [
+          "Degree",
+          "B.Sc. Artificial Intelligence"
+        ],
+        [
+          "Languages",
+          "English · Persian"
+        ],
+        [
+          "Response",
+          "Within 24 hours"
+        ]
       ]
     },
     "contact": {
-      "label": "// let's build something",
+      "label": "// collaborations",
       "title": "Get in Touch",
-      "description": "Have a project in mind? Tell me about it. No sales call, no long questionnaire — just a conversation.",
+      "description": "Let's discuss full-time roles, contracts, or technical collaborations. Drop me a message below.",
       "formLabels": {
         "name": "Your Name",
-        "email": "Email",
-        "company": "Company / Project Name",
-        "budget": "Estimated Budget",
-        "message": "Describe your project",
+        "email": "Email Address",
+        "company": "Company / Project",
+        "message": "Your Message",
         "submit": "Send Message",
-        "sending": "Sending..."
+        "sending": "Sending Message..."
       },
-      "budgetOptions": [
-        { "value": "under_100", "label": "Under $100" },
-        { "value": "100_300", "label": "$100 – $300" },
-        { "value": "300_500", "label": "$300 – $500" },
-        { "value": "500_1000", "label": "$500 – $1,000" },
-        { "value": "over_1000", "label": "Over $1,000" }
-      ],
-      "successMessage": "Message sent! I'll get back to you within 24 hours.",
-      "budgetPlaceholder": "Not sure yet",
+      "successMessage": "Message sent successfully! I'll get back to you within 24 hours.",
       "errorMessage": "Something went wrong. Please try again.",
       "validation": {
         "name": "Name must be at least 2 characters",
-        "email": "Please enter a valid email",
-        "message": "Please describe your project (at least 20 characters)"
+        "email": "Please enter a valid email address",
+        "message": "Message must be at least 20 characters"
       },
       "postNotes": [
-        "I review your brief and reply within 24 hours.",
-        "If it's a good fit, I'll follow up via email.",
-        "You receive a written, fixed-price proposal within 3 days."
+        "I review all messages personally.",
+        "For job inquiries, I'll follow up via email.",
+        "Let's align on technical scope and details."
       ],
-      "personalNote": "I check messages personally — not a bot, not a VA."
+      "personalNote": "Messages are reviewed personally."
     },
     "chatbot": {
-      "label": "Let's Talk",
+      "label": "Chat Assistant",
       "button": "Chat",
-      "openingMessage": "Hi there! 👋 Tell me about your project. What are you building?",
-      "responseTime": "Responds within 24h",
-      "aiNotice": "This chat is handled by AI. All inquiries are reviewed personally.",
+      "openingMessage": "Hi! I am Sepehr's AI assistant. Ask me about his projects, skills, or full-time availability.",
+      "responseTime": "Responds instantly",
+      "aiNotice": "This assistant is powered by Gemini. Inquiries are reviewed personally.",
       "close": "Close",
-      "fillFormCTA": "Fill the contact form with this context →",
+      "fillFormCTA": "Prefill the contact form with this context →",
       "send": "Send"
     },
     "footer": {
-      "description": "Based in Yerevan, Armenia.",
-      "contact": "Get in Touch:",
+      "description": "Full-Stack Developer & AI Engineer",
+      "contact": "Contact:",
       "email": "sepehrjokanian99@gmail.com",
       "copyright": "© 2026 Sepehr Jokanian · sepehrjokanian99@gmail.com"
     },
+    "valueStrip": {
+      "projects": {
+        "label": "Projects delivered",
+        "sub": "Production-ready launches"
+      },
+      "years": {
+        "label": "Years experience",
+        "sub": "Full-stack & AI"
+      },
+      "quality": {
+        "label": "Client satisfaction",
+        "sub": "Holistic engineering"
+      }
+    },
     "projects": {
-      "label": "// selected work",
-      "title": "Real Code. Real Demos.",
-      "subtitle": "These aren't mockups. Click the links — they actually load.",
+      "label": "// portfolio",
+      "title": "Selected Engineering Works",
+      "description": "Selected projects across AI/ML, full-stack, and automation.",
+      "categories": {
+        "all": "All",
+        "web": "Full-Stack",
+        "ai": "AI/ML",
+        "mobile": "Automation"
+      },
       "loading": "Loading projects...",
       "github": "GitHub",
-      "liveDemo": "Live Demo"
+      "liveDemo": "Live Demo",
+      "tags": {
+        "all": "All",
+        "ai": "AI/ML",
+        "fullstack": "Full-Stack",
+        "automation": "Automation"
+      },
+      "list": {
+        "shahmaghz": {
+          "title": "ShahMaghz E-Commerce Platform",
+          "description": "A high-performance, RTL-native agricultural e-commerce platform built with a 13-model Postgres schema, Zustand state, and Cloudinary media pipelines.",
+          "highlights": [
+            "13-model relational schema with Prisma & PostgreSQL",
+            "Fully native RTL/LTR design system and theme selector",
+            "Optimized media processing and upload via Cloudinary",
+            "Predictable client-side state management using Zustand"
+          ],
+          "category": "Full-Stack"
+        },
+        "cyberbullying": {
+          "title": "Cyberbullying Classification System",
+          "description": "An NLP text classification system combining BERT and BiLSTM models with human-in-the-loop retraining, wrapped in a Chrome extension and FastAPI dashboard. Graded A+.",
+          "highlights": [
+            "Hybrid BERT + BiLSTM neural network built with PyTorch",
+            "Active learning loop utilizing moderator verification feedback",
+            "Chrome extension for real-time social platform monitoring",
+            "FastAPI backend and analytics dashboard with PostgreSQL"
+          ],
+          "category": "AI/ML"
+        },
+        "ariana": {
+          "title": "Ariana Global Trade",
+          "description": "A bilingual B2B platform prototype highlighting an advanced RTL layout engine and a local Knowledge Base chatbot running LLM fallbacks.",
+          "highlights": [
+            "Bilingual (EN/FA) interface with micro-interaction state transitions",
+            "OpenAI-powered concierge bot with local KB context integration",
+            "Robust responsive grids matching 5 viewport breakpoints"
+          ],
+          "category": "Full-Stack"
+        },
+        "forma": {
+          "title": "FORMA Studio Website",
+          "description": "A fictional design studio showcase highlighting a performance-conscious Three.js WebGL hero and 4-language i18n routing in CSS Modules.",
+          "highlights": [
+            "Three.js WebGL rendering with off-screen GPU sleep mode",
+            "Custom CSS Modules design system with zero utilities dependency",
+            "Smooth framerate animation transitions using Framer Motion"
+          ],
+          "category": "Full-Stack"
+        },
+        "telegram": {
+          "title": "Telegram AI Assistant",
+          "description": "A Gemini-powered personal bot deployed on the edge, featuring ElevenLabs voice processing and live knowledge base syncing without redeploys.",
+          "highlights": [
+            "Serverless execution using Cloudflare Workers, KV, and D1",
+            "Multimodal audio translation powered by ElevenLabs voice API",
+            "Dynamic context updating through real-time DB synchronization"
+          ],
+          "category": "AI/ML"
+        },
+        "n8n": {
+          "title": "Multi-Agent Outreach Automation",
+          "description": "A secure n8n automation pipeline conducting recursive site scraping, AI research, and automated draft synthesis with strict rate-limiting guardrails.",
+          "highlights": [
+            "Orchestration of independent research and writing agents",
+            "Dynamic rate-limiting guardrails and manual approval gates",
+            "Real-time logging to spreadsheet databases and email triggers"
+          ],
+          "category": "Automation"
+        }
+      }
     },
     "whyMe": {
-      "label": "// value proposition",
-      "heading1": "What others charge more for —",
-      "heading2": "I ship faster.",
-      "subheading": "Most agencies add layers of account managers, designers, and developers between you and your product. I remove all of that overhead — and pass the savings directly to you.",
+      "label": "// values",
+      "heading1": "Engineered for impact,",
+      "heading2": "delivered with precision.",
+      "subheading": "I combine high-performance full-stack architectures with modern AI systems to build scalable, production-ready products.",
       "items": [
         {
-          "title": "Full-Stack, Solo",
-          "body": "Frontend, backend, and deployment — one person. No handoffs, no miscommunication, no \"that's the other team's problem.\" You talk directly to the developer writing your code."
+          "title": "Full-Stack Ownership",
+          "body": "From frontend UI animations to backend API architectures and database migrations. One developer responsible for the entire pipeline."
         },
         {
-          "title": "AI-Augmented Workflow",
-          "body": "I hold a degree in Artificial Intelligence — I understand what these models actually do, not just how to call an API. That means faster builds and smarter integrations."
+          "title": "AI & LLM Integration",
+          "body": "Backed by a B.Sc. in Artificial Intelligence. I implement production-ready AI pipelines, from custom models (BERT) to edge API orchestrations."
         },
         {
-          "title": "Yerevan Rates, European Quality",
-          "body": "Competitive pricing is a natural result of low overhead — not a sign of lower quality. You get senior-level architecture at a fraction of typical agency cost."
+          "title": "Production-Grade Quality",
+          "body": "Robust codebases built with TypeScript, structured schema modeling (Postgres/Prisma), type-safe APIs, and strict performance guardrails."
         },
         {
-          "title": "Demo in Days, Not Weeks",
-          "body": "Most clients see a working prototype within 3–5 days of kickoff. Faster feedback loops mean faster launches. Speed is a feature."
+          "title": "Rapid Prototyping",
+          "body": "Fast development iterations and deployment pipelines (Vercel/Cloudflare). See a working version of your product in days, not weeks."
         }
       ]
-    },
-    "valueStrip": {
-      "stat1": { "label": "Days to Prototype", "sub": "Working build, not a mockup" },
-      "stat2": { "label": "Response Time", "sub": "You are never left waiting" },
-      "stat3": { "label": "Minimum Engagement", "sub": "Fixed scope, no surprises" }
     },
     "multilingual": {
-      "label": "// multilingual delivery",
-      "title": "Production sites shipped in 5+ languages.",
-      "description": "SEO-optimised per market. Full localisation — copy, currency, legal. Including complex right-to-left (RTL) layout engines with sub-180ms page-load transitions.",
+      "label": "// multilingual deployment",
+      "title": "Production sites built with native multi-language design.",
+      "description": "Fully localized content, currencies, and SEO structure, supporting complex right-to-left (RTL) layout engines with sub-180ms client-side translations.",
       "languages": [
-        { "code": "EN", "name": "English" },
-        { "code": "HY", "name": "Armenian" },
-        { "code": "RU", "name": "Russian" },
-        { "code": "FA", "name": "Persian" },
-        { "code": "DE", "name": "German" },
-        { "code": "FR", "name": "French" }
-      ]
-    },
-    "agency": {
-      "label": "// for agencies",
-      "heading": "Your subcontractor. Not your competitor.",
-      "sub": "I handle frontend work while you focus on client relationships and strategy. Clean handoff, predictable delivery, your client never needs to know.",
-      "items": [
         {
-          "title": "White-label option",
-          "body": "Your branding, your client relationship. Billing runs through your account. I stay invisible."
+          "code": "EN",
+          "name": "English"
         },
         {
-          "title": "Fixed scope, fixed price",
-          "body": "No scope creep arguments. Estimate included with proposal. Payment on delivery, not on promises."
-        },
-        {
-          "title": "Flexible terms",
-          "body": "Project-by-project, ongoing retainer, or sprint-based. We structure it for your workflow."
-        },
-        {
-          "title": "Smooth handoff",
-          "body": "Complete documentation. Accessible code. Deployed and ready. I stay available for questions."
-        }
-      ]
-    }
-  },
-  "hy": {
-    "nav": {
-      "links": [
-        { "label": "Աշխատանք", "href": "#work" },
-        { "label": "Հմտություններ", "href": "#skills" },
-        { "label": "Գործընթաց", "href": "#process" },
-        { "label": "Իմ մասին", "href": "#about" },
-        { "label": "Կոնտակտ", "href": "#contact" }
-      ],
-      "cta": "Պահանջ ներկայացնել →",
-      "logoLabel": "Սեպեր",
-      "languageSelect": "Ընտրեք լեզուն"
-    },
-    "hero": {
-      "typewriter": "// full-stack ծրագրավորիչ — Երևան, Հայաստան",
-      "heading1": "Ավելի արագ։",
-      "heading2": "Ավելի էժան։",
-      "heading3": "Պարտներներ չկան։",
-      "description": "Մեկ full-stack ծրագրավորիչ, ով կատարում է ամեն ինչ — դիզայնից մինչև տեղակայում։ Ուղղակի կոմունիկացիա, շատ մրցակցային գինը և արդյունքներ, որ շատ ավելի շատ են խոսում, քան խոստումները։",
-      "status": "Հասանելի նոր նախագծերի համար",
-      "cta1": "Տեսեք իմ աշխատանքը →",
-      "cta2": "Կապ հաստատել"
-    },
-    "services": {
-      "label": "// ինչ ես ստեղծում",
-      "title": "Երեք ձևով կարող եմ օգնել",
-      "description": "Շատ նախագծեր միավորում են երկուսը կամ ավելին: Աշխատում եմ գործակալությունների և բիզնեսների հետ:",
-      "items": [
-        {
-          "title": "Figma → Արտադրություն",
-          "body": "Ձեր դիզայնները վերածում եմ արագ, արձագանքական վեբ-կայքերի, որոնք պիքսել-ճշգրիտ կատարված են։ Մաքուր կոդ, որը ձեր թիմը կարող է պահպանել: Սպիտակ ջապ հասանելի է գործակալությունների համար։"
-        },
-        {
-          "title": "Աշխատանքային հոսքի ավտոմատացում",
-          "body": "Միացրեք ձեր CRM-ը, ձևերը, էլ.փոստը և ներքին համակարգերը: Վերացրեք ձեր թիմի ժամանակ ծախսող կրկնվող խնդիրները: No-code, որտեղ հարմար է, custom կոդ, որտեղ պետք է:"
-        },
-        {
-          "title": "AI հատկանիշներ, որ իրականում շարվում են",
-          "body": "Ունեմ AI-ի գիտական վկայական, որը հետ կանգնած է ամեն ինտեգրացիայի համար, որ ես կատարում եմ — չատբոտներ, բովանդակության գեներացում, հատնել որակավորում, փաստաթղթերի մշակում: Իրական իրականացումներ, ոչ թե պատճենված ձեռնարկներ:"
-        }
-      ]
-    },
-    "skills": {
-      "label": "// տեխնոլոգիական հավաք",
-      "title": "Ես աշխատում եմ հետ",
-      "groups": [
-        { "label": "Frontend", "items": ["React","Next.js","TypeScript","Tailwind CSS","Framer Motion","HTML/CSS","Vite"] },
-        { "label": "3D & Visual", "items": ["Three.js","@react-three/fiber","@react-three/drei","CSS Modules"] },
-        { "label": "Backend & API", "items": ["Node.js","REST APIs","Next.js Server Actions","Zod","PostgreSQL"] },
-        { "label": "AI & Automation", "items": ["OpenAI API","LLM Integration","Zapier","Make","Webhooks"] },
-        { "label": "Internationalisation", "items": ["i18next","react-i18next","RTL/LTR Layouts","Persian","Armenian","Russian"] },
-        { "label": "Deploy & Tools", "items": ["Vercel","GitHub","Git","Figma","Docker"] }
-      ]
-    },
-    "process": {
-      "label": "// ինչպես ենք աշխատում",
-      "title": "Պարզ, ուղղակի գործընթաց",
-      "steps": [
-        {
-          "number": "01",
-          "title": "Հայտնագործում",
-          "description": "Ներկայացրեք ինձ ձեր նախագիծ։ Ես տալիս եմ դժվար հարցեր, որպեսզի վստահ լինեմ, որ ես համապատասխան ընտրություն եմ:"
-        },
-        {
-          "number": "02",
-          "title": "Առաջարկ",
-          "description": "Դուք ստանում եք հաստատուն շրջանակ, հաստատուն ժամկետ և հաստատուն գինը: Հանկարծություններ չկան:"
-        },
-        {
-          "number": "03",
-          "title": "Կառուցել",
-          "description": "Տասնօրյա թարմացումներ: Շաբաթական հաղորդակցություն: Դուք ունեք լիակատար թաղամասի:"
-        },
-        {
-          "number": "04",
-          "title": "Շարել",
-          "description": "Տեղակայում, վարժեցում և 30-օր հանձնման աջակցություն: Ամբողջ փաստաթղթավորում:"
-        }
-      ]
-    },
-    "about": {
-      "label": "// ով եմ ես",
-      "title": "Թվային արհեստավոր",
-      "description": "Սկսեցի որպես դիզայներ, դարձա ծրագրավորիչ, և այժմ երկուսն էլ անում եմ: Այդ ֆոնը ձևավորում է ամեն ինչ, որ ես կառուցում եմ — ինտերֆեյսներ, որ ոչ միայն աշխատում են, այլ հաճելի են թվում:",
-      "points": [
-        "Ուղղակի հաղորդակցություն, բնօրեն project manager markup չկա",
-        "Դիզայն և զարգացում մեկ տանիքի տակ",
-        "Հաստատուն շրջանակ = կանխատեսելի մատուցում",
-        "Ձեր բյուջեն ապահովված է: շրջանակն ընդունում եք մինչ մենք մեկնարկում:"
-      ],
-      "focus": [
-        "Full-stack implementation from Figma or spec",
-        "3D WebGL interfaces (Three.js + React Three Fiber)",
-        "Practical AI integration backed by genuine ML understanding",
-        "Multi-language deployment: EN, HY, RU, FA, DE, FR"
-      ],
-      "sidebar": [
-        ["Based in","Yerevan, Armenia 🇦🇲"],
-        ["Availability","Open to new work"],
-        ["Response","Within 24 hours"],
-        ["Timezone","GMT+4 (Armenia Standard)"],
-        ["Degree","B.Sc. Artificial Intelligence"],
-        ["Languages","English · Armenian · Farsi"]
-      ]
-    },
-    "contact": {
-      "label": "// կառուցենք մի բան",
-      "title": "Կապ հաստատել",
-      "description": "Ունեք նախագիծ ի սրտին: Պատմեք ինձ դրա մասին: Վաճառքային զանգ չկա, երկար հարցաշար չկա — պարզապես զրույց:",
-      "formLabels": {
-        "name": "Ձեր անունը",
-        "email": "Էլ.փոստ",
-        "company": "Ընկերություն / Նախագծի անվ",
-        "budget": "Գնահատված բյուջե",
-        "message": "Նկարագրեք ձեր նախագիծ",
-        "submit": "Ուղարկել հաղորդագրություն",
-        "sending": "Ուղարկվում է..."
-      },
-      "budgetOptions": [
-        { "value": "under_100", "label": "100 դոլարից պակաս" },
-        { "value": "100_300", "label": "$100 – $300" },
-        { "value": "300_500", "label": "$300 – $500" },
-        { "value": "500_1000", "label": "$500 – $1,000" },
-        { "value": "over_1000", "label": "1000 դոլարից ավելի" }
-      ],
-      "successMessage": "Հաղորդագրությունը ուղարկվել է: Ես կպատասխանեմ 24 ժամվա ընթացքում:",
-      "budgetPlaceholder": "Դեռ հայտնի չէ",
-      "errorMessage": "Ինչ-որ բան սխալ եղավ: Կրկին փորձեք:",
-      "validation": {
-        "name": "Անունը պետք է լինի առնվազն 2 նիշ",
-        "email": "Մուտքագրեք վավեր էլ.փոստ",
-        "message": "Նկարագրեք ձեր նախագիծը (առնվազն 20 նիշ)"
-      },
-      "postNotes": [
-        "Ես վերանայում եմ ձեր բրիֆը և պատասխանում եմ 24 ժամում:",
-        "Եթե այն լավ ընդունվել է, ես կհետևեմ էլ.փոստի միջոցով:",
-        "Դուք ստանում եք գրավոր, ֆիքսված գինով առաջարկ 3 օրվա ընթացքում:"
-      ],
-      "personalNote": "Ես անձամբ ստուգում եմ հաղորդագրությունները — ոչ բոտ, ոչ VA:"
-    },
-    "chatbot": {
-      "label": "Խոսենք",
-      "button": "Զրուցել",
-      "openingMessage": "Բարեւ ձեզ! 👋 Պատմեք ինձ ձեր նախագծի մասին: Ինչ եք կառուցում?",
-      "responseTime": "Պատասխանում է 24 ժամում",
-      "aiNotice": "Այս չատը կառավարվում է AI-ի կողմից: Բոլոր հարցումները ստուգվում են անձամբ:",
-      "close": "Փակել",
-      "fillFormCTA": "Լրացրեք կոնտակտային ձևը այս համատեքստով →",
-      "send": "Ուղարկել"
-    },
-    "footer": {
-      "description": "Գտնվում է Երևան, Հայաստանում:",
-      "contact": "Կապ հաստատել:",
-      "email": "sepehrjokanian99@gmail.com",
-      "copyright": "© 2026 Sepehr Jokanian · sepehrjokanian99@gmail.com"
-    },
-    "projects": {
-      "label": "// ընտրված աշխատանքներ",
-      "title": "Իրական կոդ։ Իրական դեմոներ։",
-      "subtitle": "Սրանք մակետներ չեն։ Սեղմեք հղումները — դրանք իսկապես բեռնվում են։",
-      "loading": "Նախագծերը բեռնվում են...",
-      "github": "GitHub",
-      "liveDemo": "Կենդանի դեմո"
-    },
-    "whyMe": {
-      "label": "// արժեքի առաջարկ",
-      "heading1": "Ինչի համար ուրիշներն ավելի են գանձում —",
-      "heading2": "Ես ավելի արագ եմ հանձնում։",
-      "subheading": "Շատ գործակալություններ ձեր և ձեր արտադրանքի միջև ավելացնում են հաշվապահների, դիզայներների և մշակողների շերտեր։ Ես վերացնում եմ այդ ամբողջ ծախսը — և խնայողությունը փոխանցում եմ ձեզ։",
-      "items": [
-        {
-          "title": "Full-stack, մենակ",
-          "body": "Fronted, backend և տեղակայում — մեկ մարդ։ Ոչ մի փոխանցում, ոչ մի թյուրիմացություն, ոչ մի «սա մյուս թիմի խնդիրն է»։ Դուք խոսում եք անմիջապես ձեր կոդը գրող մշակողի հետ։"
-        },
-        {
-          "title": "AI-ով հարստացված աշխատանքային հոսք",
-          "body": "Ես ունեմ Արհեստական ինտելեկտի ոլորտի դիպլոմ — ես հասկանում եմ, թե ինչ են իրականում անում այս մոդելները, ոչ միայն թե ինչպես կանչել API-ն։ Դա նշանակում է ավելի արագ կառուցում և ավելի խելացի ինտեգրացիաներ։"
-        },
-        {
-          "title": "Երևանի գներ, եվրոպական որակ",
-          "body": "Մրցունակ գնագոյացումը ցածր ծախսերի բնական արդյունքն է — ոչ թե ցածր որակի նշան։ Դուք ստանում եք ավագ մակարդակի ճարտարապետություն սովորական գործակալության արժեքի մի մասի դիմաց։"
-        },
-        {
-          "title": "Դեմո՝ օրերում, ոչ թե շաբաթներում",
-          "body": "Շատ հաճախորդներ մեկնարկից 3–5 օրվա ընթացքում տեսնում են աշխատող նախատիպ։ Ավելի արագ արձագանքման ցիկլերը նշանակում են ավելի արագ գործարկում։ Արագությունը հատկություն է։"
-        }
-      ]
-    },
-    "valueStrip": {
-      "stat1": { "label": "Օր մինչև նախատիպ", "sub": "Աշխատող կառուցվածք, ոչ թե մակետ" },
-      "stat2": { "label": "Պատասխանի ժամկետ", "sub": "Դուք երբեք սպասման մեջ չեք մնում" },
-      "stat3": { "label": "Նվազագույն ներգրավում", "sub": "Հաստատուն շրջանակ, անակնկալներ չկան" }
-    },
-    "multilingual": {
-      "label": "// բազմալեզու մատուցում",
-      "title": "Արտադրական կայքեր 5+ լեզուներով։",
-      "description": "SEO-օպտիմիզացված ըստ շուկայի։ Լիարժեք տեղայնացում — տեքստ, արժույթ, իրավական։ Ներառյալ բարդ աջից-ձախ (RTL) դասավորության շարժիչներ՝ 180ms-ից արագ էջի բեռնմամբ։",
-      "languages": [
-        { "code": "EN", "name": "Անգլերեն" },
-        { "code": "HY", "name": "Հայերեն" },
-        { "code": "RU", "name": "Ռուսերեն" },
-        { "code": "FA", "name": "Պարսկերեն" },
-        { "code": "DE", "name": "Գերմաներեն" },
-        { "code": "FR", "name": "Ֆրանսերեն" }
-      ]
-    },
-    "agency": {
-      "label": "// գործակալությունների համար",
-      "heading": "Ձեր ենթակապալառուն։ Ոչ թե մրցակիցը։",
-      "sub": "Ես զբաղվում եմ frontend աշխատանքներով, իսկ դուք կենտրոնանում եք հաճախորդների հարաբերությունների և ռազմավարության վրա։ Մաքուր հանձնում, կանխատեսելի մատուցում, ձեր հաճախորդը երբեք չի իմանա։",
-      "items": [
-        {
-          "title": "Սպիտակ պիտակի տարբերակ",
-          "body": "Ձեր բրենդինգը, ձեր հաճախորդի հարաբերությունը։ Վճարումը գնում է ձեր հաշվի միջոցով։ Ես մնում եմ անտեսանելի։"
-        },
-        {
-          "title": "Հաստատուն շրջանակ, հաստատուն գին",
-          "body": "Ոչ մի շրջանակի ընդլայնման վեճ։ Գնահատականը ներառված է առաջարկում։ Վճարումը՝ մատուցման, ոչ թե խոստումների դիմաց։"
-        },
-        {
-          "title": "Ճկուն պայմաններ",
-          "body": "Նախագծից նախագիծ, շարունակական պահում կամ sprint-ել։ Մենք այն կառուցում ենք ձեր աշխատանքային հոսքի համար։"
-        },
-        {
-          "title": "Հարթ հանձնում",
-          "body": "Ամբողջական փաստաթղթավորում։ Հասանելի կոդ։ Տեղակայված և պատրաստ։ Ես հասանելի եմ մնում հարցերի համար։"
+          "code": "FA",
+          "name": "Persian"
         }
       ]
     }
@@ -462,231 +297,296 @@
   "fa": {
     "nav": {
       "links": [
-        { "label": "کار", "href": "#work" },
-        { "label": "مهارت‌ها", "href": "#skills" },
-        { "label": "فرآیند", "href": "#process" },
-        { "label": "درباره", "href": "#about" },
-        { "label": "تماس", "href": "#contact" }
+        {
+          "label": "پروژه‌ها",
+          "href": "#work"
+        },
+        {
+          "label": "مهارت‌ها",
+          "href": "#skills"
+        },
+        {
+          "label": "درباره من",
+          "href": "#about"
+        },
+        {
+          "label": "خدمات",
+          "href": "#skills"
+        },
+        {
+          "label": "تماس",
+          "href": "#contact"
+        }
       ],
-      "cta": "درخواست ارسال کنید ←",
+      "cta": "ارتباط با من ←",
       "logoLabel": "سپهر",
-      "languageSelect": "زبان را انتخاب کنید"
+      "languageSelect": "انتخاب زبان"
     },
     "hero": {
-      "typewriter": "// توسعه‌دهنده تمام‌کاره — یروان، ارمنستان",
-      "heading1": "سریع‌تر حمل کنید.",
-      "heading2": "کمتر بپرداخت کنید.",
-      "heading3": "بدون واسطه‌گر.",
-      "description": "یک توسعه‌دهنده تمام‌کاره که همه‌چیز را انجام می‌دهد — از طراحی تا استقرار. ارتباط مستقیم، قیمت‌گذاری صادقانه، و نتایجی که بسیار بیشتر از وعده‌ها حرف می‌زند.",
-      "status": "برای پروژه‌های جدید در دسترس",
-      "cta1": "کارهایم را ببینید ←",
-      "cta2": "تماس بگیرید"
+      "typewriter": "// توسعه‌دهنده فول‌استک و مهندس هوش مصنوعی",
+      "heading1": "توسعه‌دهنده فول‌استک",
+      "heading2": "و مهندس هوش مصنوعی",
+      "heading3": "خلق محصولات و سیستم‌های هوشمند",
+      "description": "از مدل‌های یادگیری ماشین تا وب‌اپلیکیشن‌های تجاری و خودکارسازی فرآیندها. تمرکز بر سیستم‌های وب با کارایی بالا و هوش عملی.",
+      "status": "در دسترس برای فرصتهای تماموقت · باز برای همکاری پروژهای",
+      "cta1": "مشاهده نمونه کارها",
+      "cta2": "تماس"
     },
     "services": {
-      "label": "// آنچه من می‌سازم",
-      "title": "سه روش که می‌توانم کمک کنم",
-      "description": "اکثر پروژه‌ها دو یا بیشتر از اینها را با هم ترکیب می‌کنند. با آژانس‌ها و کسب‌وکارها کار می‌کنم.",
+      "label": "// حوزه‌های تخصص",
+      "title": "توانمندی‌های فنی و مهندسی",
+      "description": "چگونه به تیم‌های مهندسی در ساخت و مقیاس‌پذیری محصولات مدرن کمک می‌کنم.",
       "items": [
         {
-          "title": "Figma → تولید",
-          "body": "طراحی‌های شما را به وب‌سایت‌های سریع و پاسخگو تبدیل می‌کنم که با دقت کامل پیاده‌سازی شده‌اند. کد تمیز که تیم شما می‌تواند نگهداری کند. برای آژانس‌ها برچسب سفید موجود است — مشتری شما هیچ‌گاه نیاز ندارد بداند."
+          "title": "توسعه وب فول‌استک",
+          "body": "ساخت سیستم‌های وب ماژولار، سریع و ایمن با استفاده از React، Next.js و TypeScript. طراحی پایگاه‌داده ساختاریافته و بک‌اندهای بدون سرور."
         },
         {
-          "title": "خودکارسازی گردش کار",
-          "body": "CRM، فرم‌ها، ایمیل و سیستم‌های داخلی خود را متصل کنید. کارهای تکراری را حذف کنید که وقت تیم شما را تلف می‌کند. بدون کد جایی که مناسب است، کد سفارشی جایی که لازم است."
+          "title": "هوش مصنوعی و پردازش زبان طبیعی",
+          "body": "یکپارچه‌سازی مدل‌های یادگیری ماشین، پیاده‌سازی طبقه‌بندی‌کننده‌های سفارشی (BERT) و ساخت عامل‌های هوشمند LLM با خطوط لوله ترکیبی RAG."
         },
         {
-          "title": "ویژگی‌های AI که واقعاً حمل می‌کنند",
-          "body": "برای هر ادغام که من می‌سازم — چت‌بات‌ها، تولید محتوا، واجد شرایط‌سازی سرنخ، پردازش اسناد — دارای درجه AI هستم. اجراهای واقعی، نه آموزش‌های کپی‌شده."
+          "title": "خودکارسازی فرآیندها و سیستم‌ها",
+          "body": "طراحی خطوط لوله قوی با استفاده از n8n و فناوری‌های بدون سرور لبه (Cloudflare Workers) برای خودکارسازی عملیات با مدیریت خطای تمیز."
         }
       ]
     },
     "skills": {
       "label": "// مجموعه تکنولوژی",
-      "title": "من با این‌ها کار می‌کنم",
+      "title": "فناوری‌های کلیدی",
       "groups": [
-        { "label": "Frontend", "items": ["React","Next.js","TypeScript","Tailwind CSS","Framer Motion","HTML/CSS","Vite"] },
-        { "label": "3D & Visual", "items": ["Three.js","@react-three/fiber","@react-three/drei","CSS Modules"] },
-        { "label": "Backend & API", "items": ["Node.js","REST APIs","Next.js Server Actions","Zod","PostgreSQL"] },
-        { "label": "AI & Automation", "items": ["OpenAI API","LLM Integration","Zapier","Make","Webhooks"] },
-        { "label": "Internationalisation", "items": ["i18next","react-i18next","RTL/LTR Layouts","Persian","Armenian","Russian"] },
-        { "label": "Deploy & Tools", "items": ["Vercel","GitHub","Git","Figma","Docker"] }
-      ]
-    },
-    "process": {
-      "label": "// نحوه کار ما",
-      "title": "فرآیند ساده و مستقیم",
-      "steps": [
         {
-          "number": "۰۱",
-          "title": "کشف",
-          "description": "درباره پروژه‌تان به من بگویید. سؤالات سختی می‌پرسم تا اطمینان حاصل کنم من انتخاب مناسب هستم."
+          "label": "هوش مصنوعی و یادگیری ماشین",
+          "items": [
+            "PyTorch",
+            "Transformers/BERT",
+            "Gemini API",
+            "RAG / Hybrid Retrieval"
+          ]
         },
         {
-          "number": "۰۲",
-          "title": "پیشنهاد",
-          "description": "دامنه ثابت، زمان‌بندی ثابت و قیمت ثابت دریافت می‌کنید. بدون شگفتی."
+          "label": "توسعه فول‌استک",
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Node.js / FastAPI",
+            "PostgreSQL",
+            "Prisma"
+          ]
         },
         {
-          "number": "۰۳",
-          "title": "ساخت",
-          "description": "به‌روزرسانی دوهفتگی. ارتباط هفتگی. شما شفافیت کامل دارید."
-        },
-        {
-          "number": "۰۴",
-          "title": "حمل کنید",
-          "description": "استقرار، آموزش، و پشتیبانی تحویل ۳۰روزه. مستندسازی کامل."
+          "label": "خودکارسازی و زیرساخت",
+          "items": [
+            "n8n",
+            "Cloudflare Workers",
+            "D1 / KV",
+            "CI/CD Basics"
+          ]
         }
       ]
     },
     "about": {
-      "label": "// من چه کسی هستم",
+      "label": "// درباره من",
       "title": "پیشه‌ور دیجیتالی",
-      "description": "به‌عنوان یک طراح شروع کردم، توسعه‌دهنده شدم، و اکنون هردو را انجام می‌دهم. آن پیشینه همه چیزی را که من می‌سازم شکل می‌دهد — رابط‌هایی که نه‌تنها کار می‌کنند، بلکه احساس خوبی دارند.",
-      "points": [
-        "ارتباط مستقیم، بدون نشانه‌گذاری project manager",
-        "طراحی و توسعه در زیر یک سقف",
-        "دامنه ثابت = تحویل قابل‌پیش‌بینی",
-        "بودجه شما امن است: قبل از شروع، دامنه را تأیید می‌کنید"
-      ],
-      "focus": [
-        "Full-stack implementation from Figma or spec",
-        "3D WebGL interfaces (Three.js + React Three Fiber)",
-        "Practical AI integration backed by genuine ML understanding",
-        "Multi-language deployment: EN, HY, RU, FA, DE, FR"
-      ],
+      "description": "من توسعه‌دهنده فول‌استک و مهندس هوش مصنوعی هستم که روی ساخت برنامه‌های وب با کارایی بالا و سیستم‌های هوشمند تمرکز دارم. با داشتن مدرک کارشناسی در هوش مصنوعی، ارتباطی یکپارچه بین سیستم‌های پیچیده یادگیری ماشین و رابط‌های کاربری ظریف و کاربرپسند برقرار می‌کنم. تخصص من در طراحی معماری‌های مبتنی بر تایپ، ادغام میکروسرویس‌ها و خودکارسازی گردش کار در لبه است.",
       "sidebar": [
-        ["Based in","Yerevan, Armenia 🇦🇲"],
-        ["Availability","Open to new work"],
-        ["Response","Within 24 hours"],
-        ["Timezone","GMT+4 (Armenia Standard)"],
-        ["Degree","B.Sc. Artificial Intelligence"],
-        ["Languages","English · Armenian · Farsi"]
+        [
+          "همکاری تمام‌وقت",
+          "آماده برای موقعیت‌های تمام‌وقت و پروژه‌ای"
+        ],
+        [
+          "مدرک تحصیلی",
+          "کارشناسی هوش مصنوعی"
+        ],
+        [
+          "زبان‌های مسلط",
+          "انگلیسی · فارسی"
+        ],
+        [
+          "پاسخ‌گویی",
+          "کمتر از ۲۴ ساعت"
+        ]
       ]
     },
     "contact": {
-      "label": "// بیایید چیزی بسازیم",
+      "label": "// همکاری‌های فنی",
       "title": "تماس بگیرید",
-      "description": "پروژه‌ای در ذهن دارید؟ درباره آن به من بگویید. تماس فروش نیست، پرسش‌نامه طولانی نیست — فقط یک گفتگو.",
+      "description": "بیایید درباره موقعیت‌های شغلی تمام‌وقت، قراردادها یا همکاری‌های فنی گفتگو کنیم. از فرم زیر پیام بفرستید.",
       "formLabels": {
         "name": "نام شما",
-        "email": "ایمیل",
-        "company": "نام شرکت / پروژه",
-        "budget": "بودجه تخمینی",
-        "message": "پروژه‌تان را توضیح دهید",
+        "email": "آدرس ایمیل",
+        "company": "شرکت / پروژه",
+        "message": "پیام شما",
         "submit": "ارسال پیام",
-        "sending": "درحال ارسال..."
+        "sending": "در حال ارسال پیام..."
       },
-      "budgetOptions": [
-        { "value": "under_100", "label": "کمتر از $100" },
-        { "value": "100_300", "label": "$100 – $300" },
-        { "value": "300_500", "label": "$300 – $500" },
-        { "value": "500_1000", "label": "$500 – $1,000" },
-        { "value": "over_1000", "label": "بیش از $1,000" }
-      ],
-      "successMessage": "پیام ارسال شد! من در ظرف ۲۴ ساعت پاسخ خواهم داد.",
-      "budgetPlaceholder": "هنوز مطمئن نیستم",
-      "errorMessage": "مشکلی پیش آمد. دوباره سعی کنید.",
+      "successMessage": "پیام با موفقیت ارسال شد! در کمتر از ۲۴ ساعت پاسخ خواهم داد.",
+      "errorMessage": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
       "validation": {
-        "name": "نام باید حداقل 2 کاراکتر باشد",
-        "email": "لطفاً یک ایمیل معتبر وارد کنید",
-        "message": "لطفاً پروژه خود را توضیح دهید (حداقل 20 کاراکتر)"
+        "name": "نام باید حداقل ۲ کاراکتر باشد",
+        "email": "لطفاً یک آدرس ایمیل معتبر وارد کنید",
+        "message": "پیام باید حداقل ۲۰ کاراکتر باشد"
       },
       "postNotes": [
-        "من متن شما را بررسی می‌کنم و در ظرف 24 ساعت پاسخ می‌دهم.",
-        "اگر مناسب باشد، از طریق ایمیل دنبال‌کاری خواهم کرد.",
-        "شما یک پیشنهاد نوشتاری با قیمت ثابت را در ظرف 3 روز دریافت می‌کنید."
+        "من تمامی پیام‌ها را شخصاً بررسی می‌کنم.",
+        "برای درخواست‌های شغلی، از طریق ایمیل پاسخ خواهم داد.",
+        "بیایید بر روی دامنه‌های فنی و جزئیات هماهنگ شویم."
       ],
-      "personalNote": "من پیام‌ها را به صورت شخصی بررسی می‌کنم — نه ربات، نه VA."
+      "personalNote": "پیام‌ها به صورت شخصی بررسی می‌شوند."
     },
     "chatbot": {
-      "label": "بیایید صحبت کنیم",
-      "button": "گفت‌وگو",
-      "openingMessage": "سلام! 👋 درباره پروژه‌تان به من بگویید. شما چه می‌سازید?",
-      "responseTime": "در ظرف 24 ساعت پاسخ دهید",
-      "aiNotice": "این چت توسط AI اداره می‌شود. تمام درخواست‌ها به صورت شخصی بررسی می‌شوند.",
+      "label": "دستیار گفتگو",
+      "button": "گفتگو",
+      "openingMessage": "سلام! من دستیار هوش مصنوعی سپهر هستم. درباره پروژه‌ها، مهارت‌ها یا آمادگی او برای کار تمام‌وقت از من بپرسید.",
+      "responseTime": "پاسخ‌گویی فوری",
+      "aiNotice": "این چت‌بات توسط Gemini پشتیبانی می‌شود. پیام‌ها به صورت شخصی بررسی می‌شوند.",
       "close": "بستن",
-      "fillFormCTA": "فرم تماس را با این زمینه پر کنید →",
+      "fillFormCTA": "تکمیل فرم تماس با اطلاعات گفتگو →",
       "send": "ارسال"
     },
     "footer": {
-      "description": "مستقر در یروان، ارمنستان.",
-      "contact": "تماس بگیرید:",
+      "description": "توسعه‌دهنده فول‌استک و مهندس هوش مصنوعی",
+      "contact": "تماس:",
       "email": "sepehrjokanian99@gmail.com",
-      "copyright": "© 2026 Sepehr Jokanian · sepehrjokanian99@gmail.com"
+      "copyright": "© ۲۰۲۶ سپهر جوکانیان · sepehrjokanian99@gmail.com"
     },
     "projects": {
       "label": "// کارهای منتخب",
-      "title": "کد واقعی. دموهای واقعی.",
-      "subtitle": "این‌ها ماکت نیستند. روی لینک‌ها کلیک کنید — واقعاً بارگذاری می‌شوند.",
-      "loading": "در حال بارگذاری پروژه‌ها...",
-      "github": "GitHub",
-      "liveDemo": "دموی زنده"
+      "title": "پروژه‌های مهندسی برگزیده",
+      "description": "پروژه‌های منتخب در حوزه هوش مصنوعی، فول‌استک و خودکارسازی.",
+      "categories": {
+        "all": "همه",
+        "web": "فول‌استک",
+        "ai": "هوش مصنوعی",
+        "mobile": "خودکارسازی"
+      },
+      "loading": "در حال بارگذاری...",
+      "github": "گیت‌هاب",
+      "liveDemo": "دموی زنده",
+      "tags": {
+        "all": "همه پروژه‌ها",
+        "ai": "هوش مصنوعی و یادگیری ماشین",
+        "fullstack": "فول‌استک",
+        "automation": "خودکارسازی"
+      },
+      "list": {
+        "shahmaghz": {
+          "title": "پلتفرم فروشگاهی شاه‌مغز",
+          "description": "یک پلتفرم فروشگاهی با کارایی بالا و منطبق بر چیدمان راست‌به‌چپ برای محصولات کشاورزی که با یک طرح پایگاه‌داده ۱۳ مدله Postgres، مدیریت حالت Zustand و پردازش رسانه Cloudinary طراحی شده است.",
+          "highlights": [
+            "طراحی پایگاه‌داده ۱۳ مدله با Prisma و PostgreSQL",
+            "طراحی بومی سیستم راست‌به‌چپ/چپ‌به‌راست و تغییر تم",
+            "آپلود و پردازش تصویر بهینه‌شده از طریق Cloudinary",
+            "مدیریت وضعیت سمت کلاینت با کارایی بالا با Zustand"
+          ],
+          "category": "فول‌استک"
+        },
+        "cyberbullying": {
+          "title": "سیستم طبقه‌بندی سایبربولینگ",
+          "description": "یک سیستم طبقه‌بندی متنی NLP ترکیبی از مدل‌های BERT و BiLSTM همراه با حلقه یادگیری فعال با بازخورد ناظران، در قالب افزونه کروم و داشبورد FastAPI. نمره پایان‌نامه: A+.",
+          "highlights": [
+            "شبکه عصبی ترکیبی BERT + BiLSTM با PyTorch",
+            "حلقه یادگیری فعال با تأیید و بازخورد ناظران انسانی",
+            "افزونه کروم برای پایش زنده در شبکه‌های اجتماعی",
+            "بک‌اند FastAPI و داشبورد تحلیل داده با PostgreSQL"
+          ],
+          "category": "هوش مصنوعی و یادگیری ماشین"
+        },
+        "ariana": {
+          "title": "پورتال تجاری آریانا",
+          "description": "یک نمونه اولیه پلتفرم تجارت B2B دوزبانه با سیستم تغییر چیدمان پیشرفته RTL/LTR و چت‌بات پشتیبان با پایگاه دانش محلی و مدل‌های زبانی.",
+          "highlights": [
+            "واسط کاربری دوزبانه (فارسی/انگلیسی) با انیمیشن‌های روان",
+            "دستیار گفتگو با هوش مصنوعی OpenAI و پایگاه دانش محلی",
+            "سازگاری کامل با ۵ سایز استاندارد نمایشگر"
+          ],
+          "category": "فول‌استک"
+        },
+        "forma": {
+          "title": "وب‌سایت استودیو FORMA",
+          "description": "یک ویترین نمایشی استودیوی طراحی با رندر سه‌بعدی Three.js WebGL و مدیریت هوشمند منابع سیستم و ۴ زبان مختلف در CSS Modules.",
+          "highlights": [
+            "رندر سه‌بعدی Three.js WebGL با حالت استراحت در خارج از صفحه جهت کاهش بار پردازشی",
+            "سیستم طراحی کاملاً اختصاصی CSS Modules بدون نیاز به کلاس‌های Tailwind",
+            "انیمیشن‌های نرم کلاینت با استفاده از Framer Motion"
+          ],
+          "category": "فول‌استک"
+        },
+        "telegram": {
+          "title": "ربات دستیار تلگرام AI",
+          "description": "یک ربات شخصی مبتنی بر مدل Gemini مستقر در لبه (Edge) با پردازش صوتی ElevenLabs و همگام‌سازی زنده پایگاه دانش بدون نیاز به استقرار مجدد.",
+          "highlights": [
+            "اجرای ابری بدون سرور با Cloudflare Workers، KV و D1",
+            "تبدیل صوت و ترجمه صوتی با APIهای صوتی ElevenLabs",
+            "به‌روزرسانی پویای بستر دانش از طریق همگام‌سازی زنده دیتابیس"
+          ],
+          "category": "هوش مصنوعی و یادگیری ماشین"
+        },
+        "n8n": {
+          "title": "خودکارسازی فرآیند ارتباط با مشتری",
+          "description": "یک خط لوله خودکارسازی امن با n8n شامل استخراج recursively وب‌سایت‌ها، تحلیل هوش مصنوعی و تولید خودکار ایمیل با سدهای محدودکننده نرخ ارسال.",
+          "highlights": [
+            "هماهنگ‌سازی و ارتباط هوشمند عامل‌های تحقیقاتی و نویسندگی",
+            "رعایت محدودیت‌های خودکار ارسال و درگاه‌های تأیید انسانی",
+            "ثبت زنده داده‌ها در صفحات اکسل و محرک‌های خودکار ایمیلی"
+          ],
+          "category": "خودکارسازی"
+        }
+      }
     },
     "whyMe": {
-      "label": "// ارزش پیشنهادی",
-      "heading1": "آنچه دیگران بیشتر بابت آن هزینه می‌گیرند —",
-      "heading2": "من سریع‌تر تحویل می‌دهم.",
-      "subheading": "اکثر آژانس‌ها لایه‌هایی از مدیران حساب، طراحان و توسعه‌دهندگان را بین شما و محصول‌تان اضافه می‌کنند. من همه آن سربار را حذف می‌کنم — و صرفه‌جویی را مستقیماً به شما منتقل می‌کنم.",
+      "label": "// اصول کاری",
+      "heading1": "مهندسی‌شده برای اثرگذاری،",
+      "heading2": "پیاده‌سازی‌شده با دقت.",
+      "subheading": "من معماری‌های پیشرفته فول‌استک را با سیستم‌های مدرن هوش مصنوعی ترکیب می‌کنم تا محصولاتی مقیاس‌پذیر و آماده تولید بسازم.",
       "items": [
         {
-          "title": "فول‌استک، به‌تنهایی",
-          "body": "فرانت‌اند، بک‌اند و استقرار — یک نفر. بدون تحویل، بدون سوءتفاهم، بدون «این مشکل تیم دیگر است». شما مستقیماً با توسعه‌دهنده‌ای که کد شما را می‌نویسد صحبت می‌کنید."
+          "title": "مسئولیت‌پذیری کامل در فرآیند ساخت",
+          "body": "از طراحی رابط‌های کاربری تا پیاده‌سازی معماری بک‌اند و پایگاه‌داده. یک مهندس مسئولیت کامل تمام مراحل تولید را بر عهده دارد."
         },
         {
-          "title": "گردش کار تقویت‌شده با AI",
-          "body": "من مدرک هوش مصنوعی دارم — می‌فهمم این مدل‌ها واقعاً چه می‌کنند، نه‌فقط اینکه چگونه API را فراخوانی کنم. این یعنی ساخت سریع‌تر و ادغام‌های هوشمندانه‌تر."
+          "title": "هوش مصنوعی و مدل‌های زبانی هوشمند",
+          "body": "با تکیه بر مدرک کارشناسی هوش مصنوعی، من راه‌حل‌های عملی هوش مصنوعی را از مدل‌های سفارشی (BERT) تا ارتباط با API در لبه پیاده‌سازی می‌کنم."
         },
         {
-          "title": "نرخ‌های ایروان، کیفیت اروپایی",
-          "body": "قیمت‌گذاری رقابتی نتیجه طبیعی سربار پایین است — نه نشانه‌ای از کیفیت پایین. شما معماری در سطح ارشد را با کسری از هزینه معمول آژانس دریافت می‌کنید."
+          "title": "کیفیت بالا در سطح استقرار نهایی",
+          "body": "توسعه کدهای پایدار و بهینه با TypeScript، مدل‌سازی دیتابیس (PostgreSQL/Prisma)، واسط‌های امن و رعایت کارایی سیستم."
         },
         {
-          "title": "دمو در چند روز، نه چند هفته",
-          "body": "اکثر مشتریان ظرف ۳–۵ روز از آغاز پروژه نمونه کار اولیه را می‌بینند. حلقه‌های بازخورد سریع‌تر به معنای راه‌اندازی سریع‌تر است. سرعت یک ویژگی است."
+          "title": "نمونه‌سازی فوق‌العاده سریع",
+          "body": "سرعت بالای چرخه‌های توسعه و استقرارهای مداوم ابری (Vercel/Cloudflare). کارکرد زنده پروژه خود را در چند روز مشاهده کنید."
+        }
+      ]
+    },
+    "multilingual": {
+      "label": "// توسعه چندزبانه",
+      "title": "سایت‌های فعال در سطح اینترنت با پشتیبانی بومی چندزبانه.",
+      "description": "بومی‌سازی کامل متن، واحد پولی و ساختار سئو، شامل موتورهای پیچیده چیدمان راست‌به‌چپ (RTL) با زمان تغییر زبان زیر ۱۸۰ میلی‌ثانیه.",
+      "languages": [
+        {
+          "code": "EN",
+          "name": "انگلیسی"
+        },
+        {
+          "code": "FA",
+          "name": "فارسی"
         }
       ]
     },
     "valueStrip": {
-      "stat1": { "label": "روز تا نمونه اولیه", "sub": "ساخت کاربردی، نه ماکت" },
-      "stat2": { "label": "زمان پاسخ‌گویی", "sub": "هرگز در انتظار نمی‌مانید" },
-      "stat3": { "label": "حداقل قرارداد", "sub": "دامنه ثابت، بدون غافلگیری" }
-    },
-    "multilingual": {
-      "label": "// ارائه چندزبانه",
-      "title": "سایت‌های تولیدی در بیش از ۵ زبان.",
-      "description": "بهینه‌سازی SEO برای هر بازار. بومی‌سازی کامل — متن، ارز، حقوقی. شامل موتورهای پیچیده چیدمان راست‌به‌چپ (RTL) با گذار بارگذاری صفحه کمتر از ۱۸۰ms.",
-      "languages": [
-        { "code": "EN", "name": "انگلیسی" },
-        { "code": "HY", "name": "ارمنی" },
-        { "code": "RU", "name": "روسی" },
-        { "code": "FA", "name": "فارسی" },
-        { "code": "DE", "name": "آلمانی" },
-        { "code": "FR", "name": "فرانسوی" }
-      ]
-    },
-    "agency": {
-      "label": "// برای آژانس‌ها",
-      "heading": "پیمانکار فرعی شما. نه رقیب شما.",
-      "sub": "من کار فرانت‌اند را انجام می‌دهم در حالی که شما بر روابط با مشتری و استراتژی تمرکز می‌کنید. تحویل تمیز، تحویل قابل‌پیش‌بینی، مشتری شما هیچ‌گاه نیاز ندارد بداند.",
-      "items": [
-        {
-          "title": "گزینه برچسب سفید",
-          "body": "برندینگ شما، رابطه مشتری شما. صورتحساب از طریق حساب شما انجام می‌شود. من نامرئی می‌مانم."
-        },
-        {
-          "title": "دامنه ثابت، قیمت ثابت",
-          "body": "بدون بحث درباره گسترش دامنه. برآورد همراه با پیشنهاد. پرداخت در زمان تحویل، نه بر اساس وعده."
-        },
-        {
-          "title": "شرایط انعطاف‌پذیر",
-          "body": "پروژه‌به‌پروژه، حق‌التدریس مداوم، یا sprint-محور. ما آن را برای گردش کار شما ساختار می‌دهیم."
-        },
-        {
-          "title": "تحویل روان",
-          "body": "مستندسازی کامل. کد قابل دسترسی. مستقر و آماده. من برای سؤالات در دسترس می‌مانم."
-        }
-      ]
+      "projects": {
+        "label": "پروژه تحویل‌شده",
+        "sub": "آماده برای بهره‌برداری"
+      },
+      "years": {
+        "label": "سال تجربه",
+        "sub": "فول‌استک و هوش مصنوعی"
+      },
+      "quality": {
+        "label": "تعهد به کیفیت",
+        "sub": "مهندسی جامع"
+      }
     }
   }
 }

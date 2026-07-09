@@ -12,10 +12,6 @@ const contactSchema = z.object({
   email: z.string().email(),
   company: z.string().max(100).optional(),
   project: z.string().min(20).max(2000),
-  // Updated budget tiers to reflect current public knowledge/pricing
-  budget: z
-    .enum(["", "under_100", "100_300", "300_500", "500_1000", "over_1000"])
-    .optional(),
 });
 
 export const Route = createFileRoute("/api/contact")({
@@ -39,7 +35,7 @@ export const Route = createFileRoute("/api/contact")({
             );
           }
 
-          const { name, email, company, project, budget } = result.data;
+          const { name, email, company, project } = result.data;
 
           // Save to database (best effort - don't block email)
           let contactId: number | undefined;
@@ -66,7 +62,6 @@ export const Route = createFileRoute("/api/contact")({
               email,
               company,
               project,
-              budget,
             });
           } catch (dbError) {
             // Log but don't fail the request - email is more important
@@ -79,13 +74,7 @@ export const Route = createFileRoute("/api/contact")({
             if (resendKey) {
               const resend = new Resend(resendKey);
 
-              const budgetLabels: Record<string, string> = {
-                under_100: 'Under $100',
-                '100_300': '$100 – $300',
-                '300_500': '$300 – $500',
-                '500_1000': '$500 – $1,000',
-                over_1000: 'Over $1,000',
-              };
+
 
               await resend.emails.send({
                 from: 'onboarding@resend.dev',
@@ -126,14 +115,7 @@ export const Route = createFileRoute("/api/contact")({
                           ${escapeHtml(company)}
                         </td>
                       </tr>` : ''}
-                      ${budget ? `
-                      <tr>
-                        <td style="padding:10px 0;color:#888;
-                                   border-bottom:1px solid #222;">Budget</td>
-                        <td style="padding:10px 0;border-bottom:1px solid #222;">
-                          ${budgetLabels[budget] || budget}
-                        </td>
-                      </tr>` : ''}
+
                       <tr>
                         <td style="padding:10px 0;color:#888;
                                    vertical-align:top;
@@ -192,7 +174,7 @@ export const Route = createFileRoute("/api/contact")({
                 ${company ? `<p><strong>Company:</strong> ${escapeHtml(company)}</p>` : ""}
                 <p><strong>Project:</strong></p>
                 <p>${escapeHtml(project).replace(/\n/g, "<br>")}</p>
-                ${budget ? `<p><strong>Budget Range:</strong> ${escapeHtml(budget)}</p>` : ""}
+
                 ${contactId ? `<p><em>Database ID: ${contactId}</em></p>` : ""}
               `,
             });

@@ -65,7 +65,7 @@ export function Projects() {
         </motion.div>
 
         {/* Projects grid with jigsaw cards */}
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 justify-items-center">
           {projects
             .filter((p) => filter === "all" || (p.category && p.category === filter))
             .map((p, i) => (

@@ -64,9 +64,9 @@ export function Chatbot() {
       </button>
       
       {/* Tooltip on hover */}
-      <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none">
-        Chat Bot
-      </div>
+        <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none">
+          Let's Talk
+        </div>
     </motion.div>
   );
 

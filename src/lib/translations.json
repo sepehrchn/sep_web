@@ -193,8 +193,8 @@
         "shahmaghz": {
           "title": "ShahMaghz E-Commerce Platform",
           "description": "A full-scale e-commerce platform for a Persian nuts & dried-fruits brand — 13-model schema, RTL-native UI, admin dashboard, and a live storefront.",
-          "color": "#1B1B4A",
-          "images": ["/assets/projects/shahmaghz-1.jpg", "/assets/projects/shahmaghz-2.jpg", "/assets/projects/shahmaghz-3.jpg"],
+          "color": "#C17A54",
+          "images": ["/assets/projects/shahmaghz-1.webp", "/assets/projects/shahmaghz-2.webp", "/assets/projects/shahmaghz-3.webp"],
           "highlights": [
             "13-model relational schema with Prisma & PostgreSQL",
             "Fully native RTL/LTR design system and theme selector",
@@ -203,24 +203,12 @@
           ],
           "category": "web"
         },
-        "cyberbullying": {
-          "title": "Cyberbullying Classification System",
-          "description": "An NLP system that detects cyberbullying in real time — BERT + BiLSTM model, Chrome extension, moderator dashboard, and human-in-the-loop retraining. Final year project, graded A+.",
-          "color": "#C17A54",
-          "images": ["/assets/projects/cyberbullying-1.jpg", "/assets/projects/cyberbullying-2.jpg", "/assets/projects/cyberbullying-3.jpg"],
-          "highlights": [
-            "Hybrid BERT + BiLSTM neural network built with PyTorch",
-            "Active learning loop utilizing moderator verification feedback",
-            "Chrome extension for real-time social platform monitoring",
-            "FastAPI backend and analytics dashboard with PostgreSQL"
-          ],
-          "category": "ai"
-        },
+
         "ariana": {
           "title": "Ariana Global Trade",
           "description": "A bilingual B2B export platform with a full RTL/LTR layout engine and a hybrid chatbot — local knowledge base first, LLM fallback when needed.",
           "color": "#1B1B4A",
-          "images": ["/assets/projects/ariana-1.jpg", "/assets/projects/ariana-2.jpg", "/assets/projects/ariana-3.jpg"],
+          "images": ["/assets/projects/ariana-1.webp", "/assets/projects/ariana-2.webp", "/assets/projects/ariana-3.webp"],
           "highlights": [
             "Bilingual (EN/FA) interface with micro-interaction state transitions",
             "OpenAI-powered concierge bot with local KB context integration",
@@ -232,7 +220,7 @@
           "title": "FORMA Studio Website",
           "description": "An interactive agency site with a WebGL Three.js hero, 4-language i18n, and a custom AI chat widget — built as a design/dev showcase.",
           "color": "#C17A54",
-          "images": ["/assets/projects/forma-1.jpg", "/assets/projects/forma-2.jpg", "/assets/projects/forma-3.jpg"],
+          "images": ["/assets/projects/forma-1.webp", "/assets/projects/forma-2.webp", "/assets/projects/forma-3.webp"],
           "highlights": [
             "Three.js WebGL rendering with off-screen GPU sleep mode",
             "Custom CSS Modules design system with zero utilities dependency",
@@ -244,7 +232,7 @@
           "title": "Telegram AI Assistant",
           "description": "A Gemini-powered assistant on Cloudflare's edge — voice in, voice out (ElevenLabs), auto language detection, and a live-updatable knowledge base.",
           "color": "#1B1B4A",
-          "images": ["/assets/projects/telegram-1.jpg", "/assets/projects/telegram-2.jpg", "/assets/projects/telegram-3.jpg"],
+          "images": ["/assets/projects/telegram-1.webp", "/assets/projects/telegram-2.webp"],
           "highlights": [
             "Serverless execution using Cloudflare Workers, KV, and D1",
             "Multimodal audio translation powered by ElevenLabs voice API",
@@ -256,7 +244,7 @@
           "title": "Multi-Agent Outreach Automation",
           "description": "An automation pipeline where one AI agent researches a lead and another drafts the outreach email — with human review and rate-limited sending.",
           "color": "#C17A54",
-          "images": ["/assets/projects/n8n-1.jpg", "/assets/projects/n8n-2.jpg", "/assets/projects/n8n-3.jpg"],
+          "images": ["/assets/projects/n8n-1.webp", "/assets/projects/n8n-2.webp", "/assets/projects/n8n-3.webp"],
           "highlights": [
             "Orchestration of independent research and writing agents",
             "Dynamic rate-limiting guardrails and manual approval gates",
@@ -486,8 +474,8 @@
         "shahmaghz": {
           "title": "پلتفرم فروشگاهی شاه‌مغز",
           "description": "یک پلتفرم فروشگاهی کامل برای برند خشکبار — با طراحی پایگاه‌داده ۱۳ مدله، رابط کاربری بومی راست‌به‌چپ، داشبورد مدیریتی و فروشگاه آنلاین فعال.",
-          "color": "#1B1B4A",
-          "images": ["/assets/projects/shahmaghz-1.jpg", "/assets/projects/shahmaghz-2.jpg", "/assets/projects/shahmaghz-3.jpg"],
+          "color": "#C17A54",
+          "images": ["/assets/projects/shahmaghz-1.webp", "/assets/projects/shahmaghz-2.webp", "/assets/projects/shahmaghz-3.webp"],
           "highlights": [
             "طراحی پایگاه‌داده ۱۳ مدله با Prisma و PostgreSQL",
             "طراحی بومی سیستم راست‌به‌چپ/چپ‌به‌راست و تغییر تم",
@@ -496,24 +484,12 @@
           ],
           "category": "web"
         },
-        "cyberbullying": {
-          "title": "سیستم طبقه‌بندی سایبربولینگ",
-          "description": "سیستمی برای شناسایی آنی سایبربولینگ — مدل ترکیبی BERT و BiLSTM، افزونه کروم، داشبورد ناظر و بازآموزی مبتنی بر بازخورد انسانی. پروژه پایانی، نمره A+.",
-          "color": "#C17A54",
-          "images": ["/assets/projects/cyberbullying-1.jpg", "/assets/projects/cyberbullying-2.jpg", "/assets/projects/cyberbullying-3.jpg"],
-          "highlights": [
-            "شبکه عصبی ترکیبی BERT + BiLSTM با PyTorch",
-            "حلقه یادگیری فعال با تأیید و بازخورد ناظران انسانی",
-            "افزونه کروم برای پایش زنده در شبکه‌های اجتماعی",
-            "بک‌اند FastAPI و داشبورد تحلیل داده با PostgreSQL"
-          ],
-          "category": "ai"
-        },
+
         "ariana": {
           "title": "پورتال تجاری آریانا",
           "description": "پلتفرم صادرات B2B دوزبانه با موتور چیدمان کامل راست‌به‌چپ/چپ‌به‌راست و چت‌بات ترکیبی — ابتدا پایگاه دانش محلی، در صورت نیاز مدل زبانی.",
           "color": "#1B1B4A",
-          "images": ["/assets/projects/ariana-1.jpg", "/assets/projects/ariana-2.jpg", "/assets/projects/ariana-3.jpg"],
+          "images": ["/assets/projects/ariana-1.webp", "/assets/projects/ariana-2.webp", "/assets/projects/ariana-3.webp"],
           "highlights": [
             "واسط کاربری دوزبانه (فارسی/انگلیسی) با انیمیشن‌های روان",
             "دستیار گفتگو با هوش مصنوعی OpenAI و پایگاه دانش محلی",
@@ -525,7 +501,7 @@
           "title": "وب‌سایت استودیو FORMA",
           "description": "وب‌سایت تعاملی یک استودیوی طراحی با هیرو سه‌بعدی WebGL، پشتیبانی از ۴ زبان و ویجت گفتگوی هوش مصنوعی اختصاصی — به‌عنوان نمونه‌کار طراحی و توسعه.",
           "color": "#C17A54",
-          "images": ["/assets/projects/forma-1.jpg", "/assets/projects/forma-2.jpg", "/assets/projects/forma-3.jpg"],
+          "images": ["/assets/projects/forma-1.webp", "/assets/projects/forma-2.webp", "/assets/projects/forma-3.webp"],
           "highlights": [
             "رندر سه‌بعدی Three.js WebGL با حالت استراحت در خارج از صفحه جهت کاهش بار پردازشی",
             "سیستم طراحی کاملاً اختصاصی CSS Modules بدون نیاز به کلاس‌های Tailwind",
@@ -537,7 +513,7 @@
           "title": "ربات دستیار تلگرام AI",
           "description": "دستیار هوشمند مبتنی بر Gemini روی زیرساخت Edge کلادفلر — ورودی و خروجی صوتی با ElevenLabs، تشخیص خودکار زبان و پایگاه دانش قابل به‌روزرسانی زنده.",
           "color": "#1B1B4A",
-          "images": ["/assets/projects/telegram-1.jpg", "/assets/projects/telegram-2.jpg", "/assets/projects/telegram-3.jpg"],
+          "images": ["/assets/projects/telegram-1.webp", "/assets/projects/telegram-2.webp"],
           "highlights": [
             "اجرای ابری بدون سرور با Cloudflare Workers، KV و D1",
             "تبدیل صوت و ترجمه صوتی با APIهای صوتی ElevenLabs",
@@ -549,7 +525,7 @@
           "title": "خودکارسازی فرآیند ارتباط با مشتری",
           "description": "خط لوله خودکارسازی‌ای که یک عامل هوش مصنوعی درباره مخاطب تحقیق می‌کند و دیگری ایمیل را می‌نویسد — با بازبینی انسانی و محدودیت نرخ ارسال.",
           "color": "#C17A54",
-          "images": ["/assets/projects/n8n-1.jpg", "/assets/projects/n8n-2.jpg", "/assets/projects/n8n-3.jpg"],
+          "images": ["/assets/projects/n8n-1.webp", "/assets/projects/n8n-2.webp", "/assets/projects/n8n-3.webp"],
           "highlights": [
             "هماهنگ‌سازی و ارتباط هوشمند عامل‌های تحقیقاتی و نویسندگی",
             "رعایت محدودیت‌های خودکار ارسال و درگاه‌های تأیید انسانی",

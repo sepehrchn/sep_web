@@ -12,7 +12,7 @@ const contactSchema = z.object({
   email: z.string().email().optional(),
   phone: z.string().min(6).max(20),
   company: z.string().max(100).optional(),
-  project: z.string().min(20),
+  project: z.string().min(1),
 });
 
 export const Route = createFileRoute("/api/contact")({

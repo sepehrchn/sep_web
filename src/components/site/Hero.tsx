@@ -110,7 +110,7 @@ export function Hero() {
       </div>
 
       {/* Wavy transition to next section */}
-      <WaveDivider color="#FAFAFA" height={60} />
+      <WaveDivider color="#EDE6D8" height={60} />
     </section>
   );
 }

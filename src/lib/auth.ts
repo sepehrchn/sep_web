@@ -38,7 +38,7 @@ export async function createSession(
 
   await db
     .prepare(
-      `INSERT INTO admin_sessions (id, user_id, expires_at, tab_token) VALUES (?, ?, ?, ?)`
+      `INSERT INTO admin_sessions (session_id, admin_id, expires_at, tab_token) VALUES (?, ?, ?, ?)`
     )
     .bind(sessionId, userId, expiresAt, tabToken ?? null)
     .run();
@@ -55,17 +55,17 @@ export async function validateSession(
 
   const session = await db
     .prepare(
-      `SELECT user_id, expires_at FROM admin_sessions WHERE id = ? AND tab_token = ? AND expires_at > unixepoch()`
+      `SELECT admin_id, expires_at FROM admin_sessions WHERE session_id = ? AND tab_token = ? AND expires_at > unixepoch()`
     )
     .bind(sessionId, tabToken)
-    .first<{ user_id: number; expires_at: number }>();
+    .first<{ admin_id: number; expires_at: number }>();
 
-  return session?.user_id ?? null;
+  return session?.admin_id ?? null;
 }
 
 export async function deleteSession(
   db: D1Database,
   sessionId: string
 ): Promise<void> {
-  await db.prepare(`DELETE FROM admin_sessions WHERE id = ?`).bind(sessionId).run();
+  await db.prepare(`DELETE FROM admin_sessions WHERE session_id = ?`).bind(sessionId).run();
 }

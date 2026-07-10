@@ -26,7 +26,7 @@ export function Projects() {
     <section id="work" className="relative bg-[var(--bg-card)] py-28 overflow-hidden">
       {/* Wavy top divider */}
       <div className="absolute top-0 left-0 right-0">
-        <WaveDivider color="#FAFAFA" height={60} flip />
+        <WaveDivider color="#EDE6D8" height={60} flip />
       </div>
 
       <div className="mx-auto max-w-7xl px-6">

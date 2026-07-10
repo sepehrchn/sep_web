@@ -9,15 +9,18 @@ CREATE TABLE IF NOT EXISTS admin_users (
 );
 
 CREATE TABLE IF NOT EXISTS admin_sessions (
-  id TEXT PRIMARY KEY,
-  user_id INTEGER NOT NULL,
+  session_id TEXT PRIMARY KEY,
+  admin_id INTEGER NOT NULL,
+  tab_token TEXT NOT NULL,
   expires_at INTEGER NOT NULL,
-  created_at INTEGER NOT NULL DEFAULT (unixepoch()),
-  FOREIGN KEY (user_id) REFERENCES admin_users(id) ON DELETE CASCADE
+  created_at INTEGER DEFAULT (unixepoch()),
+  FOREIGN KEY(admin_id) REFERENCES admin_users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX idx_sessions_expires ON admin_sessions(expires_at);
+CREATE INDEX IF NOT EXISTS idx_admin_sessions_expires_at ON admin_sessions(expires_at);
 
--- Insert default admin user (password: changeme123 - MUST be changed after first login)
+-- Admin user created - password hash should be set via secure initialization
+-- DO NOT commit actual password hashes to version control
+-- To set password: UPDATE admin_users SET password_hash = '<sha256-hash>' WHERE username = 'sepehr';
 INSERT INTO admin_users (username, password_hash) 
-VALUES ('admin', '494a715f7e9b4071aca61bac42ca858a309524e5864f0920030862a4ae7589be');
+VALUES ('sepehr', '');

@@ -16,10 +16,10 @@ export function ValueStrip() {
     <section className="relative bg-[var(--primary)] py-24 overflow-hidden">
       {/* Wavy edges */}
       <div className="absolute top-0 left-0 right-0">
-        <WaveDivider color="#FAFAFA" height={50} flip />
+        <WaveDivider color="#EDE6D8" height={50} flip />
       </div>
       <div className="absolute bottom-0 left-0 right-0">
-        <WaveDivider color="#FAFAFA" height={50} />
+        <WaveDivider color="#EDE6D8" height={50} />
       </div>
 
       <div className="mx-auto max-w-7xl px-6">

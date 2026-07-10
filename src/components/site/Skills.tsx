@@ -34,7 +34,6 @@ export function Skills() {
         >
           <div className="label-mono">{t('skills.label')}</div>
           <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('skills.title')}</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-base text-text-secondary md:text-lg">{t('skills.description')}</p>
         </motion.div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
@@ -49,7 +48,6 @@ export function Skills() {
               <JigsawCard color={PALETTE[gi % PALETTE.length]} className="h-full">
                 <div className="flex h-full flex-col p-8">
                   {/* Skill tag & label */}
-                  <div className="label-mono mb-4">{g.label}</div>
                   <h3 className="font-display text-2xl font-bold text-[var(--primary)] leading-tight">{g.title || g.label}</h3>
                   <p className="mt-3 text-sm text-text-secondary leading-relaxed flex-1">{g.description || ''}</p>
                   <div className="mt-4 flex flex-wrap gap-2">

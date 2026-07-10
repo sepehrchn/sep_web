@@ -4,8 +4,8 @@ import { WaveDivider } from "./WaveDivider";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const stats = [
-  { value: 12, suffix: "+", key: "projects" },
-  { value: 3, suffix: "+", key: "years" },
+  { value: 6, suffix: "+", key: "projects" },
+  { value: 2, suffix: "+", key: "years" },
   { value: 100, suffix: "%", key: "quality" },
 ];
 

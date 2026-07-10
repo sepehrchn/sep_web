@@ -38,10 +38,12 @@ export function About() {
             <div className="label-mono">// snapshot</div>
             <dl className="mt-5 divide-y divide-[var(--border)]">
               {sidebar.map((pair: any) => (
-                <div key={pair[0]} className="flex items-start justify-between gap-4 py-3">
-                  <dt className="font-mono-ui text-xs text-text-tertiary">{pair[0]}</dt>
-                  <dd className="text-right text-sm text-text-primary font-medium">{pair[1]}</dd>
-                </div>
+                pair[0] ? (
+                  <div key={pair[0]} className="flex items-start justify-between gap-4 py-3">
+                    <dt className="font-mono-ui text-xs text-text-tertiary">{pair[0]}</dt>
+                    <dd className="text-right text-sm text-text-primary font-medium">{pair[1]}</dd>
+                  </div>
+                ) : null
               ))}
             </dl>
           </motion.aside>

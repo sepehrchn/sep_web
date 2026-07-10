@@ -85,31 +85,27 @@ export function Contact() {
         </motion.div>
 
         <div className="mt-14 grid gap-10 md:grid-cols-2">
-          {/* Left */}
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <div className="label-mono">{t('footer.contact')}</div>
-            <div className="mt-6 space-y-5">
-              {[
-                { Icon: Mail, label: "Email", value: t('footer.email') || "sepehrjokanian99@gmail.com", href: `mailto:${t('footer.email') || 'sepehrjokanian99@gmail.com'}` },
-                { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/sepehr-jo", href: "https://www.linkedin.com/in/sepehr-jo/" },
-                { Icon: Github, label: "GitHub", value: "github.com/sepehrjo", href: "https://github.com/sepehrjo" },
-              ].map((c) => (
-                <a key={c.label} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined} className="group flex items-center gap-4 rounded-xl border border-[var(--border)] bg-white p-4 transition-all hover:border-[var(--accent)] hover:shadow-[var(--shadow-glow)]">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
-                    <c.Icon size={18} />
-                  </div>
-                  <div>
-                    <div className="font-mono-ui text-xs text-text-tertiary">{c.label}</div>
-                    <div className="text-sm text-text-primary group-hover:text-[var(--accent)] transition-colors">{c.value}</div>
-                  </div>
-                </a>
-              ))}
-              <a href={`mailto:${t('footer.email') || 'sepehrjokanian99@gmail.com'}`} className="inline-flex items-center gap-2 rounded-lg border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-4 py-3 text-sm text-text-primary transition-all hover:bg-[var(--accent)]/10 hover:border-[var(--accent)]/60">
-                <Mail size={16} className="text-[var(--accent)]" />
-                {t('footer.email') || 'Email'}
-              </a>
-            </div>
-          </motion.div>
+              {/* Left */}
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <div className="label-mono">{t('footer.contact')}</div>
+                <div className="mt-6 space-y-5">
+                  {[
+                    { Icon: Mail, label: "Email", value: t('footer.email') || "sepehrjokanian99@gmail.com", href: `mailto:${t('footer.email') || 'sepehrjokanian99@gmail.com'}` },
+                    { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/sepehr-jo", href: "https://www.linkedin.com/in/sepehr-jo/" },
+                    { Icon: Github, label: "GitHub", value: "github.com/sepehrjo", href: "https://github.com/sepehrjo" },
+                  ].map((c) => (
+                    <a key={c.label} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined} className="group flex items-center gap-4 rounded-xl border border-[var(--border)] bg-white p-4 transition-all hover:border-[var(--accent)] hover:shadow-[var(--shadow-glow)]">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
+                        <c.Icon size={18} />
+                      </div>
+                      <div>
+                        <div className="font-mono-ui text-xs text-text-tertiary">{c.label}</div>
+                        <div className="text-sm text-text-primary group-hover:text-[var(--accent)] transition-colors">{c.value}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
 
           {/* Right form */}
           <motion.form onSubmit={onSubmit} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="rounded-2xl border border-[var(--border)] bg-white p-6 md:p-8 shadow-sm">

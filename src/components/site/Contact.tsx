@@ -9,7 +9,7 @@ type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export function Contact() {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", message: "" });
   const [status, setStatus] = useState<FormStatus>("idle");
   const [apiError, setApiError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -24,8 +24,8 @@ export function Contact() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.name || formData.name.length < 2) { setApiError(t('contact.validation.name')); return; }
-    if (!formData.email || !formData.email.includes("@")) { setApiError(t('contact.validation.email')); return; }
-    if (!formData.message || formData.message.length < 20) { setApiError(t('contact.validation.message')); return; }
+    if (!formData.phone || formData.phone.length < 6) { setApiError(t('contact.validation.phone')); return; }
+    if (!formData.message) { setApiError(t('contact.validation.message')); return; }
 
     setStatus("submitting");
     setApiError("");
@@ -35,7 +35,7 @@ export function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: formData.name.trim(), email: formData.email.trim(), company: formData.company.trim() || undefined, project: formData.message.trim() }),
+        body: JSON.stringify({ name: formData.name.trim(), email: formData.email.trim() || undefined, phone: formData.phone.trim(), company: formData.company.trim() || undefined, project: formData.message.trim() }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -44,7 +44,7 @@ export function Contact() {
         setStatus("error");
       } else {
         setStatus("success");
-        setFormData({ name: "", email: "", company: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", company: "", message: "" });
       }
     } catch (err) {
       console.error("Contact form error:", err);
@@ -111,11 +111,12 @@ export function Contact() {
           <motion.form onSubmit={onSubmit} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="rounded-2xl border border-[var(--border)] bg-white p-6 md:p-8 shadow-sm">
             <div className="space-y-4">
               <Field label={t('contact.formLabels.name')} name="name" value={formData.name} onChange={onChange} required error={fieldErrors.name} />
-              <Field label={t('contact.formLabels.email')} name="email" type="email" value={formData.email} onChange={onChange} required error={fieldErrors.email} />
+              <Field label={t('contact.formLabels.email')} name="email" type="email" value={formData.email} onChange={onChange} error={fieldErrors.email} />
+              <Field label={t('contact.formLabels.phone')} name="phone" type="tel" value={formData.phone} onChange={onChange} required error={fieldErrors.phone} />
               <Field label={t('contact.formLabels.company')} name="company" value={formData.company} onChange={onChange} error={fieldErrors.company} />
               <div>
                 <label className="font-mono-ui text-xs text-text-tertiary font-medium">{t('contact.formLabels.message')}{" *"}</label>
-                <textarea name="message" required rows={5} maxLength={2000} value={formData.message} onChange={(e) => onChange("message", e.target.value)} placeholder={t('contact.formLabels.message')} className="mt-2 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-text-primary outline-none transition-all placeholder:text-text-tertiary focus:border-[var(--accent)]/40 focus:bg-[var(--bg-elevated)]" />
+                <textarea name="message" required rows={5} value={formData.message} onChange={(e) => onChange("message", e.target.value)} placeholder={t('contact.formLabels.message')} className="mt-2 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-text-primary outline-none transition-all placeholder:text-text-tertiary focus:border-[var(--accent)]/40 focus:bg-[var(--bg-elevated)]" />
                 {fieldErrors.message && <p className="mt-1 text-xs text-[var(--c-danger)]">{fieldErrors.message}</p>}
               </div>
             </div>

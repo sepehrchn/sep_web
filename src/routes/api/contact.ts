@@ -9,9 +9,10 @@ import { getDevEnv } from "@/lib/platform";
 
 const contactSchema = z.object({
   name: z.string().min(2).max(100),
-  email: z.string().email(),
+  email: z.string().email().optional(),
+  phone: z.string().min(6).max(20),
   company: z.string().max(100).optional(),
-  project: z.string().min(20).max(2000),
+  project: z.string().min(20),
 });
 
 export const Route = createFileRoute("/api/contact")({
@@ -35,7 +36,7 @@ export const Route = createFileRoute("/api/contact")({
             );
           }
 
-          const { name, email, company, project } = result.data;
+          const { name, email, phone, company, project } = result.data;
 
           // Save to database (best effort - don't block email)
           let contactId: number | undefined;
@@ -44,10 +45,10 @@ export const Route = createFileRoute("/api/contact")({
             env = await getDevEnv();
             const db = getDb(env);
             
-            // Check for duplicate submission (same email within last hour)
+            // Check for duplicate submission (same phone within last hour)
             const recentContact = await db
-              .prepare(`SELECT id FROM contacts WHERE email = ? AND created_at > unixepoch() - 3600 LIMIT 1`)
-              .bind(email)
+              .prepare(`SELECT id FROM contacts WHERE phone = ? AND created_at > unixepoch() - 3600 LIMIT 1`)
+              .bind(phone)
               .first<{ id: number }>();
             
             if (recentContact) {
@@ -59,7 +60,8 @@ export const Route = createFileRoute("/api/contact")({
 
             contactId = await insertContact(db, {
               name,
-              email,
+              email: email || null,
+              phone,
               company,
               project,
             });
@@ -79,7 +81,7 @@ export const Route = createFileRoute("/api/contact")({
               await resend.emails.send({
                 from: 'onboarding@resend.dev',
                 to: 'sepehrjokanian99@gmail.com',
-                replyTo: email,
+                replyTo: email || undefined,
                 subject: `New inquiry from ${name}`,
                 html: `
                   <div style="font-family:sans-serif;max-width:600px;margin:0 auto;
@@ -97,6 +99,7 @@ export const Route = createFileRoute("/api/contact")({
                           ${escapeHtml(name)}
                         </td>
                       </tr>
+                      ${email ? `
                       <tr>
                         <td style="padding:10px 0;color:#888;
                                    border-bottom:1px solid #222;">Email</td>
@@ -105,6 +108,13 @@ export const Route = createFileRoute("/api/contact")({
                              style="color:#6366f1;">
                             ${escapeHtml(email)}
                           </a>
+                        </td>
+                      </tr>` : ''}
+                      <tr>
+                        <td style="padding:10px 0;color:#888;
+                                   border-bottom:1px solid #222;">Phone</td>
+                        <td style="padding:10px 0;border-bottom:1px solid #222;">
+                          ${escapeHtml(phone)}
                         </td>
                       </tr>
                       ${company ? `
@@ -170,7 +180,8 @@ export const Route = createFileRoute("/api/contact")({
               html: `
                 <h2>New Inquiry</h2>
                 <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-                <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+                ${email ? `<p><strong>Email:</strong> ${escapeHtml(email)}</p>` : ""}
+                <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
                 ${company ? `<p><strong>Company:</strong> ${escapeHtml(company)}</p>` : ""}
                 <p><strong>Project:</strong></p>
                 <p>${escapeHtml(project).replace(/\n/g, "<br>")}</p>

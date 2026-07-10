@@ -8,6 +8,7 @@ export type Contact = {
   id: number;
   name: string;
   email: string;
+  phone: string | null;
   company: string | null;
   project: string;
   budget: string | null;
@@ -18,7 +19,8 @@ export type Contact = {
 
 export type NewContact = {
   name: string;
-  email: string;
+  email: string | null;
+  phone: string;
   company?: string;
   project: string;
   budget?: string;
@@ -27,10 +29,10 @@ export type NewContact = {
 export async function insertContact(db: D1Database, data: NewContact): Promise<number> {
   const result = await db
     .prepare(
-      `INSERT INTO contacts (name, email, company, project, budget) 
-       VALUES (?, ?, ?, ?, ?)`
+      `INSERT INTO contacts (name, email, phone, company, project, budget) 
+       VALUES (?, ?, ?, ?, ?, ?)`
     )
-    .bind(data.name, data.email, data.company || null, data.project, data.budget || null)
+    .bind(data.name, data.email || null, data.phone, data.company || null, data.project, data.budget || null)
     .run();
 
   if (!result.success) {

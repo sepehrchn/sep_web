@@ -121,6 +121,7 @@
       "formLabels": {
         "name": "Your Name",
         "email": "Email Address",
+        "phone": "Phone Number",
         "company": "Company / Project",
         "message": "Your Message",
         "submit": "Send Message",
@@ -131,6 +132,7 @@
       "validation": {
         "name": "Name must be at least 2 characters",
         "email": "Please enter a valid email address",
+        "phone": "Please enter a valid phone number",
         "message": "Message must be at least 20 characters"
       },
       "postNotes": [
@@ -416,6 +418,7 @@
       "formLabels": {
         "name": "نام شما",
         "email": "آدرس ایمیل",
+        "phone": "شماره تماس",
         "company": "شرکت / پروژه",
         "message": "پیام شما",
         "submit": "ارسال پیام",
@@ -426,6 +429,7 @@
       "validation": {
         "name": "نام باید حداقل ۲ کاراکتر باشد",
         "email": "لطفاً یک آدرس ایمیل معتبر وارد کنید",
+        "phone": "لطفاً شماره تماس معتبر وارد کنید",
         "message": "پیام باید حداقل ۲۰ کاراکتر باشد"
       },
       "postNotes": [

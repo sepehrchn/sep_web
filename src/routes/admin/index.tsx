@@ -246,6 +246,7 @@ function AdminDashboard() {
                             <a href={`mailto:${contact.email}`} className="font-mono text-sm text-accent hover:underline">
                               {contact.email}
                             </a>
+                            {contact.phone && <div className="font-mono text-sm text-text-secondary">{contact.phone}</div>}
                           </td>
                           <td className="hidden p-3 text-sm text-text-secondary md:table-cell">
                             {contact.company || "-"}

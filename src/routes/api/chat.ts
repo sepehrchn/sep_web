@@ -19,15 +19,18 @@ export const Route = createFileRoute("/api/chat")({
 
           // Resolve runtime env (DB, secrets) using helper that works in Pages/Workers
           let apiKey: string | undefined;
+          let groqApiKey: string | undefined;
           try {
             const env = await getDevEnv();
             // Prefer binding on env (Cloudflare Pages runtime)
             apiKey = env?.GEMINI_API_KEY ?? env?.GEMINI_API_KEY?.toString?.();
+            groqApiKey = env?.GROQ_API_KEY ?? env?.GROQ_API_KEY?.toString?.();
             // store env for later DB logging
             (request as any).__runtime_env = env;
           } catch (e) {
             // fallback to process.env (some runtimes may expose this)
             apiKey = process.env.GEMINI_API_KEY as any;
+            groqApiKey = process.env.GROQ_API_KEY as any;
           }
 
           if (!apiKey) {
@@ -115,6 +118,45 @@ export const Route = createFileRoute("/api/chat")({
             } catch (e) {
               console.error('Gemini request error for model', modelName, e);
               // try next model
+            }
+          }
+
+          // If Gemini all failed, try Groq as final fallback
+          if (!reply && groqApiKey) {
+            try {
+              // Convert Gemini-style history [{role, parts:[{text}]}] to OpenAI-style messages
+              const groqMessages = [
+                { role: 'system', content: knowledge },
+                ...history.map((h: any) => ({
+                  role: h.role === 'model' ? 'assistant' : 'user',
+                  content: Array.isArray(h.parts) ? h.parts.map((p: any) => p?.text || '').join('') : '',
+                })),
+                { role: 'user', content: message },
+              ];
+
+              const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${groqApiKey}`,
+                },
+                body: JSON.stringify({
+                  model: 'llama-3.3-70b-versatile',
+                  messages: groqMessages,
+                }),
+              });
+
+              const groqRaw = await groqRes.text().catch(() => null);
+              console.log('GROQ_STATUS:', groqRes.status);
+              console.log('GROQ_BODY:', groqRaw);
+
+              if (groqRes.ok && groqRaw) {
+                const groqParsed = JSON.parse(groqRaw);
+                const groqText = groqParsed?.choices?.[0]?.message?.content;
+                if (groqText) reply = groqText;
+              }
+            } catch (e) {
+              console.error('Groq request error:', e);
             }
           }
 

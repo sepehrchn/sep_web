@@ -150,6 +150,7 @@
       "aiNotice": "This assistant is powered by Gemini. Inquiries are reviewed personally.",
       "close": "Close",
       "fillFormCTA": "Prefill the contact form with this context →",
+      "inputPlaceholder": "Type your message...",
       "send": "Send"
     },
     "footer": {
@@ -447,6 +448,7 @@
       "aiNotice": "این چت‌بات توسط Gemini پشتیبانی می‌شود. پیام‌ها به صورت شخصی بررسی می‌شوند.",
       "close": "بستن",
       "fillFormCTA": "تکمیل فرم تماس با اطلاعات گفتگو →",
+      "inputPlaceholder": "پیام خود را بنویسید...",
       "send": "ارسال"
     },
     "footer": {

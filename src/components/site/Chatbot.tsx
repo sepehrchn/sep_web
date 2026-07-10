@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChatbot } from "@/hooks/useChatbot";
 import { useTranslation } from "@/hooks/useTranslation";
-import { MessageSquare, X } from "lucide-react";
+import { X } from "lucide-react";
 
 export function Chatbot() {
   const { t } = useTranslation();
@@ -40,34 +40,22 @@ export function Chatbot() {
 
   /* Floating action button trigger */
   const TriggerButton = (
-    <motion.div
-      className="fixed bottom-6 left-6 z-50 group"
+    <motion.button
+      ref={triggerRef}
+      onClick={isOpen ? closeChat : openChat}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.5, duration: 0.4 }}
+      aria-expanded={isOpen}
+      aria-label={isOpen ? `${t('chatbot.label')} (close)` : `${t('chatbot.label')} (open)`}
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center h-16 w-16 rounded-full border-2 border-[var(--accent)] bg-[var(--primary)] shadow-md transition-all hover:shadow-[var(--shadow-glow)] overflow-hidden"
     >
-      <button
-        ref={triggerRef}
-        onClick={isOpen ? closeChat : openChat}
-        aria-expanded={isOpen}
-        aria-label={isOpen ? `${t('chatbot.label')} (close)` : `${t('chatbot.label')} (open)`}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-lg transition-all hover:scale-110 hover:shadow-[var(--shadow-glow)]"
-      >
-        {/* Copper ring accent on hover */}
-        <div className="absolute -inset-1 rounded-full border-2 border-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-40" />
-        
-        {/* Pulsing glow */}
-        <span className="absolute inset-0 rounded-full bg-[var(--accent)] opacity-20 animate-ping" />
-        
-        {/* Icon */}
-        <MessageSquare size={24} className="relative z-10 text-white" />
-      </button>
-      
-      {/* Tooltip on hover */}
-        <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none">
-          Let's Talk
-        </div>
-    </motion.div>
+      <img src="/assets/chat.webp" alt="Chat" className="h-full w-full object-cover rounded-full" />
+      <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+        <span className="absolute inset-0 animate-ping rounded-full bg-[var(--c-success)] opacity-70" />
+        <span className="relative h-3 w-3 rounded-full bg-[var(--c-success)] border-2 border-white" />
+      </span>
+    </motion.button>
   );
 
   /* Chat dialog */
@@ -80,15 +68,15 @@ export function Chatbot() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 16, scale: 0.96 }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-20 left-6 z-40 flex h-[520px] max-h-[70vh] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-bg shadow-2xl md:left-6 md:w-[360px]"
+      className="fixed bottom-20 right-6 z-40 flex h-[520px] max-h-[70vh] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-bg shadow-2xl md:right-6 md:w-[360px]"
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[var(--border)] bg-[var(--primary)] px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="relative h-10 w-10">
             <div className="absolute inset-0 rounded-full border-2 border-[var(--accent)]" />
-            <div className="absolute inset-[3px] rounded-full bg-white flex items-center justify-center">
-              <MessageSquare size={14} className="text-[var(--primary)]" />
+            <div className="absolute inset-[3px] rounded-full overflow-hidden">
+              <img src="/assets/chat.webp" alt="Chat" className="h-full w-full object-cover" />
             </div>
           </div>
           <div>
@@ -150,7 +138,7 @@ export function Chatbot() {
           onKeyDown={handleKeyDown}
           maxLength={500}
           rows={2}
-          placeholder={t('chatbot.openingMessage')}
+          placeholder={t('chatbot.inputPlaceholder')}
           className="flex-1 resize-none rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-3 py-2 text-sm text-text-primary outline-none placeholder:text-text-tertiary focus:border-[var(--accent)]"
         />
         <button

@@ -24,8 +24,8 @@ export function Footer() {
             <a href="#" className="inline-block group">
               <div className="relative h-10 w-10">
                 <div className="absolute inset-0 rounded-full border-2 border-[var(--accent)] transition-all group-hover:border-[var(--accent-hover)]" />
-                <div className="absolute inset-[3px] rounded-full bg-white flex items-center justify-center">
-                  <span className="font-script text-[var(--primary)] text-lg leading-none">سپهر</span>
+                <div className="absolute inset-[3px] rounded-full overflow-hidden">
+                  <img src="/assets/logo.webp" alt="Sepehr" className="h-full w-full object-cover" />
                 </div>
               </div>
             </a>

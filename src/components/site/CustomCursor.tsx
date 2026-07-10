@@ -57,7 +57,7 @@ export function CustomCursor() {
     <>
       {/* Main cursor dot */}
       <motion.div
-        style={{ translateX: sx, translateY: sy }}
+        style={{ left: 0, top: 0, translateX: sx, translateY: sy }}
         className="pointer-events-none fixed z-[9999]"
       >
         <motion.div
@@ -77,7 +77,7 @@ export function CustomCursor() {
 
       {/* Trailing glow dot */}
       <motion.div
-        style={{ translateX: tx, translateY: ty }}
+        style={{ left: 0, top: 0, translateX: tx, translateY: ty }}
         className="pointer-events-none fixed z-[9998]"
       >
         <div
@@ -92,7 +92,7 @@ export function CustomCursor() {
 
       {/* Interactive element hover ring */}
       <motion.div
-        style={{ translateX: sx, translateY: sy }}
+        style={{ left: 0, top: 0, translateX: sx, translateY: sy }}
         className="pointer-events-none fixed z-[9997]"
         animate={{
           width: hovering ? 48 : 0,

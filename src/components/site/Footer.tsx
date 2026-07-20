@@ -18,8 +18,8 @@ export function Footer() {
 
   return (
     <footer className="relative bg-[var(--primary)] text-white overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid gap-8 md:grid-cols-3 md:items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-12">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-3 md:items-center">
           <div>
             <a href="#" className="inline-block group">
               <div className="relative h-10 w-10">

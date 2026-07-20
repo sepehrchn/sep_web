@@ -18,13 +18,13 @@ export function Skills() {
   const groups = t('skills.groups') || [];
 
   return (
-    <section id="skills" className="relative bg-bg py-28 overflow-hidden">
+    <section id="skills" className="relative bg-bg py-16 sm:py-20 md:py-28 overflow-hidden">
       {/* Wavy top divider */}
       <div className="absolute top-0 left-0 right-0">
         <WaveDivider color="#EDE6D8" height={60} flip />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export function Skills() {
           className="text-center"
         >
           <div className="label-mono">{t('skills.label')}</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('skills.title')}</h2>
+          <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('skills.title')}</h2>
         </motion.div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">

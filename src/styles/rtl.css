@@ -47,10 +47,6 @@ html[dir="rtl"] .flex-row-reverse {
   flex-direction: row !important;
 }
 
-html[dir="rtl"] .flex-col {
-  flex-direction: column !important;
-}
-
 /* Padding and margin RTL mirroring — only for explicitly directional spacing */
 html[dir="rtl"] .pl-6 {
   padding-right: 1.5rem;
@@ -90,15 +86,12 @@ html[dir="rtl"] .text-right {
   text-align: left;
 }
 
-/* Fixed positioning adjustments — only for specific UI elements */
-html[dir="rtl"] .right-0 {
+/* Mobile nav panel: swap to slide from LEFT in RTL */
+html[dir="rtl"] .mobile-nav-panel {
   right: auto;
   left: 0;
-}
-
-html[dir="rtl"] .inset-y-0 {
-  left: auto;
-  right: 0;
+  border-left: none;
+  border-right: 1px solid var(--border);
 }
 
 html[dir="rtl"] .border-l {
@@ -109,11 +102,6 @@ html[dir="rtl"] .border-l {
 html[dir="rtl"] .border-r {
   border-right: none;
   border-left: 1px solid var(--border);
-}
-
-/* Animation directions */
-html[dir="rtl"] [style*="x:"] {
-  transform: translateX(calc(-1 * var(--tw-translate-x))) translateY(var(--tw-translate-y));
 }
 
 /* Hero particles RTL mirroring — mirror left/right positions */

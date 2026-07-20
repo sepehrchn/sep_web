@@ -48,7 +48,7 @@ export function Chatbot() {
       transition={{ delay: 1.5, duration: 0.4 }}
       aria-expanded={isOpen}
       aria-label={isOpen ? `${t('chatbot.label')} (close)` : `${t('chatbot.label')} (open)`}
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center h-16 w-16 rounded-full border-2 border-[var(--accent)] bg-[var(--primary)] shadow-md transition-all hover:shadow-[var(--shadow-glow)] overflow-hidden"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center h-14 w-14 sm:h-16 sm:w-16 rounded-full border-2 border-[var(--accent)] bg-[var(--primary)] shadow-md transition-all hover:shadow-[var(--shadow-glow)] overflow-hidden"
     >
       <img src="/assets/chat.webp" alt="Chat" className="h-full w-full object-cover rounded-full" />
       <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
@@ -68,7 +68,7 @@ export function Chatbot() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 16, scale: 0.96 }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-20 right-6 z-40 flex h-[520px] max-h-[70vh] w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-bg shadow-2xl md:right-6 md:w-[360px]"
+      className="fixed bottom-[4.5rem] sm:bottom-20 right-2 sm:right-6 z-40 flex h-[480px] sm:h-[520px] max-h-[75vh] w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-bg shadow-2xl md:right-6 md:w-[360px]"
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[var(--border)] bg-[var(--primary)] px-4 py-3">

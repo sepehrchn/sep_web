@@ -23,13 +23,13 @@ export function Projects() {
     ] as { value: Filter; label: string }[];
 
   return (
-    <section id="work" className="relative bg-[var(--bg-card)] py-28 overflow-hidden">
+    <section id="work" className="relative bg-[var(--bg-card)] py-16 sm:py-20 md:py-28 overflow-hidden">
       {/* Wavy top divider */}
       <div className="absolute top-0 left-0 right-0">
         <WaveDivider color="#EDE6D8" height={60} flip />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +39,7 @@ export function Projects() {
           className="text-center"
         >
           <div className="label-mono">{t('projects.label')}</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('projects.title')}</h2>
+          <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('projects.title')}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-text-secondary md:text-lg">{t('projects.description')}</p>
         </motion.div>
 
@@ -65,7 +65,7 @@ export function Projects() {
         </motion.div>
 
         {/* Projects grid with jigsaw cards */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 justify-items-center">
+        <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 justify-items-center">
           {projects
             .filter((p) => filter === "all" || (p.category && p.category === filter))
             .map((p, i) => (

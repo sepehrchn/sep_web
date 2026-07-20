@@ -35,8 +35,8 @@ export function Services() {
   ];
 
   return (
-    <section id="services" className="py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="services" className="py-16 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export function Services() {
           transition={{ duration: 0.6 }}
         >
           <div className="font-mono-ui text-sm text-accent">{t('services.label')}</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl">{t('services.title')}</h2>
+          <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold md:text-5xl">{t('services.title')}</h2>
           <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-lg">
             {t('services.description')}
           </p>

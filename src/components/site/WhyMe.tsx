@@ -36,8 +36,8 @@ export function WhyMe() {
   ];
 
   return (
-    <section className="py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="py-16 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ export function WhyMe() {
           transition={{ duration: 0.6 }}
         >
           <div className="font-mono-ui text-sm text-accent">{t('whyMe.label')}</div>
-          <h2 className="font-display mt-4 text-4xl font-bold leading-tight md:text-5xl">
+          <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold leading-tight md:text-5xl">
             {t('whyMe.heading1')}
             <br />
             <span className="text-accent">{t('whyMe.heading2')}</span>

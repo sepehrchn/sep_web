@@ -77,7 +77,7 @@ export function Nav() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 z-50 w-72 bg-[var(--bg-card)] border-l border-[var(--border)] p-6 md:hidden shadow-lg"
+            className="mobile-nav-panel fixed inset-y-0 right-0 z-50 w-72 bg-[var(--bg-card)] border-l border-[var(--border)] p-6 md:hidden shadow-lg"
           >
             <div className="flex justify-between items-center">
               <LanguageSwitcher />

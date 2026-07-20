@@ -7,14 +7,14 @@ export function About() {
   const sidebar = t('about.sidebar') || [];
 
   return (
-    <section id="about" className="relative bg-[var(--bg-card)] py-28 overflow-hidden">
+    <section id="about" className="relative bg-[var(--bg-card)] py-16 sm:py-20 md:py-28 overflow-hidden">
       {/* Wavy top divider */}
       <div className="absolute top-0 left-0 right-0">
         <WaveDivider color="#EDE6D8" height={60} flip />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-8 md:gap-12 grid-cols-1 md:grid-cols-[1.4fr_1fr]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ export function About() {
             transition={{ duration: 0.6 }}
           >
             <div className="label-mono">{t('about.label')}</div>
-            <h2 className="font-display mt-4 text-4xl font-bold leading-tight md:text-5xl text-[var(--primary)]">{t('about.title')}</h2>
+            <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold leading-tight md:text-5xl text-[var(--primary)]">{t('about.title')}</h2>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-text-secondary md:text-lg">
               <p>{t('about.description')}</p>
             </div>

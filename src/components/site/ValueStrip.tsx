@@ -22,7 +22,7 @@ export function ValueStrip() {
         <WaveDivider color="#EDE6D8" height={50} />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 text-center">
           {stats.map((s, i) => (
             <motion.div

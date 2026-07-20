@@ -14,8 +14,8 @@ export function Hero() {
       {/* Dot grid */}
       <div className="dot-grid absolute inset-0 opacity-[0.6]" />
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-8">
           {/* Right column — visual blob image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -29,7 +29,7 @@ export function Hero() {
 
               {/* Blob-masked image/visual */}
               <div
-                className="blob-mask relative h-[320px] w-[320px] overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-xl md:h-[420px] md:w-[420px]"
+                className="blob-mask relative h-[220px] w-[220px] sm:h-[280px] sm:w-[280px] overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-xl md:h-[420px] md:w-[420px]"
                 style={{ animation: "float 8s ease-in-out infinite" }}
               >
                 <img src="/assets/profile-final-v2.png" alt="سپهر - Full-Stack Developer" className="h-full w-full object-cover scale-100" style={{ objectPosition: "center center" }} />
@@ -38,7 +38,7 @@ export function Hero() {
           </motion.div>
 
           {/* Left column — content */}
-          <div className="order-2 md:order-1">
+          <div className="order-2 md:order-1 text-center md:text-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="font-display mt-6 text-4xl font-bold leading-tight md:text-6xl text-[var(--primary)]"
+              className="font-display mt-6 text-3xl sm:text-4xl font-bold leading-tight md:text-6xl text-[var(--primary)]"
             >
               {t('hero.heading1')}
               <br />
@@ -65,7 +65,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 max-w-[520px] text-base text-text-secondary md:text-lg leading-relaxed"
+              className="mt-6 max-w-[520px] mx-auto md:mx-0 text-sm sm:text-base text-text-secondary md:text-lg leading-relaxed"
             >
               {t('hero.description')}
             </motion.p>
@@ -74,7 +74,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
+              className="mt-8 flex flex-wrap items-center justify-center md:justify-start gap-4"
             >
               <MagneticButton
                 onClick={() => scrollTo("#work")}
@@ -97,7 +97,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-8 inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-5 py-2.5 shadow-sm"
+              className="mt-8 inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-4 sm:px-5 py-2.5 shadow-sm"
             >
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inset-0 animate-ping rounded-full bg-[var(--c-success)] opacity-70" />

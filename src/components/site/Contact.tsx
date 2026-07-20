@@ -55,8 +55,8 @@ export function Contact() {
 
   if (status === "success") {
     return (
-      <section id="contact" className="relative bg-bg py-28 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6">
+      <section id="contact" className="relative bg-bg py-16 sm:py-20 md:py-28 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mx-auto max-w-xl rounded-2xl border border-[var(--accent)]/20 bg-white p-10 text-center shadow-md">
             <CheckCircle2 size={40} className="mx-auto text-[var(--accent)]" />
             <h2 className="font-display mt-6 text-3xl font-bold text-[var(--primary)]">{t('contact.title')}</h2>
@@ -71,20 +71,20 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative bg-bg py-28 overflow-hidden">
+    <section id="contact" className="relative bg-bg py-16 sm:py-20 md:py-28 overflow-hidden">
       {/* Wavy top divider */}
       <div className="absolute top-0 left-0 right-0">
         <WaveDivider color="#EDE6D8" height={60} flip />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="label-mono">{t('contact.label')}</div>
-          <h2 className="font-display mt-4 text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('contact.title')}</h2>
+          <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('contact.title')}</h2>
           <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-lg">{t('contact.description')}</p>
         </motion.div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-2">
+        <div className="mt-10 sm:mt-14 grid gap-8 sm:gap-10 grid-cols-1 md:grid-cols-2">
               {/* Left */}
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <div className="label-mono">{t('footer.contact')}</div>

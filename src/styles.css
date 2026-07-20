@@ -100,6 +100,17 @@
   --space-xl: min(14rem, 20vw);
 }
 
+/* Mobile spacing overrides */
+@media (max-width: 640px) {
+  :root {
+    --space-xs: 1rem;
+    --space-sm: 2rem;
+    --space-md: 3rem;
+    --space-lg: 5rem;
+    --space-xl: 7rem;
+  }
+}
+
 @layer base {
 
   /* YekanBakh — Persian font */

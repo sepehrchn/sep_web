@@ -41,7 +41,7 @@ export function Nav() {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((l: any) => (
               <button
                 key={l.href}
@@ -53,7 +53,7 @@ export function Nav() {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <LanguageSwitcher />
             <MagneticButton
               onClick={() => scrollTo("#contact")}
@@ -63,7 +63,7 @@ export function Nav() {
             </MagneticButton>
           </div>
 
-          <button className="md:hidden text-white" onClick={() => setOpen(true)} aria-label="Menu">
+          <button className="lg:hidden text-white" onClick={() => setOpen(true)} aria-label="Menu">
             <Menu size={22} />
           </button>
         </nav>
@@ -77,7 +77,7 @@ export function Nav() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="mobile-nav-panel fixed inset-y-0 right-0 z-50 w-72 bg-[var(--bg-card)] border-l border-[var(--border)] p-6 md:hidden shadow-lg"
+            className="mobile-nav-panel fixed inset-y-0 right-0 z-50 w-72 bg-[var(--bg-card)] border-l border-[var(--border)] p-6 lg:hidden shadow-lg"
           >
             <div className="flex justify-between items-center">
               <LanguageSwitcher />

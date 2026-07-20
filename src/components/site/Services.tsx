@@ -50,7 +50,7 @@ export function Services() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3" style={{ perspective: 1200 }}>
+        <div className="mt-14 grid gap-6 lg:grid-cols-3" style={{ perspective: 1200 }}>
           {services.map((s, i) => (
             <motion.div
               key={s.title}

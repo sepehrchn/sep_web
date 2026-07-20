@@ -36,7 +36,7 @@ export function Skills() {
           <h2 className="font-display mt-4 text-3xl sm:text-4xl font-bold md:text-5xl text-[var(--primary)]">{t('skills.title')}</h2>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {groups.map((g: any, gi: number) => (
             <motion.div
               key={g.label}

@@ -15,13 +15,13 @@ export function Hero() {
       <div className="dot-grid absolute inset-0 opacity-[0.6]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-8">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-8">
           {/* Right column — visual blob image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="order-1 md:order-2 flex justify-center"
+            className="order-1 lg:order-2 flex justify-center"
           >
             <div className="relative">
               {/* Copper ring accent */}
@@ -29,7 +29,7 @@ export function Hero() {
 
               {/* Blob-masked image/visual */}
               <div
-                className="blob-mask relative h-[220px] w-[220px] sm:h-[280px] sm:w-[280px] overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-xl md:h-[420px] md:w-[420px]"
+                className="blob-mask relative h-[220px] w-[220px] sm:h-[280px] sm:w-[280px] overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] shadow-xl lg:h-[420px] lg:w-[420px]"
                 style={{ animation: "float 8s ease-in-out infinite" }}
               >
                 <img src="/assets/profile-final-v2.png" alt="سپهر - Full-Stack Developer" className="h-full w-full object-cover scale-100" style={{ objectPosition: "center center" }} />
@@ -38,7 +38,7 @@ export function Hero() {
           </motion.div>
 
           {/* Left column — content */}
-          <div className="order-2 md:order-1 text-center md:text-start">
+          <div className="order-2 lg:order-1 text-center lg:text-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="font-display mt-6 text-3xl sm:text-4xl font-bold leading-tight md:text-6xl text-[var(--primary)]"
+              className="font-display mt-6 text-3xl sm:text-4xl font-bold leading-tight lg:text-6xl text-[var(--primary)]"
             >
               {t('hero.heading1')}
               <br />
@@ -65,7 +65,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 max-w-[520px] mx-auto md:mx-0 text-sm sm:text-base text-text-secondary md:text-lg leading-relaxed"
+              className="mt-6 max-w-[520px] mx-auto lg:mx-0 text-sm sm:text-base text-text-secondary md:text-lg leading-relaxed"
             >
               {t('hero.description')}
             </motion.p>
@@ -74,7 +74,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-8 flex flex-wrap items-center justify-center md:justify-start gap-4"
+              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4"
             >
               <MagneticButton
                 onClick={() => scrollTo("#work")}

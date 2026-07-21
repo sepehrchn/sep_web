@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build && node scripts/prepare-pages.mjs",
+    "build": "vite build",
     "deploy:pages": "wrangler pages deploy dist --project-name=sep-web",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",

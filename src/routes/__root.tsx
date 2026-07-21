@@ -113,7 +113,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
- 
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="fa" dir="rtl">
@@ -140,21 +140,25 @@ function RootShell({ children }: { children: ReactNode }) {
           href="#main-content"
           style={{
             position: "absolute",
-            left: "-9999px",
-            top: "auto",
+            top: "6px",
+            insetInlineStart: "6px",
             width: "1px",
             height: "1px",
             overflow: "hidden",
+            clipPath: "inset(50%)",
+            whiteSpace: "nowrap",
           }}
           onFocus={(e) => {
-            e.currentTarget.style.left = "6px";
-            e.currentTarget.style.top = "6px";
             e.currentTarget.style.width = "auto";
             e.currentTarget.style.height = "auto";
             e.currentTarget.style.overflow = "visible";
+            e.currentTarget.style.clipPath = "none";
           }}
           onBlur={(e) => {
-            e.currentTarget.style.left = "-9999px";
+            e.currentTarget.style.width = "1px";
+            e.currentTarget.style.height = "1px";
+            e.currentTarget.style.overflow = "hidden";
+            e.currentTarget.style.clipPath = "inset(50%)";
           }}
         >
           Skip to content
@@ -165,10 +169,10 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
- 
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
- 
+
   return (
     <I18nProvider defaultLanguage="fa">
       <QueryClientProvider client={queryClient}>
